@@ -24,13 +24,4 @@
          </property>
       </product>
    </extension>
-   <extension
-         point="org.eclipse.ui.views">
-      <view
-            class="brewerycontrol.parts.ARse"
-            id="brewerycontrol.parts.ARse"
-            name="New ViewPart">
-      </view>
-   </extension>
-
 </plugin>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_1VAlUJk2EeO3BfkAMF08ng" elementId="org.eclipse.e4.ide.application" bindingContexts="_1VBMYJk2EeO3BfkAMF08ng">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_1VAlUZk2EeO3BfkAMF08ng" label="BreweryControl" width="500" height="400">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_1VBMd5k2EeO3BfkAMF08ng">
+      <children xsi:type="advanced:Perspective" xmi:id="_1VBMeJk2EeO3BfkAMF08ng">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_1VBMeZk2EeO3BfkAMF08ng">
+          <children xsi:type="basic:PartStack" xmi:id="_1VBMepk2EeO3BfkAMF08ng">
+            <children xsi:type="basic:Part" xmi:id="_9c5uEJopEeOprfHuY1tYSQ" elementId="brewerycontrol.part.1" contributionURI="bundleclass://BreweryControl/brewerycontrol.parts.MashPart" label="Mash Schedule"/>
+            <children xsi:type="basic:Part" xmi:id="_I2a_YJlLEeO3BfkAMF08ng" elementId="brewerycontrol.part.0" contributionURI="bundleclass://BreweryControl/brewerycontrol.parts.FermentationPart" label="Fermentor 1"/>
+            <children xsi:type="basic:Part" xmi:id="_Kq0g4JoqEeOprfHuY1tYSQ" elementId="brewerycontrol.part.2" contributionURI="bundleclass://BreweryControl/brewerycontrol.parts.FermentationPart" label="Fermentor 2"/>
+            <children xsi:type="basic:Part" xmi:id="_M-_i8JoqEeOprfHuY1tYSQ" elementId="brewerycontrol.part.3" contributionURI="bundleclass://BreweryControl/brewerycontrol.parts.FermentationPart" label="Fermentor 3"/>
+            <children xsi:type="basic:Part" xmi:id="_PMLzQJoqEeOprfHuY1tYSQ" elementId="brewerycontrol.part.4" contributionURI="bundleclass://BreweryControl/brewerycontrol.parts.FermentationPart" label="Fermentor 4"/>
+          </children>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_1VBMcJk2EeO3BfkAMF08ng" elementId="menu:org.eclipse.ui.main.menu">
+      <children xsi:type="menu:Menu" xmi:id="_1VBMcZk2EeO3BfkAMF08ng" label="File">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_1VBMcpk2EeO3BfkAMF08ng" label="Open" iconURI="platform:/plugin/BreweryControl/icons/sample.png" command="_1VBMZ5k2EeO3BfkAMF08ng"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_1VBMc5k2EeO3BfkAMF08ng" label="Save" iconURI="platform:/plugin/BreweryControl/icons/save_edit.png" command="_1VBMapk2EeO3BfkAMF08ng"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_1VBMdJk2EeO3BfkAMF08ng" label="Quit" command="_1VBMY5k2EeO3BfkAMF08ng"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_1VBMdZk2EeO3BfkAMF08ng" label="Help">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_1VBMdpk2EeO3BfkAMF08ng" label="About" command="_1VBMbZk2EeO3BfkAMF08ng"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_1Pq_AJoKEeO3BfkAMF08ng" elementId="brewerycontrol.menu.0" label="Tools">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_5yBI0JoKEeO3BfkAMF08ng" elementId="brewerycontrol.handledmenuitem.0" label="Add Yeast Profile" command="_ichCAJoKEeO3BfkAMF08ng"/>
+      </children>
+    </mainMenu>
+    <trimBars xmi:id="_1VBMfJk2EeO3BfkAMF08ng">
+      <children xsi:type="menu:ToolBar" xmi:id="_1VBMfZk2EeO3BfkAMF08ng" elementId="toolbar:org.eclipse.ui.main.toolbar">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_1VBMfpk2EeO3BfkAMF08ng" iconURI="platform:/plugin/BreweryControl/icons/sample.png" command="_1VBMZ5k2EeO3BfkAMF08ng"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_1VBzcJk2EeO3BfkAMF08ng" iconURI="platform:/plugin/BreweryControl/icons/save_edit.png" command="_1VBMapk2EeO3BfkAMF08ng"/>
+      </children>
+    </trimBars>
+  </children>
+  <handlers xmi:id="_1VBMZJk2EeO3BfkAMF08ng" elementId="BreweryControl.handler.quitCommand" contributionURI="bundleclass://BreweryControl/brewerycontrol.handlers.QuitHandler" command="_1VBMY5k2EeO3BfkAMF08ng"/>
+  <handlers xmi:id="_1VBMaJk2EeO3BfkAMF08ng" elementId="BreweryControl.handler.openCommand" contributionURI="bundleclass://BreweryControl/brewerycontrol.handlers.OpenHandler" command="_1VBMZ5k2EeO3BfkAMF08ng"/>
+  <handlers xmi:id="_1VBMa5k2EeO3BfkAMF08ng" elementId="BreweryControl.handler.saveCommand" contributionURI="bundleclass://BreweryControl/brewerycontrol.handlers.SaveHandler" command="_1VBMapk2EeO3BfkAMF08ng"/>
+  <handlers xmi:id="_1VBMbpk2EeO3BfkAMF08ng" elementId="BreweryControl.handler.aboutCommand" contributionURI="bundleclass://BreweryControl/brewerycontrol.handlers.AboutHandler" command="_1VBMbZk2EeO3BfkAMF08ng"/>
+  <handlers xmi:id="_mCPykJoKEeO3BfkAMF08ng" elementId="brewerycontrol.handler.0" contributionURI="bundleclass://BreweryControl/brewerycontrol.handlers.AddYeastHandler" command="_ichCAJoKEeO3BfkAMF08ng"/>
+  <bindingTables xmi:id="_1VBMZZk2EeO3BfkAMF08ng" bindingContext="_1VBMYJk2EeO3BfkAMF08ng">
+    <bindings xmi:id="_1VBMZpk2EeO3BfkAMF08ng" keySequence="M1+Q" command="_1VBMY5k2EeO3BfkAMF08ng"/>
+    <bindings xmi:id="_1VBMaZk2EeO3BfkAMF08ng" keySequence="M1+O" command="_1VBMZ5k2EeO3BfkAMF08ng"/>
+    <bindings xmi:id="_1VBMbJk2EeO3BfkAMF08ng" keySequence="M1+S" command="_1VBMapk2EeO3BfkAMF08ng"/>
+    <bindings xmi:id="_1VBMb5k2EeO3BfkAMF08ng" keySequence="M1+A" command="_1VBMbZk2EeO3BfkAMF08ng"/>
+  </bindingTables>
+  <rootContext xmi:id="_1VBMYJk2EeO3BfkAMF08ng" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_1VBMYZk2EeO3BfkAMF08ng" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_1VBMYpk2EeO3BfkAMF08ng" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  </rootContext>
+  <commands xmi:id="_1VBMY5k2EeO3BfkAMF08ng" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
+  <commands xmi:id="_1VBMZ5k2EeO3BfkAMF08ng" elementId="BreweryControl.open" commandName="openCommand"/>
+  <commands xmi:id="_1VBMapk2EeO3BfkAMF08ng" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
+  <commands xmi:id="_1VBMbZk2EeO3BfkAMF08ng" elementId="org.eclipse.ui.help.aboutAction" commandName="aboutCommand"/>
+  <commands xmi:id="_ichCAJoKEeO3BfkAMF08ng" elementId="brewerycontrol.addYeastCommand" commandName="addYeastCommand"/>
+  <addons xmi:id="_1VAlUpk2EeO3BfkAMF08ng" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_1VAlU5k2EeO3BfkAMF08ng" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_1VAlVJk2EeO3BfkAMF08ng" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_1VAlVZk2EeO3BfkAMF08ng" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_1VAlVpk2EeO3BfkAMF08ng" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+  <addons xmi:id="_1VAlV5k2EeO3BfkAMF08ng" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_1VAlWJk2EeO3BfkAMF08ng" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>

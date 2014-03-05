@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Ecore="http://www.eclipse.org/uml2/schemas/Ecore/5" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Ecore/5 pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA">
+  <uml:Model xmi:id="_BYtOkJolEeO6WJtEboz-_A" name="brewery" URI="http://brewery/1.0">
+    <packagedElement xmi:type="uml:Class" xmi:id="_BYtOkZolEeO6WJtEboz-_A" name="Yeast">
+      <ownedAttribute xmi:id="_BYtOkpolEeO6WJtEboz-_A" name="name" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYtOk5olEeO6WJtEboz-_A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_BYtOlJolEeO6WJtEboz-_A" name="flocculation" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYtOlZolEeO6WJtEboz-_A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_BYtOlpolEeO6WJtEboz-_A" name="attenuation" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYtOl5olEeO6WJtEboz-_A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_BYtOmJolEeO6WJtEboz-_A" name="manufacturer" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYtOmZolEeO6WJtEboz-_A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_BYtOmpolEeO6WJtEboz-_A" name="range" type="_BYtOm5olEeO6WJtEboz-_A" isOrdered="true" association="_BYtOpZolEeO6WJtEboz-_A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_BYtOm5olEeO6WJtEboz-_A" name="TemperatureRange">
+      <ownedAttribute xmi:id="_BYtOnJolEeO6WJtEboz-_A" name="unit" visibility="public" type="_BYtOopolEeO6WJtEboz-_A" isOrdered="true">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYtOnZolEeO6WJtEboz-_A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_BYtOnpolEeO6WJtEboz-_A" name="low" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYtOn5olEeO6WJtEboz-_A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_BYtOoJolEeO6WJtEboz-_A" name="high" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYtOoZolEeO6WJtEboz-_A"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_BYtOopolEeO6WJtEboz-_A" name="TemperatureUnit">
+      <ownedLiteral xmi:id="_BYtOo5olEeO6WJtEboz-_A" name="Celsius"/>
+      <ownedLiteral xmi:id="_BYtOpJolEeO6WJtEboz-_A" name="Farenheit"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_BYtOpZolEeO6WJtEboz-_A" memberEnd="_BYtOmpolEeO6WJtEboz-_A _BYtOppolEeO6WJtEboz-_A">
+      <ownedEnd xmi:id="_BYtOppolEeO6WJtEboz-_A" type="_BYtOkZolEeO6WJtEboz-_A" association="_BYtOpZolEeO6WJtEboz-_A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_BYtOp5olEeO6WJtEboz-_A" name="Inventory">
+      <ownedAttribute xmi:id="_BYtOqJolEeO6WJtEboz-_A" name="yeast" type="_BYtOkZolEeO6WJtEboz-_A" isOrdered="true" aggregation="composite" association="_BYtOq5olEeO6WJtEboz-_A">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYtOqZolEeO6WJtEboz-_A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BYtOqpolEeO6WJtEboz-_A" value="*"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_BYtOq5olEeO6WJtEboz-_A" memberEnd="_BYtOqJolEeO6WJtEboz-_A _BYtOrJolEeO6WJtEboz-_A">
+      <ownedEnd xmi:id="_BYtOrJolEeO6WJtEboz-_A" type="_BYtOp5olEeO6WJtEboz-_A" association="_BYtOq5olEeO6WJtEboz-_A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_BYtOrZolEeO6WJtEboz-_A" name="Fermenter">
+      <ownedAttribute xmi:id="_BYtOrpolEeO6WJtEboz-_A" name="name" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYtOr5olEeO6WJtEboz-_A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_BYtOsJolEeO6WJtEboz-_A" name="yeast" type="_BYtOkZolEeO6WJtEboz-_A" isOrdered="true" association="_BYtOtZolEeO6WJtEboz-_A"/>
+      <ownedAttribute xmi:id="_BYtOsZolEeO6WJtEboz-_A" name="content" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYtOspolEeO6WJtEboz-_A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_BYtOs5olEeO6WJtEboz-_A" name="started" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYtOtJolEeO6WJtEboz-_A"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_BYtOtZolEeO6WJtEboz-_A" memberEnd="_BYtOsJolEeO6WJtEboz-_A _BYtOtpolEeO6WJtEboz-_A">
+      <ownedEnd xmi:id="_BYtOtpolEeO6WJtEboz-_A" type="_BYtOrZolEeO6WJtEboz-_A" association="_BYtOtZolEeO6WJtEboz-_A"/>
+    </packagedElement>
+    <profileApplication xmi:id="_BYtOt5olEeO6WJtEboz-_A">
+      <eAnnotations xmi:id="_BYtOuJolEeO6WJtEboz-_A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Ecore.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <Ecore:EPackage xmi:id="_BYtOuZolEeO6WJtEboz-_A" base_Package="_BYtOkJolEeO6WJtEboz-_A" nsPrefix="brewery"/>
+  <Ecore:EClass xmi:id="_BYtOupolEeO6WJtEboz-_A" base_Class="_BYtOkZolEeO6WJtEboz-_A"/>
+  <Ecore:EReference xmi:id="_BYtOu5olEeO6WJtEboz-_A" base_Property="_BYtOmpolEeO6WJtEboz-_A"/>
+  <Ecore:EClass xmi:id="_BYtOvJolEeO6WJtEboz-_A" base_Class="_BYtOm5olEeO6WJtEboz-_A"/>
+  <Ecore:EEnum xmi:id="_BYt1oJolEeO6WJtEboz-_A" base_Enumeration="_BYtOopolEeO6WJtEboz-_A"/>
+  <Ecore:EEnumLiteral xmi:id="_BYt1oZolEeO6WJtEboz-_A" base_EnumerationLiteral="_BYtOo5olEeO6WJtEboz-_A" literal="C"/>
+  <Ecore:EEnumLiteral xmi:id="_BYt1opolEeO6WJtEboz-_A" base_EnumerationLiteral="_BYtOpJolEeO6WJtEboz-_A" literal="F"/>
+  <Ecore:EClass xmi:id="_BYt1o5olEeO6WJtEboz-_A" base_Class="_BYtOp5olEeO6WJtEboz-_A"/>
+  <Ecore:EReference xmi:id="_BYt1pJolEeO6WJtEboz-_A" base_Property="_BYtOqJolEeO6WJtEboz-_A"/>
+  <Ecore:EClass xmi:id="_BYt1pZolEeO6WJtEboz-_A" base_Class="_BYtOrZolEeO6WJtEboz-_A"/>
+  <Ecore:EReference xmi:id="_BYt1ppolEeO6WJtEboz-_A" base_Property="_BYtOsJolEeO6WJtEboz-_A"/>
+</xmi:XMI>

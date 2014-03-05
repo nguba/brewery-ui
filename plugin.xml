@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated brewery -->
+      <package
+            uri="http://brewery/1.0"
+            class="brewery.BreweryPackage"
+            genModel="brewery.genmodel"/>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="BreweryControl">
+         <property
+               name="lifeCycleURI"
+               value="bundleclass://BreweryControl/brewerycontrol.monitor.LifecycleManager">
+         </property>
+         <property
+               name="appName"
+               value="BreweryControl">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="brewerycontrol.parts.ARse"
+            id="brewerycontrol.parts.ARse"
+            name="New ViewPart">
+      </view>
+   </extension>
+
+</plugin>

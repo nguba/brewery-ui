@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="lib/org.csstudio.swt.widgets_2.1.0.201209121549.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.csstudio.swt.widgets_2.1.0.201209121549.jar" sourcepath="lib/org.csstudio.swt.widgets.source_2.1.0.201209121549.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.csstudio.swt.xygraph_2.1.0.201209121540.jar" sourcepath="lib/org.csstudio.swt.xygraph.source_2.1.0.201209121540.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jackson-core-asl-1.9.13.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jackson-mapper-asl-1.9.13.jar" sourcepath="C:/Users/nguba_000/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/rxtxcomm-2.2.jar" sourcepath="C:/Users/nguba_000/.m2/repository/org/bidib/jbidib/org/qbang/rxtx/rxtxcomm/2.2/rxtxcomm-2.2-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins">
 		<accessrules>
 			<accessrule kind="accessible" pattern="org/eclipse/e4/**"/>
 		</accessrules>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_17">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>

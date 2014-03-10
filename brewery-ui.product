@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="BreweryControl" uid="Brewery" id="BreweryControl.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+<product name="brewery-ui" uid="brewery-ui" id="brewery-ui.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+
 
    <configIni use="default">
    </configIni>
@@ -13,6 +14,7 @@
 
    <windowImages/>
 
+
    <launcher name="brewery">
       <solaris/>
       <win useIco="false">
@@ -20,12 +22,14 @@
       </win>
    </launcher>
 
+
    <vm>
       <windows include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JRE-1.1</windows>
    </vm>
 
+
    <plugins>
-      <plugin id="BreweryControl"/>
+      <plugin id="brewery-ui"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>

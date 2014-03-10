@@ -53,7 +53,7 @@ public final class LifecycleManager implements SerialPortEventListener {
 	};
 	private BufferedReader input;
 	private static final int TIME_OUT = 2000;
-	private static final int DATA_RATE = 115200;
+	private static final int DATA_RATE = 9600;
 
 	private IEventBroker eventBroker;
 
@@ -171,13 +171,15 @@ public final class LifecycleManager implements SerialPortEventListener {
 					inputLine = input.readLine();
 					// TODO hand off to output parser
 					final ObjectMapper mapper = new ObjectMapper();
+				
 					final Pin pin = mapper.readValue(inputLine, Pin.class);
+					mapper.enableDefaultTyping(); 
 					if (pin.type == 'a') {
 						eventBroker.send("arduino/pin/" + pin.pin, pin);
 					}
 				}
 			} catch (final Exception e) {
-				System.err.println(e.toString());
+				 e.printStackTrace();
 			}
 		}
 	}

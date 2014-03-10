@@ -13,14 +13,14 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.e4.ui.workbench.swt.E4Application"
-            name="BreweryControl">
+            name="brewery-ui">
          <property
                name="lifeCycleURI"
-               value="bundleclass://BreweryControl/brewerycontrol.monitor.LifecycleManager">
+               value="bundleclass://brewery-ui/brewerycontrol.monitor.LifecycleManager">
          </property>
          <property
                name="appName"
-               value="BreweryControl">
+               value="brewery-ui">
          </property>
       </product>
    </extension>

@@ -1,8 +1,12 @@
 package brewerycontrol.parts;
 
+import gnu.io.CommPort;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -46,7 +50,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import brewerycontrol.monitor.Pin;
+import brewerycontrol.monitor.Sensor;
 
 /**
  * 
@@ -56,18 +60,21 @@ import brewerycontrol.monitor.Pin;
 public class MashPart {
 	@Inject
 	private UISynchronize sync;
+	@Inject
+	private CommPort serialPort;
 
 	private GaugeFigure gaugeFigure;
 
 	private CircularBufferDataProvider provider;
 	private Table table;
 	private Job timerJob;
-	private Calendar calendar = Calendar.getInstance();
+	private Date startDate;
 
 	private SimpleDateFormat dateFormat;
+	private Calendar calendar = Calendar.getInstance();
 
 	private CLabel timerLabel;
-	
+
 	@Inject
 	public MashPart() {
 		ArrayList<MashStep> steps = new ArrayList<>();
@@ -76,11 +83,8 @@ public class MashPart {
 		steps.add(new MashStep(67, 60, "Saccharification"));
 		steps.add(new MashStep(76, 5, "Mash Out"));
 		MashScheduleProvider.INSTANCE.setSteps(steps);
-		
-		calendar.set(0, 0, 0, 0, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.HOUR, 0);
-		dateFormat = new SimpleDateFormat("HH:mm:ss");
+
+		dateFormat = new SimpleDateFormat("KK:mm:ss");
 		timerJob = new Job("mash/timer") {
 
 			@Override
@@ -89,8 +93,20 @@ public class MashPart {
 
 					@Override
 					public void run() {
-						calendar.add(Calendar.SECOND, 1);
-						timerLabel.setText(dateFormat.format(calendar.getTime()));
+						try {
+							serialPort.setOutputBufferSize(1024);
+							serialPort.getOutputStream().write(
+									"[sensor]".getBytes());
+							serialPort.getOutputStream().flush();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						calendar.setTimeInMillis(System.currentTimeMillis()
+								- startDate.getTime());
+						calendar.add(Calendar.HOUR, -1);
+						String format = dateFormat.format(calendar.getTime());
+						timerLabel.setText(format);
 						schedule(1000);
 					}
 				});
@@ -126,17 +142,19 @@ public class MashPart {
 		// xyGraph.setTitle("History");
 		mashGraph.primaryYAxis.setRange(new Range(0, 80));
 		mashGraph.primaryYAxis.setShowMajorGrid(true);
+		mashGraph.primaryYAxis.setShowMinorGrid(true);
+		mashGraph.primaryYAxis.setAutoFormat(true);
 		mashGraph.primaryYAxis.setTitle("Temperature");
 
-		mashGraph.primaryXAxis.setRange(new Range(0, 180));
+		mashGraph.primaryXAxis.setRange(new Range(0, 260));
 		mashGraph.primaryXAxis.setShowMajorGrid(true);
 		mashGraph.primaryXAxis.setTitle("Time");
 		mashGraph.setShowLegend(false);
-		
+
 		provider = new CircularBufferDataProvider(false);
 		provider.setPlotMode(PlotMode.N_STOP);
 		provider.setBufferSize(200);
-		
+
 		final Trace trace = new Trace("Temp Graph", mashGraph.primaryXAxis,
 				mashGraph.primaryYAxis, provider);
 		trace.setBaseLine(BaseLine.ZERO);
@@ -267,6 +285,7 @@ public class MashPart {
 		buttonStart.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				startDate = new Date();
 				timerJob.schedule(1000);
 			}
 		});
@@ -301,8 +320,7 @@ public class MashPart {
 
 		timerLabel = new CLabel(statusBar, SWT.BORDER | SWT.SHADOW_IN
 				| SWT.SHADOW_OUT | SWT.CENTER);
-		timerLabel
-				.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		timerLabel.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		timerLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
 		timerLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		GridData gd_lblNewLabel = new GridData(SWT.RIGHT, SWT.CENTER, false,
@@ -328,9 +346,9 @@ public class MashPart {
 	 */
 	@Inject
 	@Optional
-	void pinEventReceived(@UIEventTopic("arduino/pin/5") final Pin pin) {
+	void pinEventReceived(@UIEventTopic("sensor/mash") final Sensor sensor) {
 
-		final Job job = new Job("arduino/pin/5/updater") {
+		final Job job = new Job("sensor/mash/ui") {
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -338,9 +356,12 @@ public class MashPart {
 
 					@Override
 					public void run() {
-						final double temperature = ((pin.value * 0.004882814) - 0.5) * 100;
-						final double value = temperature;
-						gaugeFigure.setValue(value);
+						gaugeFigure.setValue(sensor.getValue());
+						provider.setCurrentYData(sensor.getValue());
+						calendar.add(Calendar.HOUR, 1);
+						long newValue = calendar.getTimeInMillis() / 1000 / 60;
+						System.out.println(newValue);
+						provider.setCurrentXData(newValue);
 					}
 				});
 				return Status.OK_STATUS;

@@ -3,6 +3,7 @@
  */
 package brewerycontrol.monitor;
 
+import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
@@ -130,6 +131,7 @@ public final class LifecycleManager implements SerialPortEventListener {
 		eventBroker.send("arduino/init", portIdentifier);
 		serialPort.addEventListener(this);
 		serialPort.notifyOnDataAvailable(true);
+		context.set(CommPort.class, serialPort);
 
 		final ResourceSet resSet = new ResourceSetImpl();
 		final URI uri = URI.createURI("data.bctl");
@@ -158,6 +160,14 @@ public final class LifecycleManager implements SerialPortEventListener {
 		context.set(inventory.getClass().getCanonicalName(), inventory);
 	}
 
+	private enum State {
+		COMMAND, COMMAND_START, REPLY_START, READY, REPLY, COMMAND_END;
+	}
+
+	private State state = State.READY;
+	private StringBuilder buf;
+	private String command;
+
 	/**
 	 * capture the serial events from the board and broadcast them to any
 	 * listening parts or parts that are interested
@@ -169,17 +179,72 @@ public final class LifecycleManager implements SerialPortEventListener {
 				String inputLine = null;
 				if (input.ready()) {
 					inputLine = input.readLine();
-					// TODO hand off to output parser
-					final ObjectMapper mapper = new ObjectMapper();
-				
-					final Pin pin = mapper.readValue(inputLine, Pin.class);
-					mapper.enableDefaultTyping(); 
-					if (pin.type == 'a') {
-						eventBroker.send("arduino/pin/" + pin.pin, pin);
+					for (int i = 0, length = inputLine.length(); i < length; i++) {
+						char c = inputLine.charAt(i);
+						// System.out.println(state);
+						switch (state) {
+						case READY:
+							buf = new StringBuilder();
+							if (c == '[') {
+								state = State.COMMAND_START;
+							}
+							break;
+						case COMMAND_START:
+							if (Character.isWhitespace(c)) {
+								state = State.COMMAND;
+							} else if (c == ']') {
+								state = State.COMMAND_END;
+							} else {
+								buf.append(c);
+							}
+							break;
+						case COMMAND:
+							if (c == ']') {
+								System.out.println(buf);
+								state = State.READY;
+							}
+						case COMMAND_END:
+							command = buf.toString();
+							// System.out.println("COMMAND -> " + buf);
+							if (c == '[') {
+								state = State.REPLY_START;
+							}
+							break;
+						case REPLY_START:
+							if (Character.isWhitespace(c)) {
+								state = State.REPLY;
+								// discard the actual command word here
+								buf = new StringBuilder();
+							}
+							break;
+						case REPLY:
+							if (c == ']') {
+								// handle the commands here by building custom
+								// objects and sending them via the event
+								// broker.
+								switch (command) {
+								case "sensor":
+									int separator = buf.indexOf(" ");
+									Sensor sensor = new Sensor();
+									sensor.setId(buf.substring(0, separator));
+									float value = Float.parseFloat(buf
+											.substring(separator).trim());
+									sensor.setValue(value);
+									eventBroker.send("sensor/mash", sensor);
+									break;
+								}
+								state = State.READY;
+							} else {
+								buf.append(c);
+							}
+							break;
+						default:
+							break;
+						}
 					}
 				}
 			} catch (final Exception e) {
-				 e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 	}

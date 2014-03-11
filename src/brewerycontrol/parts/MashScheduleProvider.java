@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * @author nguba_000
- *
+ * 
  */
 public enum MashScheduleProvider {
 	INSTANCE;
@@ -21,7 +21,8 @@ public enum MashScheduleProvider {
 	}
 
 	/**
-	 * @param steps the steps to set
+	 * @param steps
+	 *            the steps to set
 	 */
 	public void setSteps(ArrayList<MashStep> steps) {
 		this.steps = steps;

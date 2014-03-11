@@ -18,7 +18,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.naming.CommunicationException;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.core.services.log.Logger;
@@ -41,9 +40,12 @@ import brewery.Inventory;
  */
 public final class LifecycleManager implements SerialPortEventListener {
 
+	private enum State {
+		COMMAND, COMMAND_START, REPLY_START, READY, REPLY, COMMAND_END;
+	}
+
 	@Inject
 	private Logger logger;
-
 	SerialPort serialPort;
 	/** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { "/dev/tty.usbserial-A9007UX1", // Mac
@@ -54,9 +56,16 @@ public final class LifecycleManager implements SerialPortEventListener {
 	};
 	private BufferedReader input;
 	private static final int TIME_OUT = 2000;
+
 	private static final int DATA_RATE = 9600;
 
 	private IEventBroker eventBroker;
+
+	private State state = State.READY;
+
+	private StringBuilder buf;
+
+	private String command;
 
 	/**
 	 * 
@@ -160,14 +169,6 @@ public final class LifecycleManager implements SerialPortEventListener {
 		context.set(inventory.getClass().getCanonicalName(), inventory);
 	}
 
-	private enum State {
-		COMMAND, COMMAND_START, REPLY_START, READY, REPLY, COMMAND_END;
-	}
-
-	private State state = State.READY;
-	private StringBuilder buf;
-	private String command;
-
 	/**
 	 * capture the serial events from the board and broadcast them to any
 	 * listening parts or parts that are interested
@@ -180,7 +181,7 @@ public final class LifecycleManager implements SerialPortEventListener {
 				if (input.ready()) {
 					inputLine = input.readLine();
 					for (int i = 0, length = inputLine.length(); i < length; i++) {
-						char c = inputLine.charAt(i);
+						final char c = inputLine.charAt(i);
 						// System.out.println(state);
 						switch (state) {
 						case READY:
@@ -224,10 +225,10 @@ public final class LifecycleManager implements SerialPortEventListener {
 								// broker.
 								switch (command) {
 								case "sensor":
-									int separator = buf.indexOf(" ");
-									Sensor sensor = new Sensor();
+									final int separator = buf.indexOf(" ");
+									final Sensor sensor = new Sensor();
 									sensor.setId(buf.substring(0, separator));
-									float value = Float.parseFloat(buf
+									final float value = Float.parseFloat(buf
 											.substring(separator).trim());
 									sensor.setValue(value);
 									eventBroker.send("sensor/mash", sensor);

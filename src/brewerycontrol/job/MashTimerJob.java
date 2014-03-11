@@ -24,7 +24,7 @@ import org.eclipse.swt.custom.CLabel;
 public final class MashTimerJob extends Job {
 	public static final int DELAY = 1000;
 	public static final String NAME = "job/mash/timer";
-	
+
 	private final UISynchronize sync;
 	private final CommPort serialPort;
 	private final Calendar calendar;

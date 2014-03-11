@@ -15,12 +15,12 @@ import brewerycontrol.parts.MashPartCommand;
 
 /**
  * @author nguba_000
- *
+ * 
  */
 public class StartMashHandler {
 	@Inject
 	IEventBroker eventBroker;
-	
+
 	@Execute
 	public void execute(IWorkbench workbench, Shell shell) {
 		eventBroker.send(BreweryEventTopic.MASH_COMMAND, MashPartCommand.START);

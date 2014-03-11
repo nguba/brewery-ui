@@ -11,8 +11,8 @@ import brewerycontrol.AddYeastDialog;
 public class AddYeastHandler {
 	@Execute
 	public void execute(IEclipseContext context, IWorkbench workbench) {
-		Dialog dialog = ContextInjectionFactory.make(AddYeastDialog.class,
-				context);
+		final Dialog dialog = ContextInjectionFactory.make(
+				AddYeastDialog.class, context);
 		dialog.create();
 		dialog.open();
 	}

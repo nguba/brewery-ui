@@ -77,11 +77,11 @@ public class FermentationPart {
 		xyGraph.primaryYAxis.setRange(new Range(0, 30));
 		xyGraph.primaryYAxis.setShowMajorGrid(true);
 		// xyGraph.primaryYAxis.setShowMinorGrid(true);
-		
+
 		provider = new CircularBufferDataProvider(false);
 		provider.setPlotMode(PlotMode.N_STOP);
 		provider.setBufferSize(200);
-		
+
 		final Trace trace = new Trace("Temp Graph", xyGraph.primaryXAxis,
 				xyGraph.primaryYAxis, provider);
 		trace.setBaseLine(BaseLine.ZERO);
@@ -140,7 +140,8 @@ public class FermentationPart {
 									public void run() {
 										thermo.setHiLevel(high);
 										thermo.setLoLevel(low);
-										Range r = new Range(low - 5, high + 5);
+										final Range r = new Range(low - 5,
+												high + 5);
 										thermo.setRange(r);
 										thermo.repaint();
 									}

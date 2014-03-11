@@ -3,21 +3,24 @@
  */
 package brewerycontrol.monitor;
 
-
 /**
  * @author nguba_000
- *
+ * 
  */
 public class Pin {
 	public int pin;
 	public char type;
-	
-	/* (non-Javadoc)
+
+	public int value;
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder();
 		builder.append("Pin [pin=");
 		builder.append(pin);
 		builder.append(", type=");
@@ -27,5 +30,4 @@ public class Pin {
 		builder.append("]");
 		return builder.toString();
 	}
-	public int value;
 }

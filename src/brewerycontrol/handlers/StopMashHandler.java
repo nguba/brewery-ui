@@ -16,7 +16,7 @@ import brewerycontrol.parts.MashPartCommand;
 public class StopMashHandler {
 	@Inject
 	private IEventBroker broker;
-	
+
 	/**
 	 * 
 	 */

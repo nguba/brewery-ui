@@ -14,43 +14,18 @@ public class Sensor {
 
 	/**
 	 * 
+	 */
+	public Sensor() {
+	}
+
+	/**
+	 * 
 	 * @param id
 	 * @param value
 	 */
 	public Sensor(String id, float value) {
 		super();
 		this.id = id;
-		this.value = value;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Sensor [value=");
-		builder.append(value);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
-	}
-
-	/**
-	 * @return the value
-	 */
-	public final float getValue() {
-		return value;
-	}
-
-	/**
-	 * @param value
-	 *            the value to set
-	 */
-	public final void setValue(float value) {
 		this.value = value;
 	}
 
@@ -62,6 +37,13 @@ public class Sensor {
 	}
 
 	/**
+	 * @return the value
+	 */
+	public final float getValue() {
+		return value;
+	}
+
+	/**
 	 * @param id
 	 *            the id to set
 	 */
@@ -70,9 +52,27 @@ public class Sensor {
 	}
 
 	/**
-	 * 
+	 * @param value
+	 *            the value to set
 	 */
-	public Sensor() {
+	public final void setValue(float value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("Sensor [value=");
+		builder.append(value);
+		builder.append(", id=");
+		builder.append(id);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

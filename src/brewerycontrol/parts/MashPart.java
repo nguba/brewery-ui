@@ -281,12 +281,14 @@ public class MashPart {
 		statusBar.setLayoutData(gd_statusBar);
 
 		final ProgressBar progressBar = new ProgressBar(statusBar, SWT.NONE);
-		progressBar.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
-				false, 1, 1));
+		GridData gd_progressBar = new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1);
+		gd_progressBar.heightHint = 23;
+		progressBar.setLayoutData(gd_progressBar);
 
 		timerLabel = new CLabel(statusBar, SWT.BORDER | SWT.SHADOW_IN
 				| SWT.SHADOW_OUT | SWT.CENTER);
-		timerLabel.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		timerLabel.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		timerLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
 		timerLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		final GridData gd_lblNewLabel = new GridData(SWT.RIGHT, SWT.CENTER,

@@ -48,9 +48,7 @@ public final class LifecycleManager implements SerialPortEventListener {
 	private Logger logger;
 	SerialPort serialPort;
 	/** The port we're normally going to use. */
-	private static final String PORT_NAMES[] = { "/dev/tty.usbserial-A9007UX1", // Mac
-																				// OS
-																				// X
+	private static final String PORT_NAMES[] = { "/dev/tty.usbmodemfd141", 
 			"/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 	};

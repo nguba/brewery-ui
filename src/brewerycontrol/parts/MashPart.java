@@ -2,11 +2,8 @@ package brewerycontrol.parts;
 
 import gnu.io.CommPort;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -35,21 +32,19 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import brewerycontrol.BreweryEventTopic;
+import brewerycontrol.job.MashTimerJob;
 import brewerycontrol.monitor.Sensor;
 
 /**
@@ -62,81 +57,83 @@ public class MashPart {
 	private UISynchronize sync;
 	@Inject
 	private CommPort serialPort;
-
 	private GaugeFigure gaugeFigure;
-
 	private CircularBufferDataProvider provider;
 	private Table table;
-	private Job timerJob;
-	private Date startDate;
-
-	private SimpleDateFormat dateFormat;
-	private Calendar calendar = Calendar.getInstance();
+	private MashTimerJob timerJob;
+	private final Calendar calendar = Calendar.getInstance();
 
 	private CLabel timerLabel;
 
 	@Inject
 	public MashPart() {
-		ArrayList<MashStep> steps = new ArrayList<>();
+		final ArrayList<MashStep> steps = new ArrayList<>();
 		steps.add(new MashStep(38, 40, "Acid"));
 		steps.add(new MashStep(55, 20, "Protease"));
 		steps.add(new MashStep(67, 60, "Saccharification"));
 		steps.add(new MashStep(76, 5, "Mash Out"));
 		MashScheduleProvider.INSTANCE.setSteps(steps);
+	}
 
-		dateFormat = new SimpleDateFormat("KK:mm:ss");
-		timerJob = new Job("mash/timer") {
+	/**
+	 * listens for pin 5
+	 * 
+	 * @param pin
+	 */
+	@Inject
+	@Optional
+	void pinEventReceived(@UIEventTopic("sensor/mash") final Sensor sensor) {
 
+		final Job job = new Job("sensor/mash/ui") {
+			/**
+			 * 
+			 */
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				sync.asyncExec(new Runnable() {
-
+					/**
+					 * 
+					 */
 					@Override
 					public void run() {
-						try {
-							serialPort.setOutputBufferSize(1024);
-							serialPort.getOutputStream().write(
-									"[sensor]".getBytes());
-							serialPort.getOutputStream().flush();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						calendar.setTimeInMillis(System.currentTimeMillis()
-								- startDate.getTime());
-						calendar.add(Calendar.HOUR, -1);
-						String format = dateFormat.format(calendar.getTime());
-						timerLabel.setText(format);
-						schedule(1000);
+						gaugeFigure.setValue(sensor.getValue());
+						provider.setCurrentYData(sensor.getValue());
+						calendar.add(Calendar.HOUR, 1);
+						final long newValue = calendar.getTimeInMillis() / 1000 / 60;
+						// System.out.println(newValue);
+						provider.setCurrentXData(newValue);
 					}
 				});
 				return Status.OK_STATUS;
 			}
 		};
+		job.schedule();
 	}
 
 	@PostConstruct
 	public void postConstruct(final Composite parent) {
+
 		parent.setLayout(new FillLayout(SWT.HORIZONTAL));
 
-		Composite composite = new Composite(parent, SWT.NONE);
+		final Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
 
-		Canvas guageCanvas = new Canvas(composite, SWT.NO_FOCUS);
+		final Canvas guageCanvas = new Canvas(composite, SWT.NO_FOCUS);
 		guageCanvas.setLayout(new GridLayout(1, true));
-		GridData gd_guageCanvas = new GridData(SWT.CENTER, SWT.FILL, true,
-				false, 1, 1);
+		final GridData gd_guageCanvas = new GridData(SWT.CENTER, SWT.FILL,
+				true, false, 1, 1);
 		gd_guageCanvas.widthHint = 136;
-		gd_guageCanvas.heightHint = 160;
+		gd_guageCanvas.heightHint = 134;
 		guageCanvas.setLayoutData(gd_guageCanvas);
 
-		Canvas historyCanvas = new Canvas(composite, SWT.NONE);
-		GridData gd_historyCanvas = new GridData(SWT.FILL, SWT.FILL, true,
-				true, 1, 2);
+		final Canvas historyCanvas = new Canvas(composite, SWT.NONE);
+		final GridData gd_historyCanvas = new GridData(SWT.FILL, SWT.FILL,
+				true, true, 1, 2);
 		gd_historyCanvas.heightHint = 153;
 		gd_historyCanvas.widthHint = 297;
 		historyCanvas.setLayoutData(gd_historyCanvas);
-		LightweightSystem historyLWS = new LightweightSystem(historyCanvas);
+		final LightweightSystem historyLWS = new LightweightSystem(
+				historyCanvas);
 
 		final XYGraph mashGraph = new XYGraph();
 		// xyGraph.setTitle("History");
@@ -153,7 +150,7 @@ public class MashPart {
 
 		provider = new CircularBufferDataProvider(false);
 		provider.setPlotMode(PlotMode.N_STOP);
-		provider.setBufferSize(200);
+		provider.setBufferSize(320 * 60);
 
 		final Trace trace = new Trace("Temp Graph", mashGraph.primaryXAxis,
 				mashGraph.primaryYAxis, provider);
@@ -177,82 +174,91 @@ public class MashPart {
 		gaugeFigure.setEffect3D(true);
 		gaugeFigure.setShowMarkers(true);
 		gaugeFigure.setValue(0);
-		LightweightSystem lws = new LightweightSystem(guageCanvas);
+		final LightweightSystem lws = new LightweightSystem(guageCanvas);
 
-		ScrolledComposite scrolledComposite = new ScrolledComposite(composite,
-				SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		GridData gd_scrolledComposite = new GridData(SWT.FILL, SWT.FILL, true,
-				true, 1, 1);
+		final ScrolledComposite scrolledComposite = new ScrolledComposite(
+				composite, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		final GridData gd_scrolledComposite = new GridData(SWT.FILL, SWT.FILL,
+				true, true, 1, 1);
 		gd_scrolledComposite.widthHint = 167;
 		scrolledComposite.setLayoutData(gd_scrolledComposite);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 
-		CheckboxTableViewer mashSteps = CheckboxTableViewer.newCheckList(
+		final CheckboxTableViewer mashSteps = CheckboxTableViewer.newCheckList(
 				scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION);
 		table = mashSteps.getTable();
 		table.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 
-		TableViewerColumn timeViewerColumn = new TableViewerColumn(mashSteps,
-				SWT.NONE);
+		final TableViewerColumn timeViewerColumn = new TableViewerColumn(
+				mashSteps, SWT.NONE);
 		timeViewerColumn.setLabelProvider(new ColumnLabelProvider() {
+			@Override
 			public Image getImage(Object element) {
 				return null;
 			}
 
+			@Override
 			public String getText(Object element) {
 				if (element != null) {
-					MashStep step = (MashStep) element;
+					final MashStep step = (MashStep) element;
 					return String.valueOf(step.getRest());
-				} else
+				} else {
 					return "";
+				}
 			}
 		});
-		TableColumn timeColumn = timeViewerColumn.getColumn();
+		final TableColumn timeColumn = timeViewerColumn.getColumn();
 		timeColumn.setAlignment(SWT.CENTER);
 		timeColumn.setMoveable(true);
 		timeColumn.setWidth(45);
 		timeColumn.setText("Time");
 
-		TableViewerColumn tempViewerColumn = new TableViewerColumn(mashSteps,
-				SWT.NONE);
+		final TableViewerColumn tempViewerColumn = new TableViewerColumn(
+				mashSteps, SWT.NONE);
 		tempViewerColumn.setLabelProvider(new ColumnLabelProvider() {
+			@Override
 			public Image getImage(Object element) {
 				return null;
 			}
 
+			@Override
 			public String getText(Object element) {
 				if (element != null) {
-					MashStep step = (MashStep) element;
+					final MashStep step = (MashStep) element;
 					return String.valueOf(step.getTemp()) + "C";
-				} else
+				} else {
 					return "";
+				}
 			}
 		});
-		TableColumn tempColumn = tempViewerColumn.getColumn();
+		final TableColumn tempColumn = tempViewerColumn.getColumn();
 		tempColumn.setAlignment(SWT.CENTER);
 		tempColumn.setMoveable(true);
 		tempColumn.setWidth(45);
 		tempColumn.setText("Temp");
 
-		TableViewerColumn nameViewerColumn = new TableViewerColumn(mashSteps,
-				SWT.NONE);
+		final TableViewerColumn nameViewerColumn = new TableViewerColumn(
+				mashSteps, SWT.NONE);
 		nameViewerColumn.setLabelProvider(new ColumnLabelProvider() {
+			@Override
 			public Image getImage(Object element) {
 				return null;
 			}
 
+			@Override
 			public String getText(Object element) {
 				if (element != null) {
-					MashStep step = (MashStep) element;
+					final MashStep step = (MashStep) element;
 					return step.getPhase();
-				} else
+				} else {
 					return "";
+				}
 			}
 		});
-		TableColumn nameColumn = nameViewerColumn.getColumn();
+		final TableColumn nameColumn = nameViewerColumn.getColumn();
 		nameColumn.setMoveable(true);
 		nameColumn.setWidth(120);
 		nameColumn.setText("Phase");
@@ -261,60 +267,20 @@ public class MashPart {
 		scrolledComposite.setMinSize(table
 				.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
-		Composite statusBar = new Composite(composite, SWT.BORDER
+		final Composite statusBar = new Composite(composite, SWT.BORDER
 				| SWT.NO_FOCUS);
-		GridLayout gl_statusBar = new GridLayout(3, false);
+		final GridLayout gl_statusBar = new GridLayout(2, false);
 		gl_statusBar.marginHeight = 1;
 		gl_statusBar.verticalSpacing = 1;
 		gl_statusBar.marginWidth = 1;
 		statusBar.setLayout(gl_statusBar);
-		GridData gd_statusBar = new GridData(SWT.FILL, SWT.FILL, true, false,
-				2, 1);
+		final GridData gd_statusBar = new GridData(SWT.FILL, SWT.FILL, true,
+				false, 2, 1);
 		gd_statusBar.widthHint = 459;
 		gd_statusBar.heightHint = 26;
 		statusBar.setLayoutData(gd_statusBar);
 
-		Composite composite_2 = new Composite(statusBar, SWT.NONE);
-		GridData gd_composite_2 = new GridData(SWT.LEFT, SWT.CENTER, false,
-				false, 1, 1);
-		gd_composite_2.widthHint = 173;
-		gd_composite_2.heightHint = 24;
-		composite_2.setLayoutData(gd_composite_2);
-
-		Button buttonStart = new Button(composite_2, SWT.NONE);
-		buttonStart.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				startDate = new Date();
-				timerJob.schedule(1000);
-			}
-		});
-		buttonStart.setBounds(0, 0, 45, 25);
-		buttonStart.setText("Start");
-
-		Button buttonStop = new Button(composite_2, SWT.NONE);
-		buttonStop.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				timerJob.cancel();
-			}
-		});
-		buttonStop.setBounds(51, 0, 53, 25);
-		buttonStop.setText("Stop");
-
-		Button buttonLoad = new Button(composite_2, SWT.NONE);
-		buttonLoad.setBounds(110, 0, 59, 25);
-		buttonLoad.setText("Load");
-		buttonLoad.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				FileDialog dialog = new FileDialog(parent.getShell());
-				dialog.open();
-				System.out.println(dialog.getFileName());
-			}
-		});
-
-		ProgressBar progressBar = new ProgressBar(statusBar, SWT.NONE);
+		final ProgressBar progressBar = new ProgressBar(statusBar, SWT.NONE);
 		progressBar.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
 
@@ -323,50 +289,45 @@ public class MashPart {
 		timerLabel.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		timerLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
 		timerLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		GridData gd_lblNewLabel = new GridData(SWT.RIGHT, SWT.CENTER, false,
-				false, 1, 1);
+		final GridData gd_lblNewLabel = new GridData(SWT.RIGHT, SWT.CENTER,
+				false, false, 1, 1);
 		gd_lblNewLabel.widthHint = 77;
 		timerLabel.setLayoutData(gd_lblNewLabel);
 		timerLabel.setText("00:00:00");
 		lws.setContents(gaugeFigure);
 
+		timerJob = new MashTimerJob(sync, serialPort, calendar, timerLabel);
 		mashSteps.setInput(MashScheduleProvider.INSTANCE.getSteps());
-		System.out.println(mashSteps.getInput());
-
-	}
-
-	@Persist
-	public void save() {
 	}
 
 	/**
-	 * listens for pin 5
 	 * 
-	 * @param pin
+	 * @param command
 	 */
 	@Inject
 	@Optional
-	void pinEventReceived(@UIEventTopic("sensor/mash") final Sensor sensor) {
+	void processMashtunCommands(
+			@UIEventTopic(BreweryEventTopic.MASH_COMMAND) final MashPartCommand command) {
+		switch (command) {
+		case PAUSE:
+			break;
+		case START:
+			timerJob.start();
+			break;
+		case STOP:
+			gaugeFigure.setValue(0);
+			timerJob.stop();
+			break;
+		default:
+			break;
 
-		final Job job = new Job("sensor/mash/ui") {
+		}
+	}
 
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				sync.asyncExec(new Runnable() {
-
-					@Override
-					public void run() {
-						gaugeFigure.setValue(sensor.getValue());
-						provider.setCurrentYData(sensor.getValue());
-						calendar.add(Calendar.HOUR, 1);
-						long newValue = calendar.getTimeInMillis() / 1000 / 60;
-						System.out.println(newValue);
-						provider.setCurrentXData(newValue);
-					}
-				});
-				return Status.OK_STATUS;
-			}
-		};
-		job.schedule();
+	/**
+	 * 
+	 */
+	@Persist
+	public void save() {
 	}
 }

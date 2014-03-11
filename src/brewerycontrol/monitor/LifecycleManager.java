@@ -32,19 +32,19 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.equinox.app.IApplicationContext;
 
 import brewery.BreweryFactory;
+import brewery.ConsoleCommand;
 import brewery.Inventory;
+import brewery.Sensor;
+import brewery.SensorReply;
+import brewerycontrol.BreweryEventTopic;
 
 /**
  * @author nguba_000
  * 
  */
-public final class LifecycleManager implements SerialPortEventListener {
+public final class LifecycleManager implements SerialPortEventListener, ConsoleParserEventListener {
 
 	private static final String SETTINGS_FILENAME = "brewery-settings.bctl";
-
-	private enum State {
-		COMMAND, COMMAND_START, REPLY_START, READY, REPLY, COMMAND_END;
-	}
 
 	@Inject
 	private Logger logger;
@@ -58,10 +58,8 @@ public final class LifecycleManager implements SerialPortEventListener {
 	private static final int TIME_OUT = 2000;
 	private static final int DATA_RATE = 9600;
 	private IEventBroker eventBroker;
-	private State state = State.READY;
-	private StringBuilder buf;
-	private String command;
-
+	private ConsoleParser parser;
+	
 	/**
 	 * 
 	 */
@@ -70,6 +68,7 @@ public final class LifecycleManager implements SerialPortEventListener {
 		final Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 		final Map<String, Object> m = reg.getExtensionToFactoryMap();
 		m.put("bctl", new XMIResourceFactoryImpl());
+		parser = new ConsoleParser(this);
 	}
 
 	/**
@@ -175,74 +174,24 @@ public final class LifecycleManager implements SerialPortEventListener {
 				String inputLine = null;
 				if (input.ready()) {
 					inputLine = input.readLine();
-					System.out.println(inputLine);
-					for (int i = 0, length = inputLine.length(); i < length; i++) {
-						final char c = inputLine.charAt(i);
-						// System.out.println(state);
-						switch (state) {
-						case READY:
-							buf = new StringBuilder();
-							if (c == '[') {
-								state = State.COMMAND_START;
-							}
-							break;
-						case COMMAND_START:
-							if (Character.isWhitespace(c)) {
-								state = State.COMMAND;
-							} else if (c == ']') {
-								state = State.COMMAND_END;
-							} else {
-								buf.append(c);
-							}
-							break;
-						case COMMAND:
-							if (c == ']') {
-								System.out.println(buf);
-								state = State.READY;
-							}
-						case COMMAND_END:
-							command = buf.toString();
-							// System.out.println("COMMAND -> " + buf);
-							if (c == '[') {
-								state = State.REPLY_START;
-							}
-							break;
-						case REPLY_START:
-							if (Character.isWhitespace(c)) {
-								state = State.REPLY;
-								// discard the actual command word here
-								buf = new StringBuilder();
-							}
-							break;
-						case REPLY:
-							if (c == ']') {
-								// handle the commands here by building custom
-								// objects and sending them via the event
-								// broker.
-								switch (command) {
-								case "sensor":
-									final int separator = buf.indexOf(" ");
-									final Sensor sensor = new Sensor();
-									sensor.setId(buf.substring(0, separator));
-									final float value = Float.parseFloat(buf
-											.substring(separator).trim());
-									sensor.setValue(value);
-									eventBroker.send("sensor/mash", sensor);
-									break;
-								}
-								state = State.READY;
-							} else {
-								buf.append(c);
-							}
-							break;
-						default:
-							break;
-						}
-					}
+					parser.parse(inputLine);
 				}
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public void onCommand(ConsoleCommand command) {
+		//System.out.println(command);
+	}
+
+	@Override
+	public void onSensorReply(SensorReply reply) {
+		//System.out.println(reply);
+		Sensor sensor = BreweryFactory.eINSTANCE.createSensor();
+		sensor.setValue(reply.getTemperature());
+		eventBroker.send(BreweryEventTopic.SENSOR, sensor);
 	}
 }

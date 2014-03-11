@@ -34,9 +34,29 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//MashStep/temperature"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//MashStep/pause"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//MashStep/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//MashStep/complete"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//MashStep/riseTime"/>
     </genClasses>
     <genClasses ecoreClass="brewery.ecore#//MashSchedule">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference brewery.ecore#//MashSchedule/steps"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//MashSchedule/name"/>
+    </genClasses>
+    <genClasses ecoreClass="brewery.ecore#//Sensor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//Sensor/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//Sensor/id"/>
+    </genClasses>
+    <genClasses ecoreClass="brewery.ecore#//Pin">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//Pin/id"/>
+    </genClasses>
+    <genClasses ecoreClass="brewery.ecore#//ConsoleCommand">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//ConsoleCommand/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//ConsoleCommand/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="brewery.ecore#//ConsoleReply">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//ConsoleReply/name"/>
+    </genClasses>
+    <genClasses ecoreClass="brewery.ecore#//SensorReply">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//SensorReply/temperature"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

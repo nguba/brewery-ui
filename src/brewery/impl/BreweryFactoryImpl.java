@@ -99,6 +99,10 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 			case BreweryPackage.FERMENTER: return createFermenter();
 			case BreweryPackage.MASH_STEP: return createMashStep();
 			case BreweryPackage.MASH_SCHEDULE: return createMashSchedule();
+			case BreweryPackage.SENSOR: return createSensor();
+			case BreweryPackage.PIN: return createPin();
+			case BreweryPackage.CONSOLE_COMMAND: return createConsoleCommand();
+			case BreweryPackage.SENSOR_REPLY: return createSensorReply();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -132,6 +136,46 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 	public MashSchedule createMashSchedule() {
 		MashScheduleImpl mashSchedule = new MashScheduleImpl();
 		return mashSchedule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Sensor createSensor() {
+		SensorImpl sensor = new SensorImpl();
+		return sensor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Pin createPin() {
+		PinImpl pin = new PinImpl();
+		return pin;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConsoleCommand createConsoleCommand() {
+		ConsoleCommandImpl consoleCommand = new ConsoleCommandImpl();
+		return consoleCommand;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SensorReply createSensorReply() {
+		SensorReplyImpl sensorReply = new SensorReplyImpl();
+		return sensorReply;
 	}
 
 	/**

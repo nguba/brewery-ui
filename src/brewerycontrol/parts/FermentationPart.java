@@ -29,9 +29,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
+import brewery.Sensor;
 import brewery.Yeast;
 import brewery.impl.InventoryImpl;
-import brewerycontrol.monitor.Pin;
 
 /**
  * 
@@ -161,11 +161,11 @@ public class FermentationPart {
 	/**
 	 * listens for pin 5
 	 * 
-	 * @param pin
+	 * @param sensor
 	 */
 	@Inject
 	@Optional
-	void pinEventReceived(@UIEventTopic("arduino/pin/5") final Pin pin) {
+	void pinEventReceived(@UIEventTopic("arduino/pin/5") final Sensor sensor) {
 
 		final Job job = new Job("arduino/pin/5/updater") {
 
@@ -175,7 +175,7 @@ public class FermentationPart {
 
 					@Override
 					public void run() {
-						final double temperature = ((pin.value * 0.004882814) - 0.5) * 100;
+						final double temperature = ((sensor.getValue() * 0.004882814) - 0.5) * 100;
 						final double value = temperature;
 						thermo.setValue(value);
 

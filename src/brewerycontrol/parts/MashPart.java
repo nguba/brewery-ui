@@ -15,12 +15,11 @@ import org.csstudio.swt.xygraph.figures.Trace.BaseLine;
 import org.csstudio.swt.xygraph.figures.XYGraph;
 import org.csstudio.swt.xygraph.linearscale.Range;
 import org.csstudio.swt.xygraph.util.XYGraphMediaFactory;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -44,9 +43,10 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 import brewery.MashSchedule;
 import brewery.MashStep;
+import brewery.Sensor;
 import brewerycontrol.BreweryEventTopic;
 import brewerycontrol.job.MashTimerJob;
-import brewerycontrol.monitor.Sensor;
+import brewerycontrol.job.SensorEventHandler;
 
 /**
  * 
@@ -54,18 +54,34 @@ import brewerycontrol.monitor.Sensor;
  * 
  */
 public class MashPart {
-	@Inject
-	private UISynchronize sync;
+	@Inject UISynchronize sync;
+	/**
+	 * @return the provider
+	 */
+	public CircularBufferDataProvider getProvider() {
+		return provider;
+	}
+
 	@Inject
 	private CommPort serialPort;
-	private GaugeFigure gaugeFigure;
-	private CircularBufferDataProvider provider;
+	GaugeFigure gaugeFigure;
+	CircularBufferDataProvider provider;
 	private Table table;
-	private MashTimerJob timerJob;
-	private final Calendar calendar = Calendar.getInstance();
-
+	MashTimerJob timerJob;
+	final Calendar calendar = Calendar.getInstance();
+	@Inject
+	private Logger logger;
 	private CLabel timerLabel;
 	private CheckboxTableViewer mashSteps;
+	@Inject
+	IEventBroker broker;
+	
+	/**
+	 * @return the broker
+	 */
+	public IEventBroker getBroker() {
+		return broker;
+	}
 
 	@Inject
 	public MashPart() {
@@ -79,31 +95,8 @@ public class MashPart {
 	 */
 	@Inject
 	@Optional
-	void pinEventReceived(@UIEventTopic("sensor/mash") final Sensor sensor) {
-
-		final Job job = new Job("sensor/mash/ui") {
-			/**
-			 * 
-			 */
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				sync.asyncExec(new Runnable() {
-					/**
-					 * 
-					 */
-					@Override
-					public void run() {
-						gaugeFigure.setValue(sensor.getValue());
-						provider.setCurrentYData(sensor.getValue());
-						calendar.add(Calendar.HOUR, 1);
-						final long newValue = calendar.getTimeInMillis() / 1000 / 60;
-						// System.out.println(newValue);
-						provider.setCurrentXData(newValue);
-					}
-				});
-				return Status.OK_STATUS;
-			}
-		};
+	void pinEventReceived(@UIEventTopic(BreweryEventTopic.SENSOR) final Sensor sensor) {
+		final Job job = new SensorEventHandler(this, "sensor/mash/ui", sensor);
 		job.schedule();
 	}
 
@@ -188,7 +181,6 @@ public class MashPart {
 		table.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-
 		final TableViewerColumn timeViewerColumn = new TableViewerColumn(
 				mashSteps, SWT.NONE);
 		timeViewerColumn.setLabelProvider(new ColumnLabelProvider() {
@@ -295,8 +287,63 @@ public class MashPart {
 		timerLabel.setText("00:00:00");
 		lws.setContents(gaugeFigure);
 
-		timerJob = new MashTimerJob(sync, serialPort, calendar, timerLabel);
-		
+		timerJob = new MashTimerJob(this);
+	}
+
+	/**
+	 * @return the sync
+	 */
+	public UISynchronize getSync() {
+		return sync;
+	}
+
+	/**
+	 * @return the serialPort
+	 */
+	public CommPort getSerialPort() {
+		return serialPort;
+	}
+
+	/**
+	 * @return the gaugeFigure
+	 */
+	public GaugeFigure getGaugeFigure() {
+		return gaugeFigure;
+	}
+
+	/**
+	 * @return the table
+	 */
+	public Table getTable() {
+		return table;
+	}
+
+	/**
+	 * @return the timerJob
+	 */
+	public MashTimerJob getTimerJob() {
+		return timerJob;
+	}
+
+	/**
+	 * @return the calendar
+	 */
+	public Calendar getCalendar() {
+		return calendar;
+	}
+
+	/**
+	 * @return the timerLabel
+	 */
+	public CLabel getTimerLabel() {
+		return timerLabel;
+	}
+
+	/**
+	 * @return the mashSteps
+	 */
+	public CheckboxTableViewer getMashSteps() {
+		return mashSteps;
 	}
 
 	/**
@@ -326,7 +373,7 @@ public class MashPart {
 	@Inject
 	@Optional
 	void loadMashSchedule(@UIEventTopic(BreweryEventTopic.MASH_SCHEDULE) final MashSchedule schedule) {
-		System.out.println("Loading " + schedule);
+		logger.info("Loaded mash schedule: " + schedule);
 		mashSteps.setInput(schedule.getSteps());
 	}
 

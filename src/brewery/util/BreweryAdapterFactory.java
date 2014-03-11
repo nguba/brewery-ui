@@ -61,6 +61,26 @@ public class BreweryAdapterFactory extends AdapterFactoryImpl {
 				return createMashScheduleAdapter();
 			}
 			@Override
+			public Adapter caseSensor(Sensor object) {
+				return createSensorAdapter();
+			}
+			@Override
+			public Adapter casePin(Pin object) {
+				return createPinAdapter();
+			}
+			@Override
+			public Adapter caseConsoleCommand(ConsoleCommand object) {
+				return createConsoleCommandAdapter();
+			}
+			@Override
+			public Adapter caseConsoleReply(ConsoleReply object) {
+				return createConsoleReplyAdapter();
+			}
+			@Override
+			public Adapter caseSensorReply(SensorReply object) {
+				return createSensorReplyAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -142,6 +162,76 @@ public class BreweryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMashScheduleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link brewery.Sensor <em>Sensor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see brewery.Sensor
+	 * @generated
+	 */
+	public Adapter createSensorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link brewery.Pin <em>Pin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see brewery.Pin
+	 * @generated
+	 */
+	public Adapter createPinAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link brewery.ConsoleCommand <em>Console Command</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see brewery.ConsoleCommand
+	 * @generated
+	 */
+	public Adapter createConsoleCommandAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link brewery.ConsoleReply <em>Console Reply</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see brewery.ConsoleReply
+	 * @generated
+	 */
+	public Adapter createConsoleReplyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link brewery.SensorReply <em>Sensor Reply</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see brewery.SensorReply
+	 * @generated
+	 */
+	public Adapter createSensorReplyAdapter() {
 		return null;
 	}
 

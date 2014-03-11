@@ -31,6 +31,7 @@ import brewery.MashStep;
 public class MashXMLSerializationTest {
 
 	private static ResourceSet resSet;
+	private MashSchedule schedule;
 
 	/**
 	 * @throws java.lang.Exception
@@ -56,6 +57,26 @@ public class MashXMLSerializationTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		MashStep first = BreweryFactory.eINSTANCE.createMashStep();
+		first.setDescription("First");
+		first.setPause(10);
+		first.setTemperature(40);
+		
+		MashStep second = BreweryFactory.eINSTANCE.createMashStep();
+		second.setDescription("Second");
+		second.setPause(10);
+		second.setTemperature(20);
+		
+		MashStep third = BreweryFactory.eINSTANCE.createMashStep();
+		third.setDescription("Third");
+		third.setPause(90);
+		third.setTemperature(66);
+		
+		schedule = BreweryFactory.eINSTANCE.createMashSchedule();
+		schedule.setName("default schedule");
+		schedule.getSteps().add(first);
+		schedule.getSteps().add(second);
+		schedule.getSteps().add(third);
 	}
 
 	/**
@@ -74,84 +95,32 @@ public class MashXMLSerializationTest {
 		
 		MashSchedule schedule = BreweryFactory.eINSTANCE.createMashSchedule();
 		schedule.getSteps().add(step);
-		
+		schedule.setName("first schedule");
 		System.out.println(schedule.getSteps());
 	}
 	
-	@Test
-	public void testStepInCorrectOrder() {
-		MashStep first = BreweryFactory.eINSTANCE.createMashStep();
-		first.setDescription("First");
-		first.setPause(10);
-		first.setTemperature(40);
-		
-		MashStep second = BreweryFactory.eINSTANCE.createMashStep();
-		second.setDescription("Second");
-		second.setPause(10);
-		second.setTemperature(20);
-		
-		MashStep third = BreweryFactory.eINSTANCE.createMashStep();
-		third.setDescription("Third");
-		third.setPause(90);
-		third.setTemperature(66);
-		
-		MashSchedule schedule = BreweryFactory.eINSTANCE.createMashSchedule();
-		schedule.getSteps().add(first);
-		schedule.getSteps().add(second);
-		schedule.getSteps().add(third);
-		
-		System.out.println(schedule.getSteps());
-	}
 
 	@Test
 	public void testLoader() throws Exception {
-		MashStep first = BreweryFactory.eINSTANCE.createMashStep();
-		first.setDescription("First");
-		first.setPause(10);
-		first.setTemperature(40);
-		
-		MashStep second = BreweryFactory.eINSTANCE.createMashStep();
-		second.setDescription("Second");
-		second.setPause(10);
-		second.setTemperature(20);
-		
-		MashStep third = BreweryFactory.eINSTANCE.createMashStep();
-		third.setDescription("Third");
-		third.setPause(90);
-		third.setTemperature(66);
-		
-		MashSchedule s = BreweryFactory.eINSTANCE.createMashSchedule();
-		s.getSteps().add(first);
-		s.getSteps().add(second);
-		s.getSteps().add(third);
-		
-		
 		final URI uri = URI.createURI("first-schedule.mash");
 		System.out.println(uri);
 		Resource resource = resSet.createResource(uri);
-		resource.getContents().add(s);
+		resource.getContents().add(schedule);
 		resource.save(Collections.EMPTY_MAP);
 	
-		MashSchedule schedule = null;
+		MashSchedule s = null;
 		if (uri.isFile()) {
 			final File f = new File(uri.path());
 			if (f.exists()) {
 				resource = resSet.getResource(uri, true);
 				final EObject eObject = resource.getContents().get(0);
 				if (eObject != null) {
-					schedule = (MashSchedule) eObject;
+					s = (MashSchedule) eObject;
 				}
-				if (eObject == null) {
-					// Create a new inventory instance if you cannot load it
-					// from the
-					// persistence store
-					schedule = BreweryFactory.eINSTANCE.createMashSchedule();
-				}
-			} else {
-				resource = resSet.createResource(URI.createURI("first-schedule"));
-				schedule = BreweryFactory.eINSTANCE.createMashSchedule();
 			}
 		}
-		Assert.assertArrayEquals(s.getSteps().toArray(), schedule.getSteps().toArray());
+		Assert.assertArrayEquals(s.getSteps().toArray(), s.getSteps().toArray());
 	}
+	
+	
 }

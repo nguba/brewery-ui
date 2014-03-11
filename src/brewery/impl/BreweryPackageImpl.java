@@ -11,10 +11,15 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import brewery.BreweryFactory;
 import brewery.BreweryPackage;
+import brewery.ConsoleCommand;
+import brewery.ConsoleReply;
 import brewery.Fermenter;
 import brewery.Inventory;
 import brewery.MashSchedule;
 import brewery.MashStep;
+import brewery.Pin;
+import brewery.Sensor;
+import brewery.SensorReply;
 import brewery.TemperatureRange;
 import brewery.TemperatureUnit;
 import brewery.Yeast;
@@ -102,6 +107,41 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 	private EClass mashScheduleEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sensorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pinEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass consoleCommandEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass consoleReplyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sensorReplyEClass = null;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -181,9 +221,29 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 		createEAttribute(mashStepEClass, MASH_STEP__TEMPERATURE);
 		createEAttribute(mashStepEClass, MASH_STEP__PAUSE);
 		createEAttribute(mashStepEClass, MASH_STEP__DESCRIPTION);
+		createEAttribute(mashStepEClass, MASH_STEP__COMPLETE);
+		createEAttribute(mashStepEClass, MASH_STEP__RISE_TIME);
 
 		mashScheduleEClass = createEClass(MASH_SCHEDULE);
 		createEReference(mashScheduleEClass, MASH_SCHEDULE__STEPS);
+		createEAttribute(mashScheduleEClass, MASH_SCHEDULE__NAME);
+
+		sensorEClass = createEClass(SENSOR);
+		createEAttribute(sensorEClass, SENSOR__VALUE);
+		createEAttribute(sensorEClass, SENSOR__ID);
+
+		pinEClass = createEClass(PIN);
+		createEAttribute(pinEClass, PIN__ID);
+
+		consoleCommandEClass = createEClass(CONSOLE_COMMAND);
+		createEAttribute(consoleCommandEClass, CONSOLE_COMMAND__NAME);
+		createEAttribute(consoleCommandEClass, CONSOLE_COMMAND__VALUE);
+
+		consoleReplyEClass = createEClass(CONSOLE_REPLY);
+		createEAttribute(consoleReplyEClass, CONSOLE_REPLY__NAME);
+
+		sensorReplyEClass = createEClass(SENSOR_REPLY);
+		createEAttribute(sensorReplyEClass, SENSOR_REPLY__TEMPERATURE);
 
 		// Create enums
 		temperatureUnitEEnum = createEEnum(TEMPERATURE_UNIT);
@@ -275,6 +335,24 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMashStep_Complete() {
+		return (EAttribute)mashStepEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMashStep_RiseTime() {
+		return (EAttribute)mashStepEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMashSchedule() {
 		return mashScheduleEClass;
 	}
@@ -286,6 +364,123 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 	 */
 	public EReference getMashSchedule_Steps() {
 		return (EReference)mashScheduleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMashSchedule_Name() {
+		return (EAttribute)mashScheduleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSensor() {
+		return sensorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSensor_Value() {
+		return (EAttribute)sensorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSensor_Id() {
+		return (EAttribute)sensorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPin() {
+		return pinEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPin_Id() {
+		return (EAttribute)pinEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConsoleCommand() {
+		return consoleCommandEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConsoleCommand_Name() {
+		return (EAttribute)consoleCommandEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConsoleCommand_Value() {
+		return (EAttribute)consoleCommandEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConsoleReply() {
+		return consoleReplyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConsoleReply_Name() {
+		return (EAttribute)consoleReplyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSensorReply() {
+		return sensorReplyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSensorReply_Temperature() {
+		return (EAttribute)sensorReplyEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -435,6 +630,7 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		sensorReplyEClass.getESuperTypes().add(this.getConsoleReply());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(yeastEClass, Yeast.class, "Yeast", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -462,9 +658,29 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 		initEAttribute(getMashStep_Temperature(), ecorePackage.getEInt(), "temperature", null, 0, 1, MashStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMashStep_Pause(), ecorePackage.getEInt(), "pause", null, 0, 1, MashStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMashStep_Description(), ecorePackage.getEString(), "description", null, 0, 1, MashStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMashStep_Complete(), ecorePackage.getEBoolean(), "complete", null, 0, 1, MashStep.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMashStep_RiseTime(), ecorePackage.getEInt(), "riseTime", null, 0, 1, MashStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mashScheduleEClass, MashSchedule.class, "MashSchedule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMashSchedule_Steps(), this.getMashStep(), null, "steps", null, 0, -1, MashSchedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMashSchedule_Name(), ecorePackage.getEString(), "name", null, 0, 1, MashSchedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sensorEClass, Sensor.class, "Sensor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSensor_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSensor_Id(), ecorePackage.getEString(), "id", null, 0, 1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(pinEClass, Pin.class, "Pin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPin_Id(), ecorePackage.getEString(), "id", null, 0, 1, Pin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(consoleCommandEClass, ConsoleCommand.class, "ConsoleCommand", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConsoleCommand_Name(), ecorePackage.getEString(), "name", null, 0, 1, ConsoleCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConsoleCommand_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, ConsoleCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(consoleReplyEClass, ConsoleReply.class, "ConsoleReply", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConsoleReply_Name(), ecorePackage.getEString(), "name", null, 0, 1, ConsoleReply.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sensorReplyEClass, SensorReply.class, "SensorReply", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSensorReply_Temperature(), ecorePackage.getEDouble(), "temperature", null, 0, 1, SensorReply.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(temperatureUnitEEnum, TemperatureUnit.class, "TemperatureUnit");

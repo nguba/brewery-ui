@@ -88,6 +88,81 @@ public class BrewerySwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sensor</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sensor</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSensor(Sensor object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Pin</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Pin</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePin(Pin object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Console Command</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Console Command</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConsoleCommand(ConsoleCommand object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Console Reply</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Console Reply</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConsoleReply(ConsoleReply object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sensor Reply</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sensor Reply</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSensorReply(SensorReply object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Inventory</em>'.
 	 * <!-- begin-user-doc --> This implementation returns
 	 * null; returning a non-null result will terminate the switch. <!--
@@ -187,6 +262,37 @@ public class BrewerySwitch<T> extends Switch<T> {
 			case BreweryPackage.MASH_SCHEDULE: {
 				MashSchedule mashSchedule = (MashSchedule)theEObject;
 				T result = caseMashSchedule(mashSchedule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BreweryPackage.SENSOR: {
+				Sensor sensor = (Sensor)theEObject;
+				T result = caseSensor(sensor);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BreweryPackage.PIN: {
+				Pin pin = (Pin)theEObject;
+				T result = casePin(pin);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BreweryPackage.CONSOLE_COMMAND: {
+				ConsoleCommand consoleCommand = (ConsoleCommand)theEObject;
+				T result = caseConsoleCommand(consoleCommand);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BreweryPackage.CONSOLE_REPLY: {
+				ConsoleReply consoleReply = (ConsoleReply)theEObject;
+				T result = caseConsoleReply(consoleReply);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BreweryPackage.SENSOR_REPLY: {
+				SensorReply sensorReply = (SensorReply)theEObject;
+				T result = caseSensorReply(sensorReply);
+				if (result == null) result = caseConsoleReply(sensorReply);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

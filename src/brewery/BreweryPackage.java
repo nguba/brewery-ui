@@ -204,6 +204,22 @@ public interface BreweryPackage extends EPackage {
 		EAttribute MASH_STEP__DESCRIPTION = eINSTANCE.getMashStep_Description();
 
 		/**
+		 * The meta object literal for the '<em><b>Complete</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MASH_STEP__COMPLETE = eINSTANCE.getMashStep_Complete();
+
+		/**
+		 * The meta object literal for the '<em><b>Rise Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MASH_STEP__RISE_TIME = eINSTANCE.getMashStep_RiseTime();
+
+		/**
 		 * The meta object literal for the '{@link brewery.impl.MashScheduleImpl <em>Mash Schedule</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -220,6 +236,120 @@ public interface BreweryPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MASH_SCHEDULE__STEPS = eINSTANCE.getMashSchedule_Steps();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MASH_SCHEDULE__NAME = eINSTANCE.getMashSchedule_Name();
+
+		/**
+		 * The meta object literal for the '{@link brewery.impl.SensorImpl <em>Sensor</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see brewery.impl.SensorImpl
+		 * @see brewery.impl.BreweryPackageImpl#getSensor()
+		 * @generated
+		 */
+		EClass SENSOR = eINSTANCE.getSensor();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SENSOR__VALUE = eINSTANCE.getSensor_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SENSOR__ID = eINSTANCE.getSensor_Id();
+
+		/**
+		 * The meta object literal for the '{@link brewery.impl.PinImpl <em>Pin</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see brewery.impl.PinImpl
+		 * @see brewery.impl.BreweryPackageImpl#getPin()
+		 * @generated
+		 */
+		EClass PIN = eINSTANCE.getPin();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PIN__ID = eINSTANCE.getPin_Id();
+
+		/**
+		 * The meta object literal for the '{@link brewery.impl.ConsoleCommandImpl <em>Console Command</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see brewery.impl.ConsoleCommandImpl
+		 * @see brewery.impl.BreweryPackageImpl#getConsoleCommand()
+		 * @generated
+		 */
+		EClass CONSOLE_COMMAND = eINSTANCE.getConsoleCommand();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSOLE_COMMAND__NAME = eINSTANCE.getConsoleCommand_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSOLE_COMMAND__VALUE = eINSTANCE.getConsoleCommand_Value();
+
+		/**
+		 * The meta object literal for the '{@link brewery.impl.ConsoleReplyImpl <em>Console Reply</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see brewery.impl.ConsoleReplyImpl
+		 * @see brewery.impl.BreweryPackageImpl#getConsoleReply()
+		 * @generated
+		 */
+		EClass CONSOLE_REPLY = eINSTANCE.getConsoleReply();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSOLE_REPLY__NAME = eINSTANCE.getConsoleReply_Name();
+
+		/**
+		 * The meta object literal for the '{@link brewery.impl.SensorReplyImpl <em>Sensor Reply</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see brewery.impl.SensorReplyImpl
+		 * @see brewery.impl.BreweryPackageImpl#getSensorReply()
+		 * @generated
+		 */
+		EClass SENSOR_REPLY = eINSTANCE.getSensorReply();
+
+		/**
+		 * The meta object literal for the '<em><b>Temperature</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SENSOR_REPLY__TEMPERATURE = eINSTANCE.getSensorReply_Temperature();
 
 		/**
 		 * The meta object literal for the '{@link brewery.TemperatureUnit <em>Temperature Unit</em>}' enum.
@@ -523,13 +653,31 @@ public interface BreweryPackage extends EPackage {
 	int MASH_STEP__DESCRIPTION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Complete</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MASH_STEP__COMPLETE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Rise Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MASH_STEP__RISE_TIME = 4;
+
+	/**
 	 * The number of structural features of the '<em>Mash Step</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MASH_STEP_FEATURE_COUNT = 3;
+	int MASH_STEP_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Mash Step</em>' class.
@@ -560,13 +708,22 @@ public interface BreweryPackage extends EPackage {
 	int MASH_SCHEDULE__STEPS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MASH_SCHEDULE__NAME = 1;
+
+	/**
 	 * The number of structural features of the '<em>Mash Schedule</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MASH_SCHEDULE_FEATURE_COUNT = 1;
+	int MASH_SCHEDULE_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Mash Schedule</em>' class.
@@ -578,6 +735,218 @@ public interface BreweryPackage extends EPackage {
 	int MASH_SCHEDULE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link brewery.impl.SensorImpl <em>Sensor</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see brewery.impl.SensorImpl
+	 * @see brewery.impl.BreweryPackageImpl#getSensor()
+	 * @generated
+	 */
+	int SENSOR = 6;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR__VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR__ID = 1;
+
+	/**
+	 * The number of structural features of the '<em>Sensor</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Sensor</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link brewery.impl.PinImpl <em>Pin</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see brewery.impl.PinImpl
+	 * @see brewery.impl.BreweryPackageImpl#getPin()
+	 * @generated
+	 */
+	int PIN = 7;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIN__ID = 0;
+
+	/**
+	 * The number of structural features of the '<em>Pin</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIN_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Pin</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIN_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link brewery.impl.ConsoleCommandImpl <em>Console Command</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see brewery.impl.ConsoleCommandImpl
+	 * @see brewery.impl.BreweryPackageImpl#getConsoleCommand()
+	 * @generated
+	 */
+	int CONSOLE_COMMAND = 8;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSOLE_COMMAND__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSOLE_COMMAND__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Console Command</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSOLE_COMMAND_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Console Command</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSOLE_COMMAND_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link brewery.impl.ConsoleReplyImpl <em>Console Reply</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see brewery.impl.ConsoleReplyImpl
+	 * @see brewery.impl.BreweryPackageImpl#getConsoleReply()
+	 * @generated
+	 */
+	int CONSOLE_REPLY = 9;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSOLE_REPLY__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Console Reply</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSOLE_REPLY_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Console Reply</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSOLE_REPLY_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link brewery.impl.SensorReplyImpl <em>Sensor Reply</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see brewery.impl.SensorReplyImpl
+	 * @see brewery.impl.BreweryPackageImpl#getSensorReply()
+	 * @generated
+	 */
+	int SENSOR_REPLY = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_REPLY__NAME = CONSOLE_REPLY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Temperature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_REPLY__TEMPERATURE = CONSOLE_REPLY_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Sensor Reply</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_REPLY_FEATURE_COUNT = CONSOLE_REPLY_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Sensor Reply</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_REPLY_OPERATION_COUNT = CONSOLE_REPLY_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link brewery.TemperatureUnit <em>Temperature Unit</em>}' enum.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -585,7 +954,7 @@ public interface BreweryPackage extends EPackage {
 	 * @see brewery.impl.BreweryPackageImpl#getTemperatureUnit()
 	 * @generated
 	 */
-	int TEMPERATURE_UNIT = 6;
+	int TEMPERATURE_UNIT = 11;
 
 	/**
 	 * Returns the factory that creates the instances of the model. <!--
@@ -684,6 +1053,28 @@ public interface BreweryPackage extends EPackage {
 	EAttribute getMashStep_Description();
 
 	/**
+	 * Returns the meta object for the attribute '{@link brewery.MashStep#isComplete <em>Complete</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Complete</em>'.
+	 * @see brewery.MashStep#isComplete()
+	 * @see #getMashStep()
+	 * @generated
+	 */
+	EAttribute getMashStep_Complete();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.MashStep#getRiseTime <em>Rise Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rise Time</em>'.
+	 * @see brewery.MashStep#getRiseTime()
+	 * @see #getMashStep()
+	 * @generated
+	 */
+	EAttribute getMashStep_RiseTime();
+
+	/**
 	 * Returns the meta object for class '{@link brewery.MashSchedule <em>Mash Schedule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -703,6 +1094,144 @@ public interface BreweryPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMashSchedule_Steps();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.MashSchedule#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see brewery.MashSchedule#getName()
+	 * @see #getMashSchedule()
+	 * @generated
+	 */
+	EAttribute getMashSchedule_Name();
+
+	/**
+	 * Returns the meta object for class '{@link brewery.Sensor <em>Sensor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Sensor</em>'.
+	 * @see brewery.Sensor
+	 * @generated
+	 */
+	EClass getSensor();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.Sensor#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see brewery.Sensor#getValue()
+	 * @see #getSensor()
+	 * @generated
+	 */
+	EAttribute getSensor_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.Sensor#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see brewery.Sensor#getId()
+	 * @see #getSensor()
+	 * @generated
+	 */
+	EAttribute getSensor_Id();
+
+	/**
+	 * Returns the meta object for class '{@link brewery.Pin <em>Pin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Pin</em>'.
+	 * @see brewery.Pin
+	 * @generated
+	 */
+	EClass getPin();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.Pin#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see brewery.Pin#getId()
+	 * @see #getPin()
+	 * @generated
+	 */
+	EAttribute getPin_Id();
+
+	/**
+	 * Returns the meta object for class '{@link brewery.ConsoleCommand <em>Console Command</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Console Command</em>'.
+	 * @see brewery.ConsoleCommand
+	 * @generated
+	 */
+	EClass getConsoleCommand();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.ConsoleCommand#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see brewery.ConsoleCommand#getName()
+	 * @see #getConsoleCommand()
+	 * @generated
+	 */
+	EAttribute getConsoleCommand_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.ConsoleCommand#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see brewery.ConsoleCommand#getValue()
+	 * @see #getConsoleCommand()
+	 * @generated
+	 */
+	EAttribute getConsoleCommand_Value();
+
+	/**
+	 * Returns the meta object for class '{@link brewery.ConsoleReply <em>Console Reply</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Console Reply</em>'.
+	 * @see brewery.ConsoleReply
+	 * @generated
+	 */
+	EClass getConsoleReply();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.ConsoleReply#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see brewery.ConsoleReply#getName()
+	 * @see #getConsoleReply()
+	 * @generated
+	 */
+	EAttribute getConsoleReply_Name();
+
+	/**
+	 * Returns the meta object for class '{@link brewery.SensorReply <em>Sensor Reply</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Sensor Reply</em>'.
+	 * @see brewery.SensorReply
+	 * @generated
+	 */
+	EClass getSensorReply();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.SensorReply#getTemperature <em>Temperature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Temperature</em>'.
+	 * @see brewery.SensorReply#getTemperature()
+	 * @see #getSensorReply()
+	 * @generated
+	 */
+	EAttribute getSensorReply_Temperature();
 
 	/**
 	 * Returns the meta object for the reference '{@link brewery.Fermenter#getYeast <em>Yeast</em>}'.

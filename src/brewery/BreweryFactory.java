@@ -47,6 +47,42 @@ public interface BreweryFactory extends EFactory {
 	MashSchedule createMashSchedule();
 
 	/**
+	 * Returns a new object of class '<em>Sensor</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sensor</em>'.
+	 * @generated
+	 */
+	Sensor createSensor();
+
+	/**
+	 * Returns a new object of class '<em>Pin</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Pin</em>'.
+	 * @generated
+	 */
+	Pin createPin();
+
+	/**
+	 * Returns a new object of class '<em>Console Command</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Console Command</em>'.
+	 * @generated
+	 */
+	ConsoleCommand createConsoleCommand();
+
+	/**
+	 * Returns a new object of class '<em>Sensor Reply</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sensor Reply</em>'.
+	 * @generated
+	 */
+	SensorReply createSensorReply();
+
+	/**
 	 * Returns a new object of class '<em>Inventory</em>'.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->

@@ -48,7 +48,7 @@ public final class LifecycleManager implements SerialPortEventListener {
 	private Logger logger;
 	SerialPort serialPort;
 	/** The port we're normally going to use. */
-	private static final String PORT_NAMES[] = { "/dev/tty.usbmodemfd141", 
+	private static final String PORT_NAMES[] = { "/dev/cu.usbmodemfd141", 
 			"/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 	};
@@ -178,6 +178,7 @@ public final class LifecycleManager implements SerialPortEventListener {
 				String inputLine = null;
 				if (input.ready()) {
 					inputLine = input.readLine();
+					System.out.println(inputLine);
 					for (int i = 0, length = inputLine.length(); i < length; i++) {
 						final char c = inputLine.charAt(i);
 						// System.out.println(state);

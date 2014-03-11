@@ -288,8 +288,8 @@ public class MashPart {
 
 		timerLabel = new CLabel(statusBar, SWT.BORDER | SWT.SHADOW_IN
 				| SWT.SHADOW_OUT | SWT.CENTER);
-		timerLabel.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		timerLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
+		timerLabel.setFont(SWTResourceManager.getFont("Lucida Sans Typewriter", 11, SWT.NORMAL));
+		timerLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 		timerLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		final GridData gd_lblNewLabel = new GridData(SWT.RIGHT, SWT.CENTER,
 				false, false, 1, 1);

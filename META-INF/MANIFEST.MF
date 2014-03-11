@@ -5,10 +5,10 @@ Bundle-SymbolicName: brewery-ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: lib/jackson-core-asl-1.9.13.jar,
  lib/jackson-mapper-asl-1.9.13.jar,
- lib/rxtxcomm-2.2.jar,
  .,
  lib/org.csstudio.swt.widgets_2.1.0.201209121549.jar,
- lib/org.csstudio.swt.xygraph_2.1.0.201209121540.jar
+ lib/org.csstudio.swt.xygraph_2.1.0.201209121540.jar,
+ lib/RXTXcomm.jar
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: brewery,
@@ -29,7 +29,9 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  org.eclipse.osgi.services;bundle-version="3.3.100",
  org.eclipse.draw2d;bundle-version="3.9.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.9.1",
- javax.annotation
+ javax.annotation,
+ librxtxSerial.macosx.x86_64;bundle-version="2.2.0",
+ org.junit;resolution:=optional;bundle-version="4.11.0"
 Import-Package: javax.annotation;version="1.0.0",
  org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy

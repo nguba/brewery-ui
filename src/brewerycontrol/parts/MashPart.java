@@ -2,7 +2,6 @@ package brewerycontrol.parts;
 
 import gnu.io.CommPort;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.annotation.PostConstruct;
@@ -43,6 +42,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import brewery.MashSchedule;
+import brewery.MashStep;
 import brewerycontrol.BreweryEventTopic;
 import brewerycontrol.job.MashTimerJob;
 import brewerycontrol.monitor.Sensor;
@@ -64,15 +65,11 @@ public class MashPart {
 	private final Calendar calendar = Calendar.getInstance();
 
 	private CLabel timerLabel;
+	private CheckboxTableViewer mashSteps;
 
 	@Inject
 	public MashPart() {
-		final ArrayList<MashStep> steps = new ArrayList<>();
-		steps.add(new MashStep(38, 40, "Acid"));
-		steps.add(new MashStep(55, 20, "Protease"));
-		steps.add(new MashStep(67, 60, "Saccharification"));
-		steps.add(new MashStep(76, 5, "Mash Out"));
-		MashScheduleProvider.INSTANCE.setSteps(steps);
+		
 	}
 
 	/**
@@ -185,7 +182,7 @@ public class MashPart {
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 
-		final CheckboxTableViewer mashSteps = CheckboxTableViewer.newCheckList(
+		mashSteps = CheckboxTableViewer.newCheckList(
 				scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION);
 		table = mashSteps.getTable();
 		table.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
@@ -204,7 +201,7 @@ public class MashPart {
 			public String getText(Object element) {
 				if (element != null) {
 					final MashStep step = (MashStep) element;
-					return String.valueOf(step.getRest());
+					return String.valueOf(step.getPause());
 				} else {
 					return "";
 				}
@@ -214,7 +211,7 @@ public class MashPart {
 		timeColumn.setAlignment(SWT.CENTER);
 		timeColumn.setMoveable(true);
 		timeColumn.setWidth(45);
-		timeColumn.setText("Time");
+		timeColumn.setText("Pause");
 
 		final TableViewerColumn tempViewerColumn = new TableViewerColumn(
 				mashSteps, SWT.NONE);
@@ -228,7 +225,7 @@ public class MashPart {
 			public String getText(Object element) {
 				if (element != null) {
 					final MashStep step = (MashStep) element;
-					return String.valueOf(step.getTemp()) + "C";
+					return String.valueOf(step.getTemperature()) + "C";
 				} else {
 					return "";
 				}
@@ -252,7 +249,7 @@ public class MashPart {
 			public String getText(Object element) {
 				if (element != null) {
 					final MashStep step = (MashStep) element;
-					return step.getPhase();
+					return step.getDescription();
 				} else {
 					return "";
 				}
@@ -261,7 +258,7 @@ public class MashPart {
 		final TableColumn nameColumn = nameViewerColumn.getColumn();
 		nameColumn.setMoveable(true);
 		nameColumn.setWidth(120);
-		nameColumn.setText("Phase");
+		nameColumn.setText("Description");
 		mashSteps.setContentProvider(new ArrayContentProvider());
 		scrolledComposite.setContent(table);
 		scrolledComposite.setMinSize(table
@@ -299,7 +296,7 @@ public class MashPart {
 		lws.setContents(gaugeFigure);
 
 		timerJob = new MashTimerJob(sync, serialPort, calendar, timerLabel);
-		mashSteps.setInput(MashScheduleProvider.INSTANCE.getSteps());
+		
 	}
 
 	/**
@@ -324,6 +321,13 @@ public class MashPart {
 			break;
 
 		}
+	}
+	
+	@Inject
+	@Optional
+	void loadMashSchedule(@UIEventTopic(BreweryEventTopic.MASH_SCHEDULE) final MashSchedule schedule) {
+		System.out.println("Loading " + schedule);
+		mashSteps.setInput(schedule.getSteps());
 	}
 
 	/**

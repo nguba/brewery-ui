@@ -7,18 +7,18 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Yeast</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link brewery.Yeast#getName <em>Name</em>}</li>
- * <li>{@link brewery.Yeast#getFlocculation <em>Flocculation</em>}</li>
- * <li>{@link brewery.Yeast#getAttenuation <em>Attenuation</em>}</li>
- * <li>{@link brewery.Yeast#getManufacturer <em>Manufacturer</em>}</li>
- * <li>{@link brewery.Yeast#getRange <em>Range</em>}</li>
+ *   <li>{@link brewery.Yeast#getName <em>Name</em>}</li>
+ *   <li>{@link brewery.Yeast#getFlocculation <em>Flocculation</em>}</li>
+ *   <li>{@link brewery.Yeast#getAttenuation <em>Attenuation</em>}</li>
+ *   <li>{@link brewery.Yeast#getManufacturer <em>Manufacturer</em>}</li>
+ *   <li>{@link brewery.Yeast#getRange <em>Range</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see brewery.BreweryPackage#getYeast()
  * @model
  * @generated
@@ -100,7 +100,6 @@ public interface Yeast extends EObject {
 	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Range</em>' containment reference.
 	 * @see #setRange(TemperatureRange)
 	 * @see brewery.BreweryPackage#getYeast_Range()
@@ -110,58 +109,48 @@ public interface Yeast extends EObject {
 	TemperatureRange getRange();
 
 	/**
-	 * Sets the value of the '{@link brewery.Yeast#getAttenuation
-	 * <em>Attenuation</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link brewery.Yeast#getAttenuation <em>Attenuation</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Attenuation</em>' attribute.
+	 * @param value the new value of the '<em>Attenuation</em>' attribute.
 	 * @see #getAttenuation()
 	 * @generated
 	 */
 	void setAttenuation(String value);
 
 	/**
-	 * Sets the value of the '{@link brewery.Yeast#getFlocculation
-	 * <em>Flocculation</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link brewery.Yeast#getFlocculation <em>Flocculation</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Flocculation</em>' attribute.
+	 * @param value the new value of the '<em>Flocculation</em>' attribute.
 	 * @see #getFlocculation()
 	 * @generated
 	 */
 	void setFlocculation(String value);
 
 	/**
-	 * Sets the value of the '{@link brewery.Yeast#getManufacturer
-	 * <em>Manufacturer</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link brewery.Yeast#getManufacturer <em>Manufacturer</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Manufacturer</em>' attribute.
+	 * @param value the new value of the '<em>Manufacturer</em>' attribute.
 	 * @see #getManufacturer()
 	 * @generated
 	 */
 	void setManufacturer(String value);
 
 	/**
-	 * Sets the value of the '{@link brewery.Yeast#getName <em>Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Name</em>' attribute.
+	 * Sets the value of the '{@link brewery.Yeast#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */
 	void setName(String value);
 
 	/**
-	 * Sets the value of the '{@link brewery.Yeast#getRange <em>Range</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Range</em>' containment reference.
+	 * Sets the value of the '{@link brewery.Yeast#getRange <em>Range</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Range</em>' containment reference.
 	 * @see #getRange()
 	 * @generated
 	 */

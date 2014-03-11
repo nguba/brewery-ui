@@ -40,6 +40,8 @@ import brewery.Inventory;
  */
 public final class LifecycleManager implements SerialPortEventListener {
 
+	private static final String SETTINGS_FILENAME = "brewery-settings.bctl";
+
 	private enum State {
 		COMMAND, COMMAND_START, REPLY_START, READY, REPLY, COMMAND_END;
 	}
@@ -54,15 +56,10 @@ public final class LifecycleManager implements SerialPortEventListener {
 	};
 	private BufferedReader input;
 	private static final int TIME_OUT = 2000;
-
 	private static final int DATA_RATE = 9600;
-
 	private IEventBroker eventBroker;
-
 	private State state = State.READY;
-
 	private StringBuilder buf;
-
 	private String command;
 
 	/**
@@ -141,7 +138,7 @@ public final class LifecycleManager implements SerialPortEventListener {
 		context.set(CommPort.class, serialPort);
 
 		final ResourceSet resSet = new ResourceSetImpl();
-		final URI uri = URI.createURI("data.bctl");
+		final URI uri = URI.createURI(SETTINGS_FILENAME);
 		Resource resource = null;
 		Inventory inventory = null;
 		if (uri.isFile()) {
@@ -159,7 +156,7 @@ public final class LifecycleManager implements SerialPortEventListener {
 					inventory = BreweryFactory.eINSTANCE.createInventory();
 				}
 			} else {
-				resource = resSet.createResource(URI.createURI("data.bctl"));
+				resource = resSet.createResource(URI.createURI(SETTINGS_FILENAME));
 				inventory = BreweryFactory.eINSTANCE.createInventory();
 			}
 			context.set(resource.getClass().getCanonicalName(), resource);

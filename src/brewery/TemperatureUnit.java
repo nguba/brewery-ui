@@ -12,16 +12,15 @@ import org.eclipse.emf.common.util.Enumerator;
  * <!-- begin-user-doc --> A representation of the literals of the enumeration '
  * <em><b>Temperature Unit</b></em>', and utility methods for working with them.
  * <!-- end-user-doc -->
- * 
  * @see brewery.BreweryPackage#getTemperatureUnit()
  * @model
  * @generated
  */
 public enum TemperatureUnit implements Enumerator {
 	/**
-	 * The '<em><b>Celsius</b></em>' literal object. <!-- begin-user-doc -->
+	 * The '<em><b>Celsius</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #CELSIUS_VALUE
 	 * @generated
 	 * @ordered
@@ -29,9 +28,9 @@ public enum TemperatureUnit implements Enumerator {
 	CELSIUS(0, "Celsius", "C"),
 
 	/**
-	 * The '<em><b>Farenheit</b></em>' literal object. <!-- begin-user-doc -->
+	 * The '<em><b>Farenheit</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #FARENHEIT_VALUE
 	 * @generated
 	 * @ordered
@@ -39,13 +38,13 @@ public enum TemperatureUnit implements Enumerator {
 	FARENHEIT(1, "Farenheit", "F");
 
 	/**
-	 * The '<em><b>Celsius</b></em>' literal value. <!-- begin-user-doc -->
+	 * The '<em><b>Celsius</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>Celsius</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #CELSIUS
 	 * @model name="Celsius" literal="C"
 	 * @generated
@@ -54,13 +53,13 @@ public enum TemperatureUnit implements Enumerator {
 	public static final int CELSIUS_VALUE = 0;
 
 	/**
-	 * The '<em><b>Farenheit</b></em>' literal value. <!-- begin-user-doc -->
+	 * The '<em><b>Farenheit</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>Farenheit</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #FARENHEIT
 	 * @model name="Farenheit" literal="F"
 	 * @generated
@@ -75,41 +74,38 @@ public enum TemperatureUnit implements Enumerator {
 	 * @generated
 	 */
 	private static final TemperatureUnit[] VALUES_ARRAY = new TemperatureUnit[] {
-			CELSIUS, FARENHEIT, };
+			CELSIUS,
+			FARENHEIT,
+		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Temperature Unit</b></em>'
-	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * A public read-only list of all the '<em><b>Temperature Unit</b></em>' enumerators.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<TemperatureUnit> VALUES = Collections
-			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<TemperatureUnit> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Temperature Unit</b></em>' literal with the specified
-	 * integer value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Temperature Unit</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static TemperatureUnit get(int value) {
 		switch (value) {
-		case CELSIUS_VALUE:
-			return CELSIUS;
-		case FARENHEIT_VALUE:
-			return FARENHEIT;
+			case CELSIUS_VALUE: return CELSIUS;
+			case FARENHEIT_VALUE: return FARENHEIT;
 		}
 		return null;
 	}
 
 	/**
-	 * Returns the '<em><b>Temperature Unit</b></em>' literal with the specified
-	 * literal value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Temperature Unit</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static TemperatureUnit get(String literal) {
-		for (final TemperatureUnit result : VALUES_ARRAY) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			TemperatureUnit result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -118,13 +114,13 @@ public enum TemperatureUnit implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Temperature Unit</b></em>' literal with the specified
-	 * name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Temperature Unit</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static TemperatureUnit getByName(String name) {
-		for (final TemperatureUnit result : VALUES_ARRAY) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			TemperatureUnit result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -134,29 +130,26 @@ public enum TemperatureUnit implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final int value;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String name;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private TemperatureUnit(int value, String name, String literal) {
@@ -167,38 +160,34 @@ public enum TemperatureUnit implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string
-	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

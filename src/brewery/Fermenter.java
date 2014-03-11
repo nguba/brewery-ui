@@ -9,17 +9,17 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Fermenter</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link brewery.Fermenter#getName <em>Name</em>}</li>
- * <li>{@link brewery.Fermenter#getYeast <em>Yeast</em>}</li>
- * <li>{@link brewery.Fermenter#getContent <em>Content</em>}</li>
- * <li>{@link brewery.Fermenter#getStarted <em>Started</em>}</li>
+ *   <li>{@link brewery.Fermenter#getName <em>Name</em>}</li>
+ *   <li>{@link brewery.Fermenter#getYeast <em>Yeast</em>}</li>
+ *   <li>{@link brewery.Fermenter#getContent <em>Content</em>}</li>
+ *   <li>{@link brewery.Fermenter#getStarted <em>Started</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see brewery.BreweryPackage#getFermenter()
  * @model
  * @generated
@@ -106,11 +106,9 @@ public interface Fermenter extends EObject {
 	void setContent(String value);
 
 	/**
-	 * Sets the value of the '{@link brewery.Fermenter#getName <em>Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Name</em>' attribute.
+	 * Sets the value of the '{@link brewery.Fermenter#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */
@@ -129,11 +127,9 @@ public interface Fermenter extends EObject {
 	void setStarted(Date value);
 
 	/**
-	 * Sets the value of the '{@link brewery.Fermenter#getYeast <em>Yeast</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Yeast</em>' reference.
+	 * Sets the value of the '{@link brewery.Fermenter#getYeast <em>Yeast</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Yeast</em>' reference.
 	 * @see #getYeast()
 	 * @generated
 	 */

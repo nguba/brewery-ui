@@ -17,12 +17,12 @@ import brewery.TemperatureUnit;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link brewery.impl.TemperatureRangeImpl#getUnit <em>Unit</em>}</li>
- * <li>{@link brewery.impl.TemperatureRangeImpl#getLow <em>Low</em>}</li>
- * <li>{@link brewery.impl.TemperatureRangeImpl#getHigh <em>High</em>}</li>
+ *   <li>{@link brewery.impl.TemperatureRangeImpl#getUnit <em>Unit</em>}</li>
+ *   <li>{@link brewery.impl.TemperatureRangeImpl#getLow <em>Low</em>}</li>
+ *   <li>{@link brewery.impl.TemperatureRangeImpl#getHigh <em>High</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TemperatureRangeImpl extends MinimalEObjectImpl.Container
@@ -30,7 +30,6 @@ public class TemperatureRangeImpl extends MinimalEObjectImpl.Container
 	/**
 	 * The default value of the '{@link #getUnit() <em>Unit</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getUnit()
 	 * @generated
 	 * @ordered
@@ -40,7 +39,6 @@ public class TemperatureRangeImpl extends MinimalEObjectImpl.Container
 	/**
 	 * The cached value of the '{@link #getUnit() <em>Unit</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getUnit()
 	 * @generated
 	 * @ordered
@@ -70,7 +68,6 @@ public class TemperatureRangeImpl extends MinimalEObjectImpl.Container
 	/**
 	 * The default value of the '{@link #getHigh() <em>High</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getHigh()
 	 * @generated
 	 * @ordered
@@ -80,7 +77,6 @@ public class TemperatureRangeImpl extends MinimalEObjectImpl.Container
 	/**
 	 * The cached value of the '{@link #getHigh() <em>High</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getHigh()
 	 * @generated
 	 * @ordered
@@ -89,7 +85,6 @@ public class TemperatureRangeImpl extends MinimalEObjectImpl.Container
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected TemperatureRangeImpl() {
@@ -98,64 +93,60 @@ public class TemperatureRangeImpl extends MinimalEObjectImpl.Container
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case BreweryPackage.TEMPERATURE_RANGE__UNIT:
-			return getUnit();
-		case BreweryPackage.TEMPERATURE_RANGE__LOW:
-			return getLow();
-		case BreweryPackage.TEMPERATURE_RANGE__HIGH:
-			return getHigh();
+			case BreweryPackage.TEMPERATURE_RANGE__UNIT:
+				return getUnit();
+			case BreweryPackage.TEMPERATURE_RANGE__LOW:
+				return getLow();
+			case BreweryPackage.TEMPERATURE_RANGE__HIGH:
+				return getHigh();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case BreweryPackage.TEMPERATURE_RANGE__UNIT:
-			return unit != UNIT_EDEFAULT;
-		case BreweryPackage.TEMPERATURE_RANGE__LOW:
-			return low != LOW_EDEFAULT;
-		case BreweryPackage.TEMPERATURE_RANGE__HIGH:
-			return high != HIGH_EDEFAULT;
+			case BreweryPackage.TEMPERATURE_RANGE__UNIT:
+				return unit != UNIT_EDEFAULT;
+			case BreweryPackage.TEMPERATURE_RANGE__LOW:
+				return low != LOW_EDEFAULT;
+			case BreweryPackage.TEMPERATURE_RANGE__HIGH:
+				return high != HIGH_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case BreweryPackage.TEMPERATURE_RANGE__UNIT:
-			setUnit((TemperatureUnit) newValue);
-			return;
-		case BreweryPackage.TEMPERATURE_RANGE__LOW:
-			setLow((Integer) newValue);
-			return;
-		case BreweryPackage.TEMPERATURE_RANGE__HIGH:
-			setHigh((Integer) newValue);
-			return;
+			case BreweryPackage.TEMPERATURE_RANGE__UNIT:
+				setUnit((TemperatureUnit)newValue);
+				return;
+			case BreweryPackage.TEMPERATURE_RANGE__LOW:
+				setLow((Integer)newValue);
+				return;
+			case BreweryPackage.TEMPERATURE_RANGE__HIGH:
+				setHigh((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -165,28 +156,26 @@ public class TemperatureRangeImpl extends MinimalEObjectImpl.Container
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case BreweryPackage.TEMPERATURE_RANGE__UNIT:
-			setUnit(UNIT_EDEFAULT);
-			return;
-		case BreweryPackage.TEMPERATURE_RANGE__LOW:
-			setLow(LOW_EDEFAULT);
-			return;
-		case BreweryPackage.TEMPERATURE_RANGE__HIGH:
-			setHigh(HIGH_EDEFAULT);
-			return;
+			case BreweryPackage.TEMPERATURE_RANGE__UNIT:
+				setUnit(UNIT_EDEFAULT);
+				return;
+			case BreweryPackage.TEMPERATURE_RANGE__LOW:
+				setLow(LOW_EDEFAULT);
+				return;
+			case BreweryPackage.TEMPERATURE_RANGE__HIGH:
+				setHigh(HIGH_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -196,7 +185,6 @@ public class TemperatureRangeImpl extends MinimalEObjectImpl.Container
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -206,7 +194,6 @@ public class TemperatureRangeImpl extends MinimalEObjectImpl.Container
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -216,61 +203,49 @@ public class TemperatureRangeImpl extends MinimalEObjectImpl.Container
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void setHigh(int newHigh) {
-		final int oldHigh = high;
+		int oldHigh = high;
 		high = newHigh;
-		if (eNotificationRequired()) {
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					BreweryPackage.TEMPERATURE_RANGE__HIGH, oldHigh, high));
-		}
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BreweryPackage.TEMPERATURE_RANGE__HIGH, oldHigh, high));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void setLow(int newLow) {
-		final int oldLow = low;
+		int oldLow = low;
 		low = newLow;
-		if (eNotificationRequired()) {
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					BreweryPackage.TEMPERATURE_RANGE__LOW, oldLow, low));
-		}
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BreweryPackage.TEMPERATURE_RANGE__LOW, oldLow, low));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void setUnit(TemperatureUnit newUnit) {
-		final TemperatureUnit oldUnit = unit;
+		TemperatureUnit oldUnit = unit;
 		unit = newUnit == null ? UNIT_EDEFAULT : newUnit;
-		if (eNotificationRequired()) {
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					BreweryPackage.TEMPERATURE_RANGE__UNIT, oldUnit, unit));
-		}
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BreweryPackage.TEMPERATURE_RANGE__UNIT, oldUnit, unit));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (unit: ");
 		result.append(unit);
 		result.append(", low: ");

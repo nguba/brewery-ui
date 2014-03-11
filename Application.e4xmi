@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_1VAlUJk2EeO3BfkAMF08ng" elementId="org.eclipse.e4.ide.application" bindingContexts="_1VBMYJk2EeO3BfkAMF08ng">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_1VAlUZk2EeO3BfkAMF08ng" label="brewery-ui" width="500" height="410">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_1VAlUZk2EeO3BfkAMF08ng" label="Guba's Brewery" width="500" height="410">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_1VBMd5k2EeO3BfkAMF08ng">
       <children xsi:type="advanced:Perspective" xmi:id="_1VBMeJk2EeO3BfkAMF08ng">
         <children xsi:type="basic:PartSashContainer" xmi:id="_1VBMeZk2EeO3BfkAMF08ng">

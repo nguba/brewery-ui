@@ -17,7 +17,7 @@ import brewery.MashStep;
 
 /**
  * @author nguba
- *
+ * 
  */
 public class MashManagerTest implements MashManagerEventListener {
 
@@ -40,6 +40,24 @@ public class MashManagerTest implements MashManagerEventListener {
 	private boolean increaseTemperature;
 	private boolean scheduleComplete;
 
+	@Override
+	public void newSetpointEvent(final MashStep step) {
+		System.out.println("NEW SETPOINT: " + step);
+		increaseTemperature = true;
+	}
+
+	@Override
+	public void scheduleCompleteEvent(final MashSchedule schedule) {
+		System.out.println("COMPLETE: " + schedule);
+		scheduleComplete = true;
+	}
+
+	@Override
+	public void setpointReachedEvent(final MashStep step) {
+		System.out.println("SETPOINT REACHED: " + step);
+		increaseTemperature = false;
+	}
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -48,17 +66,17 @@ public class MashManagerTest implements MashManagerEventListener {
 		manager = new MashManager(this);
 		schedule = BreweryFactory.eINSTANCE.createMashSchedule();
 		schedule.setName("Test Schedule");
-		MashStep a = BreweryFactory.eINSTANCE.createMashStep();
+		final MashStep a = BreweryFactory.eINSTANCE.createMashStep();
 		a.setDescription("first");
 		a.setPause(3000);
 		a.setTemperature(5);
 
-		MashStep b = BreweryFactory.eINSTANCE.createMashStep();
+		final MashStep b = BreweryFactory.eINSTANCE.createMashStep();
 		b.setDescription("second");
 		b.setPause(3000);
 		b.setTemperature(10);
 
-		MashStep c = BreweryFactory.eINSTANCE.createMashStep();
+		final MashStep c = BreweryFactory.eINSTANCE.createMashStep();
 		c.setDescription("third");
 		c.setPause(5000);
 		c.setTemperature(15);
@@ -68,6 +86,12 @@ public class MashManagerTest implements MashManagerEventListener {
 		schedule.getSteps().add(c);
 	}
 
+	@Override
+	public void stepCompleteEvent(MashStep step) {
+		// TODO Auto-generated method stub
+
+	}
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -75,39 +99,23 @@ public class MashManagerTest implements MashManagerEventListener {
 	public void tearDown() throws Exception {
 	}
 
-	@Test(expected = IOException.class)
-	public void testStartWithoutSchedule() throws IOException {
-		manager.start(null);
-	}
-	
 	@Test
 	public void testSetTemperature() throws Exception {
 		manager.start(schedule);
 		scheduleComplete = false;
 		double temperature = 0;
-		while(scheduleComplete == false) {
+		while (scheduleComplete == false) {
 			Thread.sleep(1000);
-			if(increaseTemperature) temperature++;
+			if (increaseTemperature) {
+				temperature++;
+			}
 			System.out.println(temperature);
 			manager.setTemperature(temperature);
 		}
 	}
 
-	@Override
-	public void newSetpointEvent(MashStep step) {
-		System.out.println("NEW SETPOINT: " + step);
-		increaseTemperature = true;
-	}
-
-	@Override
-	public void scheduleCompleteEvent(MashSchedule schedule) {
-		System.out.println("COMPLETE: " + schedule);
-		scheduleComplete = true;
-	}
-
-	@Override
-	public void setpointReachedEvent(MashStep step) {
-		System.out.println("SETPOINT REACHED: " + step);
-		increaseTemperature = false;
+	@Test(expected = IOException.class)
+	public void testStartWithoutSchedule() throws IOException {
+		manager.start(null);
 	}
 }

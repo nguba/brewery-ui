@@ -27,4 +27,11 @@ public interface MashManagerEventListener {
 	 * @param step
 	 */
 	public void setpointReachedEvent(MashStep step);
+
+	/**
+	 * fired when a step has completed
+	 * 
+	 * @param step
+	 */
+	public void stepCompleteEvent(MashStep step);
 }

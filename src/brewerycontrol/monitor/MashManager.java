@@ -106,6 +106,9 @@ public class MashManager {
 			long lapsed = now - timer;
 			// System.out.println("lapsed " + lapsed + "/" + step.getPause());
 			if (lapsed >= step.getPause()) {
+				if(listener != null) {
+					listener.stepCompleteEvent(step);
+				}
 				state = State.LOAD;
 			}
 			break;

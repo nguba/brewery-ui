@@ -52,7 +52,7 @@ public final class LifecycleManager implements SerialPortEventListener,
 	SerialPort serialPort;
 	/** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { "/dev/cu.usbmodemfd141",
-			"/dev/ttyUSB0", // Linux
+			"/dev/cu.usbmodemfd121", "/dev/cu.usbmodemfa1331", "/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 	};
 	private BufferedReader input;
@@ -97,6 +97,7 @@ public final class LifecycleManager implements SerialPortEventListener,
 			final CommPortIdentifier currPortId = (CommPortIdentifier) portEnum
 					.nextElement();
 			for (final String portName : PORT_NAMES) {
+				logger.info("Trying to find board on port: " + portName);
 				if (currPortId.getName().equals(portName)) {
 					portId = currPortId;
 					logger.info("Found board on port: " + portId.getName());

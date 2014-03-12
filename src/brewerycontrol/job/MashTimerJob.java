@@ -18,8 +18,11 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.swt.custom.CLabel;
+import org.eclipse.swt.widgets.TableItem;
 
 import brewery.MashSchedule;
 import brewery.MashStep;
@@ -47,7 +50,9 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 	private MashManager mashManager;
 	private boolean shouldRun;
 	private IEventBroker broker;
-	
+	private Logger logger;
+	private CheckboxTableViewer scheduleTable;
+
 	/**
 	 * 
 	 * @param mashPart
@@ -63,7 +68,8 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 		calendar = mashPart.getCalendar();
 		label = mashPart.getTimerLabel();
 		broker = mashPart.getBroker();
-		mashPart.getMashSteps();
+		logger = mashPart.getLogger();
+		scheduleTable = mashPart.getMashScheduleTable();
 	}
 
 	/**
@@ -107,7 +113,7 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 	}
 
 	/**
-	 * @param schedule 
+	 * @param schedule
 	 * 
 	 */
 	public void start(MashSchedule schedule) {
@@ -131,7 +137,7 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 
 	@Override
 	public void newSetpointEvent(MashStep step) {
-		System.out.println("SETPOINT " + step);
+		logger.info("SETPOINT " + step);
 		final StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("[setpoint ");
 		stringBuilder.append(new Double(step.getTemperature()));
@@ -146,7 +152,7 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 
 	@Override
 	public void scheduleCompleteEvent(MashSchedule schedule) {
-		System.out.println("COMPLETE " + schedule);
+		logger.info("COMPLETE " + schedule);
 		final StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("[setpoint ");
 		stringBuilder.append(0);
@@ -164,10 +170,20 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 
 	@Override
 	public void setpointReachedEvent(MashStep step) {
-		System.out.println("SETPOINT REACHED " + step);
+		logger.info("SETPOINT REACHED " + step);
 	}
 
 	public void setCurrentTemp(double value) {
 		mashManager.setTemperature(value);
+	}
+
+	int itemIndex = 0;
+
+	@Override
+	public void stepCompleteEvent(MashStep step) {
+		logger.info("STEP COMPLETE " + step);
+		TableItem item = scheduleTable.getTable().getItem(itemIndex);
+		item.setChecked(true);
+		itemIndex++;
 	}
 }

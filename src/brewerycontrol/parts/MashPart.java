@@ -30,13 +30,16 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Canvas;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -48,11 +51,6 @@ import brewery.Sensor;
 import brewerycontrol.BreweryEventTopic;
 import brewerycontrol.job.MashTimerJob;
 import brewerycontrol.job.SensorEventHandler;
-
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.custom.SashForm;
 
 /**
  * 
@@ -73,7 +71,7 @@ public class MashPart {
 	@Inject
 	private Logger logger;
 	private CLabel timerLabel;
-	private CheckboxTableViewer mashSteps;
+	private CheckboxTableViewer mashScheduleTable;
 	@Inject
 	IEventBroker broker;
 	private Combo selectedSchedule;
@@ -108,8 +106,8 @@ public class MashPart {
 	/**
 	 * @return the mashSteps
 	 */
-	public CheckboxTableViewer getMashSteps() {
-		return mashSteps;
+	public CheckboxTableViewer getMashScheduleTable() {
+		return mashScheduleTable;
 	}
 
 	/**
@@ -160,7 +158,7 @@ public class MashPart {
 			@UIEventTopic(BreweryEventTopic.MASH_SCHEDULE) final MashSchedule schedule) {
 		this.schedule = schedule;
 		logger.info("Loaded mash schedule: " + schedule);
-		mashSteps.setInput(schedule.getSteps());
+		mashScheduleTable.setInput(schedule.getSteps());
 		selectedSchedule.add(schedule.getName(), 0);
 		selectedSchedule.select(0);
 	}
@@ -248,8 +246,8 @@ public class MashPart {
 		final Canvas guageCanvas = new Canvas(grpTunTemperature, SWT.NO_FOCUS);
 		GridData gd_guageCanvas = new GridData(SWT.FILL, SWT.FILL, true, true,
 				1, 1);
-		gd_guageCanvas.heightHint = 151;
-		gd_guageCanvas.widthHint = 189;
+		gd_guageCanvas.heightHint = 260;
+		gd_guageCanvas.widthHint = 220;
 		guageCanvas.setLayoutData(gd_guageCanvas);
 		GridLayout gl_guageCanvas = new GridLayout(1, true);
 		gl_guageCanvas.marginTop = 5;
@@ -269,19 +267,21 @@ public class MashPart {
 
 		final ScrolledComposite scrolledComposite = new ScrolledComposite(
 				grpSchedule, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
-				true, 1, 1));
+		GridData gd_scrolledComposite = new GridData(SWT.FILL, SWT.FILL, false,
+				true, 1, 1);
+		gd_scrolledComposite.widthHint = 212;
+		scrolledComposite.setLayoutData(gd_scrolledComposite);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 
-		mashSteps = CheckboxTableViewer.newCheckList(scrolledComposite,
+		mashScheduleTable = CheckboxTableViewer.newCheckList(scrolledComposite,
 				SWT.BORDER | SWT.FULL_SELECTION);
-		table = mashSteps.getTable();
+		table = mashScheduleTable.getTable();
 		table.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 		final TableViewerColumn timeViewerColumn = new TableViewerColumn(
-				mashSteps, SWT.NONE);
+				mashScheduleTable, SWT.NONE);
 		timeViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public Image getImage(final Object element) {
@@ -292,7 +292,7 @@ public class MashPart {
 			public String getText(final Object element) {
 				if (element != null) {
 					final MashStep step = (MashStep) element;
-					return String.valueOf(step.getPause());
+					return String.valueOf(step.getPause() / 60 / 1000 ) + " min";
 				} else {
 					return "";
 				}
@@ -305,7 +305,7 @@ public class MashPart {
 		timeColumn.setText("Pause");
 
 		final TableViewerColumn tempViewerColumn = new TableViewerColumn(
-				mashSteps, SWT.NONE);
+				mashScheduleTable, SWT.NONE);
 		tempViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public Image getImage(final Object element) {
@@ -316,7 +316,7 @@ public class MashPart {
 			public String getText(final Object element) {
 				if (element != null) {
 					final MashStep step = (MashStep) element;
-					return String.valueOf(step.getTemperature()) + "C";
+					return String.valueOf(step.getTemperature()) + " C";
 				} else {
 					return "";
 				}
@@ -329,7 +329,7 @@ public class MashPart {
 		tempColumn.setText("Temp");
 
 		final TableViewerColumn nameViewerColumn = new TableViewerColumn(
-				mashSteps, SWT.NONE);
+				mashScheduleTable, SWT.NONE);
 		nameViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public Image getImage(final Object element) {
@@ -350,11 +350,11 @@ public class MashPart {
 		nameColumn.setMoveable(true);
 		nameColumn.setWidth(113);
 		nameColumn.setText("Description");
-		mashSteps.setContentProvider(new ArrayContentProvider());
+		mashScheduleTable.setContentProvider(new ArrayContentProvider());
 		scrolledComposite.setContent(table);
 		scrolledComposite.setMinSize(table
 				.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-		sashForm.setWeights(new int[] { 1, 1 });
+		sashForm.setWeights(new int[] {287, 247});
 
 		Group grpHistory = new Group(sashForm_1, SWT.NONE);
 		grpHistory.setText("History");
@@ -365,7 +365,7 @@ public class MashPart {
 				true, 1, 2));
 		final LightweightSystem historyLWS = new LightweightSystem(
 				historyCanvas);
-		sashForm_1.setWeights(new int[] { 1, 1 });
+		sashForm_1.setWeights(new int[] {266, 511});
 		historyLWS.setContents(mashGraph);
 
 		final Composite statusBar = new Composite(composite, SWT.BORDER
@@ -418,12 +418,16 @@ public class MashPart {
 			@UIEventTopic(BreweryEventTopic.MASH_COMMAND) final MashPartCommand command) {
 		switch (command) {
 		case PAUSE:
+			logger.info("PAUSE Mash");
 			break;
 		case START:
+			logger.info("START Mash");
+			provider.clearTrace();
 			if (timerJob != null)
 				timerJob.start(schedule);
 			break;
 		case STOP:
+			logger.info("STOP Mash");
 			gaugeFigure.setValue(0);
 			if (timerJob != null)
 				timerJob.stop();
@@ -432,6 +436,13 @@ public class MashPart {
 			break;
 
 		}
+	}
+
+	/**
+	 * @return the logger
+	 */
+	public Logger getLogger() {
+		return logger;
 	}
 
 	/**

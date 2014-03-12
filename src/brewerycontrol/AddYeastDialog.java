@@ -28,6 +28,11 @@ import brewery.TemperatureUnit;
 import brewery.Yeast;
 import brewery.impl.InventoryImpl;
 
+/**
+ * 
+ * @author nguba
+ *
+ */
 public class AddYeastDialog extends TitleAreaDialog {
 	private Text nameText;
 	private Text manufacturerText;

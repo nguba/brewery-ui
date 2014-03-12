@@ -11,17 +11,19 @@ import org.xml.sax.helpers.XMLReaderFactory;
  * 
  */
 public class ConsoleReader extends XMLFilterImpl {
-	private String tag;
-	private StringBuilder buf = new StringBuilder();
-	private ConsoleEventListener listener;
-	
 	public enum State {
 		ERROR;
 	}
 
+	private String tag;
+	private StringBuilder buf = new StringBuilder();
+
+	private final ConsoleEventListener listener;
+
 	private State state;
 
-	public ConsoleReader(ConsoleEventListener listener) throws SAXException {
+	public ConsoleReader(final ConsoleEventListener listener)
+			throws SAXException {
 		super(XMLReaderFactory.createXMLReader());
 		this.listener = listener;
 	}
@@ -29,11 +31,12 @@ public class ConsoleReader extends XMLFilterImpl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xml.sax.helpers.XMLFilterImpl#startDocument()
+	 * @see org.xml.sax.helpers.XMLFilterImpl#characters(char[], int, int)
 	 */
 	@Override
-	public void startDocument() throws SAXException {
-
+	public void characters(final char[] ch, final int start, final int length)
+			throws SAXException {
+		buf.append(ch, start, length);
 	}
 
 	/*
@@ -49,29 +52,12 @@ public class ConsoleReader extends XMLFilterImpl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xml.sax.helpers.XMLFilterImpl#startElement(java.lang.String,
-	 * java.lang.String, java.lang.String, org.xml.sax.Attributes)
-	 */
-	@Override
-	public void startElement(String uri, String localName, String qName,
-			Attributes atts) throws SAXException {
-		tag = qName;
-		switch (tag) {
-		case "error":
-			state = State.ERROR;
-			break;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.xml.sax.helpers.XMLFilterImpl#endElement(java.lang.String,
 	 * java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void endElement(String uri, String localName, String qName)
-			throws SAXException {
+	public void endElement(final String uri, final String localName,
+			final String qName) throws SAXException {
 		switch (state) {
 		case ERROR:
 			listener.errorEvent(buf.toString());
@@ -84,11 +70,27 @@ public class ConsoleReader extends XMLFilterImpl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xml.sax.helpers.XMLFilterImpl#characters(char[], int, int)
+	 * @see org.xml.sax.helpers.XMLFilterImpl#startDocument()
 	 */
 	@Override
-	public void characters(char[] ch, int start, int length)
-			throws SAXException {
-		buf.append(ch, start, length);
+	public void startDocument() throws SAXException {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xml.sax.helpers.XMLFilterImpl#startElement(java.lang.String,
+	 * java.lang.String, java.lang.String, org.xml.sax.Attributes)
+	 */
+	@Override
+	public void startElement(final String uri, final String localName,
+			final String qName, final Attributes atts) throws SAXException {
+		tag = qName;
+		switch (tag) {
+		case "error":
+			state = State.ERROR;
+			break;
+		}
 	}
 }

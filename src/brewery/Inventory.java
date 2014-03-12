@@ -8,14 +8,14 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Inventory</b></em>'. <!-- end-user-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link brewery.Inventory#getYeast <em>Yeast</em>}</li>
+ * <li>{@link brewery.Inventory#getYeast <em>Yeast</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see brewery.BreweryPackage#getInventory()
  * @model
  * @generated

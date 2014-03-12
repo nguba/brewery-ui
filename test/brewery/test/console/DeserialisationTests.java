@@ -17,15 +17,20 @@ import org.xml.sax.InputSource;
 
 public class DeserialisationTests implements ConsoleEventListener {
 
-	private  ConsoleReader reader;
-
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		
+
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+	}
+
+	private ConsoleReader reader;
+
+	@Override
+	public void errorEvent(final String message) {
+		System.out.println(message);
 	}
 
 	@Before
@@ -38,17 +43,12 @@ public class DeserialisationTests implements ConsoleEventListener {
 	}
 
 	@Test
-	public void testErrorMessage() throws Exception  {
-		String xml = "<error>Unable to find address for Device 0</error>";
-		Source src = new SAXSource(reader, new InputSource(
+	public void testErrorMessage() throws Exception {
+		final String xml = "<error>Unable to find address for Device 0</error>";
+		final Source src = new SAXSource(reader, new InputSource(
 				new StringReader(xml)));
-		Result res = new StreamResult(System.out);
+		final Result res = new StreamResult(System.out);
 		TransformerFactory.newInstance().newTransformer().transform(src, res);
-	}
-
-	@Override
-	public void errorEvent(String message) {
-		System.out.println(message);
 	}
 
 }

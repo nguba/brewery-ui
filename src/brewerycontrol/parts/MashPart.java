@@ -54,16 +54,11 @@ import brewerycontrol.job.SensorEventHandler;
  * 
  */
 public class MashPart {
-	@Inject UISynchronize sync;
-	/**
-	 * @return the provider
-	 */
-	public CircularBufferDataProvider getProvider() {
-		return provider;
-	}
-
+	@Inject
+	UISynchronize sync;
 	@Inject
 	private CommPort serialPort;
+
 	GaugeFigure gaugeFigure;
 	CircularBufferDataProvider provider;
 	private Table table;
@@ -75,7 +70,12 @@ public class MashPart {
 	private CheckboxTableViewer mashSteps;
 	@Inject
 	IEventBroker broker;
-	
+
+	@Inject
+	public MashPart() {
+
+	}
+
 	/**
 	 * @return the broker
 	 */
@@ -83,9 +83,75 @@ public class MashPart {
 		return broker;
 	}
 
+	/**
+	 * @return the calendar
+	 */
+	public Calendar getCalendar() {
+		return calendar;
+	}
+
+	/**
+	 * @return the gaugeFigure
+	 */
+	public GaugeFigure getGaugeFigure() {
+		return gaugeFigure;
+	}
+
+	/**
+	 * @return the mashSteps
+	 */
+	public CheckboxTableViewer getMashSteps() {
+		return mashSteps;
+	}
+
+	/**
+	 * @return the provider
+	 */
+	public CircularBufferDataProvider getProvider() {
+		return provider;
+	}
+
+	/**
+	 * @return the serialPort
+	 */
+	public CommPort getSerialPort() {
+		return serialPort;
+	}
+
+	/**
+	 * @return the sync
+	 */
+	public UISynchronize getSync() {
+		return sync;
+	}
+
+	/**
+	 * @return the table
+	 */
+	public Table getTable() {
+		return table;
+	}
+
+	/**
+	 * @return the timerJob
+	 */
+	public MashTimerJob getTimerJob() {
+		return timerJob;
+	}
+
+	/**
+	 * @return the timerLabel
+	 */
+	public CLabel getTimerLabel() {
+		return timerLabel;
+	}
+
 	@Inject
-	public MashPart() {
-		
+	@Optional
+	void loadMashSchedule(
+			@UIEventTopic(BreweryEventTopic.MASH_SCHEDULE) final MashSchedule schedule) {
+		logger.info("Loaded mash schedule: " + schedule);
+		mashSteps.setInput(schedule.getSteps());
 	}
 
 	/**
@@ -95,7 +161,8 @@ public class MashPart {
 	 */
 	@Inject
 	@Optional
-	void pinEventReceived(@UIEventTopic(BreweryEventTopic.SENSOR) final Sensor sensor) {
+	void pinEventReceived(
+			@UIEventTopic(BreweryEventTopic.SENSOR) final Sensor sensor) {
 		final Job job = new SensorEventHandler(this, "sensor/mash/ui", sensor);
 		job.schedule();
 	}
@@ -175,8 +242,8 @@ public class MashPart {
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 
-		mashSteps = CheckboxTableViewer.newCheckList(
-				scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION);
+		mashSteps = CheckboxTableViewer.newCheckList(scrolledComposite,
+				SWT.BORDER | SWT.FULL_SELECTION);
 		table = mashSteps.getTable();
 		table.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		table.setLinesVisible(true);
@@ -185,12 +252,12 @@ public class MashPart {
 				mashSteps, SWT.NONE);
 		timeViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 			@Override
-			public Image getImage(Object element) {
+			public Image getImage(final Object element) {
 				return null;
 			}
 
 			@Override
-			public String getText(Object element) {
+			public String getText(final Object element) {
 				if (element != null) {
 					final MashStep step = (MashStep) element;
 					return String.valueOf(step.getPause());
@@ -209,12 +276,12 @@ public class MashPart {
 				mashSteps, SWT.NONE);
 		tempViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 			@Override
-			public Image getImage(Object element) {
+			public Image getImage(final Object element) {
 				return null;
 			}
 
 			@Override
-			public String getText(Object element) {
+			public String getText(final Object element) {
 				if (element != null) {
 					final MashStep step = (MashStep) element;
 					return String.valueOf(step.getTemperature()) + "C";
@@ -233,12 +300,12 @@ public class MashPart {
 				mashSteps, SWT.NONE);
 		nameViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 			@Override
-			public Image getImage(Object element) {
+			public Image getImage(final Object element) {
 				return null;
 			}
 
 			@Override
-			public String getText(Object element) {
+			public String getText(final Object element) {
 				if (element != null) {
 					final MashStep step = (MashStep) element;
 					return step.getDescription();
@@ -270,15 +337,17 @@ public class MashPart {
 		statusBar.setLayoutData(gd_statusBar);
 
 		final ProgressBar progressBar = new ProgressBar(statusBar, SWT.NONE);
-		GridData gd_progressBar = new GridData(SWT.FILL, SWT.CENTER, true,
-				false, 1, 1);
+		final GridData gd_progressBar = new GridData(SWT.FILL, SWT.CENTER,
+				true, false, 1, 1);
 		gd_progressBar.heightHint = 23;
 		progressBar.setLayoutData(gd_progressBar);
 
 		timerLabel = new CLabel(statusBar, SWT.BORDER | SWT.SHADOW_IN
 				| SWT.SHADOW_OUT | SWT.CENTER);
-		timerLabel.setFont(SWTResourceManager.getFont("Lucida Sans Typewriter", 11, SWT.NORMAL));
-		timerLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
+		timerLabel.setFont(SWTResourceManager.getFont("Lucida Sans Typewriter",
+				11, SWT.NORMAL));
+		timerLabel.setForeground(SWTResourceManager
+				.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 		timerLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		final GridData gd_lblNewLabel = new GridData(SWT.RIGHT, SWT.CENTER,
 				false, false, 1, 1);
@@ -288,62 +357,6 @@ public class MashPart {
 		lws.setContents(gaugeFigure);
 
 		timerJob = new MashTimerJob(this);
-	}
-
-	/**
-	 * @return the sync
-	 */
-	public UISynchronize getSync() {
-		return sync;
-	}
-
-	/**
-	 * @return the serialPort
-	 */
-	public CommPort getSerialPort() {
-		return serialPort;
-	}
-
-	/**
-	 * @return the gaugeFigure
-	 */
-	public GaugeFigure getGaugeFigure() {
-		return gaugeFigure;
-	}
-
-	/**
-	 * @return the table
-	 */
-	public Table getTable() {
-		return table;
-	}
-
-	/**
-	 * @return the timerJob
-	 */
-	public MashTimerJob getTimerJob() {
-		return timerJob;
-	}
-
-	/**
-	 * @return the calendar
-	 */
-	public Calendar getCalendar() {
-		return calendar;
-	}
-
-	/**
-	 * @return the timerLabel
-	 */
-	public CLabel getTimerLabel() {
-		return timerLabel;
-	}
-
-	/**
-	 * @return the mashSteps
-	 */
-	public CheckboxTableViewer getMashSteps() {
-		return mashSteps;
 	}
 
 	/**
@@ -368,13 +381,6 @@ public class MashPart {
 			break;
 
 		}
-	}
-	
-	@Inject
-	@Optional
-	void loadMashSchedule(@UIEventTopic(BreweryEventTopic.MASH_SCHEDULE) final MashSchedule schedule) {
-		logger.info("Loaded mash schedule: " + schedule);
-		mashSteps.setInput(schedule.getSteps());
 	}
 
 	/**

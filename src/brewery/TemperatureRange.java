@@ -7,16 +7,16 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Temperature Range</b></em>'. <!-- end-user-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link brewery.TemperatureRange#getUnit <em>Unit</em>}</li>
- *   <li>{@link brewery.TemperatureRange#getLow <em>Low</em>}</li>
- *   <li>{@link brewery.TemperatureRange#getHigh <em>High</em>}</li>
+ * <li>{@link brewery.TemperatureRange#getUnit <em>Unit</em>}</li>
+ * <li>{@link brewery.TemperatureRange#getLow <em>Low</em>}</li>
+ * <li>{@link brewery.TemperatureRange#getHigh <em>High</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see brewery.BreweryPackage#getTemperatureRange()
  * @model
  * @generated
@@ -76,27 +76,33 @@ public interface TemperatureRange extends EObject {
 	TemperatureUnit getUnit();
 
 	/**
-	 * Sets the value of the '{@link brewery.TemperatureRange#getHigh <em>High</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>High</em>' attribute.
+	 * Sets the value of the '{@link brewery.TemperatureRange#getHigh
+	 * <em>High</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>High</em>' attribute.
 	 * @see #getHigh()
 	 * @generated
 	 */
 	void setHigh(int value);
 
 	/**
-	 * Sets the value of the '{@link brewery.TemperatureRange#getLow <em>Low</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Low</em>' attribute.
+	 * Sets the value of the '{@link brewery.TemperatureRange#getLow
+	 * <em>Low</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Low</em>' attribute.
 	 * @see #getLow()
 	 * @generated
 	 */
 	void setLow(int value);
 
 	/**
-	 * Sets the value of the '{@link brewery.TemperatureRange#getUnit <em>Unit</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Unit</em>' attribute.
+	 * Sets the value of the '{@link brewery.TemperatureRange#getUnit
+	 * <em>Unit</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Unit</em>' attribute.
 	 * @see brewery.TemperatureUnit
 	 * @see #getUnit()
 	 * @generated

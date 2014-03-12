@@ -22,17 +22,18 @@ import brewery.Yeast;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link brewery.impl.InventoryImpl#getYeast <em>Yeast</em>}</li>
+ * <li>{@link brewery.impl.InventoryImpl#getYeast <em>Yeast</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class InventoryImpl extends MinimalEObjectImpl.Container implements
 		Inventory {
 	/**
-	 * The cached value of the '{@link #getYeast() <em>Yeast</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getYeast() <em>Yeast</em>}' containment
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getYeast()
 	 * @generated
 	 * @ordered
@@ -41,6 +42,7 @@ public class InventoryImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected InventoryImpl() {
@@ -49,62 +51,68 @@ public class InventoryImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(final int featureID, final boolean resolve,
+			final boolean coreType) {
 		switch (featureID) {
-			case BreweryPackage.INVENTORY__YEAST:
-				return getYeast();
+		case BreweryPackage.INVENTORY__YEAST:
+			return getYeast();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(final InternalEObject otherEnd,
+			final int featureID, final NotificationChain msgs) {
 		switch (featureID) {
-			case BreweryPackage.INVENTORY__YEAST:
-				return ((InternalEList<?>)getYeast()).basicRemove(otherEnd, msgs);
+		case BreweryPackage.INVENTORY__YEAST:
+			return ((InternalEList<?>) getYeast()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(final int featureID) {
 		switch (featureID) {
-			case BreweryPackage.INVENTORY__YEAST:
-				return yeast != null && !yeast.isEmpty();
+		case BreweryPackage.INVENTORY__YEAST:
+			return yeast != null && !yeast.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(final int featureID, final Object newValue) {
 		switch (featureID) {
-			case BreweryPackage.INVENTORY__YEAST:
-				getYeast().clear();
-				getYeast().addAll((Collection<? extends Yeast>)newValue);
-				return;
+		case BreweryPackage.INVENTORY__YEAST:
+			getYeast().clear();
+			getYeast().addAll((Collection<? extends Yeast>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -114,26 +122,29 @@ public class InventoryImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(final int featureID) {
 		switch (featureID) {
-			case BreweryPackage.INVENTORY__YEAST:
-				getYeast().clear();
-				return;
+		case BreweryPackage.INVENTORY__YEAST:
+			getYeast().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public EList<Yeast> getYeast() {
 		if (yeast == null) {
-			yeast = new EObjectContainmentEList<Yeast>(Yeast.class, this, BreweryPackage.INVENTORY__YEAST);
+			yeast = new EObjectContainmentEList<Yeast>(Yeast.class, this,
+					BreweryPackage.INVENTORY__YEAST);
 		}
 		return yeast;
 	}

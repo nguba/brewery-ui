@@ -19,7 +19,7 @@ public class ContentPanel extends Composite {
 	 * @param parent
 	 * @param style
 	 */
-	public ContentPanel(Composite parent, int style) {
+	public ContentPanel(final Composite parent, final int style) {
 		super(parent, style);
 		final GridLayout gridLayout = new GridLayout(4, false);
 		gridLayout.marginLeft = 2;

@@ -49,7 +49,7 @@ public class AddYeastDialog extends TitleAreaDialog {
 	 */
 	@Inject
 	public AddYeastDialog(
-			@Named(IServiceConstants.ACTIVE_SHELL) Shell parentShell) {
+			@Named(IServiceConstants.ACTIVE_SHELL) final Shell parentShell) {
 		super(parentShell);
 		setHelpAvailable(false);
 	}
@@ -60,7 +60,7 @@ public class AddYeastDialog extends TitleAreaDialog {
 	 * @param parent
 	 */
 	@Override
-	protected void createButtonsForButtonBar(Composite parent) {
+	protected void createButtonsForButtonBar(final Composite parent) {
 		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
 				true);
 		createButton(parent, IDialogConstants.CANCEL_ID,
@@ -73,7 +73,7 @@ public class AddYeastDialog extends TitleAreaDialog {
 	 * @param parent
 	 */
 	@Override
-	protected Control createDialogArea(Composite parent) {
+	protected Control createDialogArea(final Composite parent) {
 		setTitle("Add Yeast");
 		setMessage("The definitions in here will be used in Fermentation control.");
 		final Composite area = (Composite) super.createDialogArea(parent);

@@ -42,7 +42,8 @@ import brewerycontrol.BreweryEventTopic;
  * @author nguba_000
  * 
  */
-public final class LifecycleManager implements SerialPortEventListener, ConsoleParserEventListener {
+public final class LifecycleManager implements SerialPortEventListener,
+		ConsoleParserEventListener {
 
 	private static final String SETTINGS_FILENAME = "brewery-settings.bctl";
 
@@ -50,7 +51,7 @@ public final class LifecycleManager implements SerialPortEventListener, ConsoleP
 	private Logger logger;
 	SerialPort serialPort;
 	/** The port we're normally going to use. */
-	private static final String PORT_NAMES[] = { "/dev/cu.usbmodemfd141", 
+	private static final String PORT_NAMES[] = { "/dev/cu.usbmodemfd141",
 			"/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 	};
@@ -58,8 +59,8 @@ public final class LifecycleManager implements SerialPortEventListener, ConsoleP
 	private static final int TIME_OUT = 2000;
 	private static final int DATA_RATE = 9600;
 	private IEventBroker eventBroker;
-	private ConsoleParser parser;
-	
+	private final ConsoleParser parser;
+
 	/**
 	 * 
 	 */
@@ -119,7 +120,7 @@ public final class LifecycleManager implements SerialPortEventListener, ConsoleP
 	 */
 	@PostContextCreate
 	public void initialise(final IEventBroker eventBroker,
-			IApplicationContext appContext, IEclipseContext context)
+			final IApplicationContext appContext, final IEclipseContext context)
 			throws Exception {
 		logger.info("Contacting Arduino");
 		this.eventBroker = eventBroker;
@@ -155,7 +156,8 @@ public final class LifecycleManager implements SerialPortEventListener, ConsoleP
 					inventory = BreweryFactory.eINSTANCE.createInventory();
 				}
 			} else {
-				resource = resSet.createResource(URI.createURI(SETTINGS_FILENAME));
+				resource = resSet.createResource(URI
+						.createURI(SETTINGS_FILENAME));
 				inventory = BreweryFactory.eINSTANCE.createInventory();
 			}
 			context.set(resource.getClass().getCanonicalName(), resource);
@@ -163,12 +165,25 @@ public final class LifecycleManager implements SerialPortEventListener, ConsoleP
 		context.set(inventory.getClass().getCanonicalName(), inventory);
 	}
 
+	@Override
+	public void onCommand(final ConsoleCommand command) {
+		// System.out.println(command);
+	}
+
+	@Override
+	public void onSensorReply(final SensorReply reply) {
+		// System.out.println(reply);
+		final Sensor sensor = BreweryFactory.eINSTANCE.createSensor();
+		sensor.setValue(reply.getTemperature());
+		eventBroker.send(BreweryEventTopic.SENSOR, sensor);
+	}
+
 	/**
 	 * capture the serial events from the board and broadcast them to any
 	 * listening parts or parts that are interested
 	 */
 	@Override
-	public void serialEvent(SerialPortEvent oEvent) {
+	public void serialEvent(final SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				String inputLine = null;
@@ -180,18 +195,5 @@ public final class LifecycleManager implements SerialPortEventListener, ConsoleP
 				e.printStackTrace();
 			}
 		}
-	}
-
-	@Override
-	public void onCommand(ConsoleCommand command) {
-		//System.out.println(command);
-	}
-
-	@Override
-	public void onSensorReply(SensorReply reply) {
-		//System.out.println(reply);
-		Sensor sensor = BreweryFactory.eINSTANCE.createSensor();
-		sensor.setValue(reply.getTemperature());
-		eventBroker.send(BreweryEventTopic.SENSOR, sensor);
 	}
 }

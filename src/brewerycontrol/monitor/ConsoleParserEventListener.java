@@ -8,7 +8,7 @@ import brewery.SensorReply;
 
 /**
  * @author nguba
- *
+ * 
  */
 public interface ConsoleParserEventListener {
 

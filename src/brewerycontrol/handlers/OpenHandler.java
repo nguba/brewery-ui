@@ -30,31 +30,35 @@ import org.eclipse.swt.widgets.Shell;
 import brewery.BreweryFactory;
 import brewery.MashSchedule;
 import brewerycontrol.BreweryEventTopic;
+
 /**
  * 
  * @author nguba
- *
+ * 
  */
 public class OpenHandler {
 
 	@Inject
 	private IEventBroker eventBroker;
-	
+
 	/**
 	 * 
 	 * @param shell
 	 */
 	@Execute
-	public void execute(Shell shell) {
+	public void execute(final Shell shell) {
 		final FileDialog dialog = new FileDialog(shell);
 		dialog.setFilterExtensions(new String[] { "mash" });
-		String fileName = dialog.open();
+		final String fileName = dialog.open();
 
+		if (fileName == null) {
+			return;
+		}
 		BreweryFactory.eINSTANCE.eClass();
 		final Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 		final Map<String, Object> m = reg.getExtensionToFactoryMap();
 		m.put("mash", new XMIResourceFactoryImpl());
-		ResourceSet resSet = new ResourceSetImpl();
+		final ResourceSet resSet = new ResourceSetImpl();
 
 		final URI uri = URI.createFileURI(fileName);
 		System.out.println(uri);
@@ -69,8 +73,8 @@ public class OpenHandler {
 			if (eObject != null) {
 				schedule = (MashSchedule) eObject;
 			}
-		} 
-		if(schedule != null) {
+		}
+		if (schedule != null) {
 			eventBroker.send(BreweryEventTopic.MASH_SCHEDULE, schedule);
 		}
 	}

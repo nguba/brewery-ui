@@ -17,7 +17,8 @@ public final class SensorEventHandler extends Job {
 	private final MashPart mashPart;
 	private final Sensor sensor;
 
-	public SensorEventHandler(MashPart mashPart, String name, Sensor sensor) {
+	public SensorEventHandler(final MashPart mashPart, final String name,
+			final Sensor sensor) {
 		super(name);
 		this.mashPart = mashPart;
 		this.sensor = sensor;
@@ -27,14 +28,14 @@ public final class SensorEventHandler extends Job {
 	 * 
 	 */
 	@Override
-	protected IStatus run(IProgressMonitor monitor) {
+	protected IStatus run(final IProgressMonitor monitor) {
 		mashPart.getSync().asyncExec(new Runnable() {
 			/**
 			 * 
 			 */
 			@Override
 			public void run() {
-				double value = sensor.getValue();
+				final double value = sensor.getValue();
 				mashPart.getGaugeFigure().setValue(value);
 				mashPart.getProvider().setCurrentYData(value);
 				mashPart.getTimerJob().setCurrentTemp(value);

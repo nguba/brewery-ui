@@ -56,7 +56,7 @@ public class FermentationPart {
 	 * Create contents of the view part.
 	 */
 	@PostConstruct
-	public void createControls(Composite parent) {
+	public void createControls(final Composite parent) {
 		parent.setLayout(new GridLayout(2, false));
 
 		final ContentPanel contentPanel = new ContentPanel(parent, SWT.NONE);
@@ -119,7 +119,7 @@ public class FermentationPart {
 		contentPanel.getYeastCombo().addSelectionListener(
 				new SelectionAdapter() {
 					@Override
-					public void widgetSelected(SelectionEvent e) {
+					public void widgetSelected(final SelectionEvent e) {
 						final String name = contentPanel.getYeastCombo()
 								.getText();
 						Yeast yeast = null;
@@ -133,7 +133,7 @@ public class FermentationPart {
 						final int low = yeast.getRange().getLow();
 						final Job job = new Job("set temperature") {
 							@Override
-							protected IStatus run(IProgressMonitor monitor) {
+							protected IStatus run(final IProgressMonitor monitor) {
 								sync.asyncExec(new Runnable() {
 
 									@Override
@@ -170,12 +170,12 @@ public class FermentationPart {
 		final Job job = new Job("arduino/pin/5/updater") {
 
 			@Override
-			protected IStatus run(IProgressMonitor monitor) {
+			protected IStatus run(final IProgressMonitor monitor) {
 				sync.asyncExec(new Runnable() {
 
 					@Override
 					public void run() {
-						final double temperature = ((sensor.getValue() * 0.004882814) - 0.5) * 100;
+						final double temperature = (sensor.getValue() * 0.004882814 - 0.5) * 100;
 						final double value = temperature;
 						thermo.setValue(value);
 

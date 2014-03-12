@@ -22,7 +22,7 @@ public class StartMashHandler {
 	IEventBroker eventBroker;
 
 	@Execute
-	public void execute(IWorkbench workbench, Shell shell) {
+	public void execute(final IWorkbench workbench, final Shell shell) {
 		eventBroker.send(BreweryEventTopic.MASH_COMMAND, MashPartCommand.START);
 	}
 }

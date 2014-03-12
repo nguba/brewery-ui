@@ -26,12 +26,11 @@ import brewery.MashStep;
 
 /**
  * @author nguba
- *
+ * 
  */
 public class MashXMLSerializationTest {
 
 	private static ResourceSet resSet;
-	private MashSchedule schedule;
 
 	/**
 	 * @throws java.lang.Exception
@@ -52,26 +51,28 @@ public class MashXMLSerializationTest {
 	public static void tearDownAfterClass() throws Exception {
 	}
 
+	private MashSchedule schedule;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		MashStep first = BreweryFactory.eINSTANCE.createMashStep();
+		final MashStep first = BreweryFactory.eINSTANCE.createMashStep();
 		first.setDescription("First");
 		first.setPause(10);
 		first.setTemperature(40);
-		
-		MashStep second = BreweryFactory.eINSTANCE.createMashStep();
+
+		final MashStep second = BreweryFactory.eINSTANCE.createMashStep();
 		second.setDescription("Second");
 		second.setPause(10);
 		second.setTemperature(20);
-		
-		MashStep third = BreweryFactory.eINSTANCE.createMashStep();
+
+		final MashStep third = BreweryFactory.eINSTANCE.createMashStep();
 		third.setDescription("Third");
 		third.setPause(90);
 		third.setTemperature(66);
-		
+
 		schedule = BreweryFactory.eINSTANCE.createMashSchedule();
 		schedule.setName("default schedule");
 		schedule.getSteps().add(first);
@@ -88,17 +89,17 @@ public class MashXMLSerializationTest {
 
 	@Test
 	public void testAddOneStep() {
-		MashStep step = BreweryFactory.eINSTANCE.createMashStep();
+		final MashStep step = BreweryFactory.eINSTANCE.createMashStep();
 		step.setDescription("First");
 		step.setPause(10);
 		step.setTemperature(40);
-		
-		MashSchedule schedule = BreweryFactory.eINSTANCE.createMashSchedule();
+
+		final MashSchedule schedule = BreweryFactory.eINSTANCE
+				.createMashSchedule();
 		schedule.getSteps().add(step);
 		schedule.setName("first schedule");
 		System.out.println(schedule.getSteps());
 	}
-	
 
 	@Test
 	public void testLoader() throws Exception {
@@ -107,7 +108,7 @@ public class MashXMLSerializationTest {
 		Resource resource = resSet.createResource(uri);
 		resource.getContents().add(schedule);
 		resource.save(Collections.EMPTY_MAP);
-	
+
 		MashSchedule s = null;
 		if (uri.isFile()) {
 			final File f = new File(uri.path());
@@ -121,6 +122,5 @@ public class MashXMLSerializationTest {
 		}
 		Assert.assertArrayEquals(s.getSteps().toArray(), s.getSteps().toArray());
 	}
-	
-	
+
 }

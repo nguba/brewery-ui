@@ -41,23 +41,27 @@ public final class MashTimerJob extends Job {
 	private final CLabel label;
 	private final SimpleDateFormat dateFormat = new SimpleDateFormat("KK:mm:ss");
 	private Date startDate;
-	private CheckboxTableViewer steps;
+	private final CheckboxTableViewer steps;
 	private EObjectContainmentEList<MashStep> schedule;
 	private double currentTemp;
 	private Iterator<MashStep> scheduleIterator;
 	private MashStep step;
-	
+
 	/**
 	 * 
 	 * @param mashPart
 	 */
-	public MashTimerJob(MashPart mashPart) {
+	public MashTimerJob(final MashPart mashPart) {
 		super(NAME);
-		this.sync = mashPart.getSync();
-		this.serialPort = mashPart.getSerialPort();
-		this.calendar = mashPart.getCalendar();
-		this.label = mashPart.getTimerLabel();
+		sync = mashPart.getSync();
+		serialPort = mashPart.getSerialPort();
+		calendar = mashPart.getCalendar();
+		label = mashPart.getTimerLabel();
 		steps = mashPart.getMashSteps();
+	}
+
+	public double getCurrentTemp() {
+		return currentTemp;
 	}
 
 	/**
@@ -74,7 +78,7 @@ public final class MashTimerJob extends Job {
 	 * IProgressMonitor)
 	 */
 	@Override
-	protected IStatus run(IProgressMonitor monitor) {
+	protected IStatus run(final IProgressMonitor monitor) {
 		sync.asyncExec(new Runnable() {
 			@Override
 			public void run() {
@@ -83,25 +87,26 @@ public final class MashTimerJob extends Job {
 					step = scheduleIterator.next();
 					System.out.println(step);
 				}
-				calendar.setTimeInMillis(
-						System.currentTimeMillis() - startDate.getTime());
+				calendar.setTimeInMillis(System.currentTimeMillis()
+						- startDate.getTime());
 				calendar.add(Calendar.HOUR, -1);
 				final String format = dateFormat.format(calendar.getTime());
 
 				try {
 					serialPort.setOutputBufferSize(1024);
-					StringBuilder stringBuilder = new StringBuilder();
+					final StringBuilder stringBuilder = new StringBuilder();
 					stringBuilder.append("[setpoint ");
 					stringBuilder.append(new Double(step.getTemperature()));
 					stringBuilder.append("]");
-					OutputStream outputStream = serialPort.getOutputStream();
+					final OutputStream outputStream = serialPort
+							.getOutputStream();
 					outputStream.write(stringBuilder.toString().getBytes());
 					outputStream.flush();
 					outputStream.write("[sensor]".getBytes());
 					outputStream.flush();
 				} catch (final IOException e) {
 					e.printStackTrace();
-				}	
+				}
 				if (label.isDisposed() == false) {
 					label.setText(format);
 					schedule(DELAY);
@@ -109,6 +114,10 @@ public final class MashTimerJob extends Job {
 			}
 		});
 		return Status.OK_STATUS;
+	}
+
+	public void setCurrentTemp(final double currentTemp) {
+		this.currentTemp = currentTemp;
 	}
 
 	/**
@@ -130,13 +139,5 @@ public final class MashTimerJob extends Job {
 	public void stop() {
 		label.setText("00:00:00");
 		cancel();
-	}
-
-	public double getCurrentTemp() {
-		return currentTemp;
-	}
-
-	public void setCurrentTemp(double currentTemp) {
-		this.currentTemp = currentTemp;
 	}
 }

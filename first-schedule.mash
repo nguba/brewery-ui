@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<brewery:MashSchedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:brewery="http://brewery/1.0" name="default schedule">
+  <steps temperature="18" pause="300000" description="First"/>
+  <steps temperature="25" pause="300000" description="Second"/>
+  <steps temperature="30" pause="300000" description="Third"/>
+</brewery:MashSchedule>

@@ -36,6 +36,7 @@ public final class SensorEventHandler extends Job {
 			@Override
 			public void run() {
 				final double value = sensor.getValue();
+				System.out.println(value);
 				mashPart.getGaugeFigure().setValue(value);
 				mashPart.getProvider().setCurrentYData(value);
 				mashPart.getTimerJob().setCurrentTemp(value);

@@ -2,6 +2,7 @@ package brewerycontrol.parts;
 
 import gnu.io.CommPort;
 
+import java.io.IOException;
 import java.util.Calendar;
 
 import javax.annotation.PostConstruct;
@@ -48,6 +49,11 @@ import brewerycontrol.BreweryEventTopic;
 import brewerycontrol.job.MashTimerJob;
 import brewerycontrol.job.SensorEventHandler;
 
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.custom.SashForm;
+
 /**
  * 
  * @author nguba_000
@@ -70,6 +76,8 @@ public class MashPart {
 	private CheckboxTableViewer mashSteps;
 	@Inject
 	IEventBroker broker;
+	private Combo selectedSchedule;
+	private MashSchedule schedule;
 
 	@Inject
 	public MashPart() {
@@ -150,8 +158,11 @@ public class MashPart {
 	@Optional
 	void loadMashSchedule(
 			@UIEventTopic(BreweryEventTopic.MASH_SCHEDULE) final MashSchedule schedule) {
+		this.schedule = schedule;
 		logger.info("Loaded mash schedule: " + schedule);
 		mashSteps.setInput(schedule.getSteps());
+		selectedSchedule.add(schedule.getName(), 0);
+		selectedSchedule.select(0);
 	}
 
 	/**
@@ -173,24 +184,12 @@ public class MashPart {
 		parent.setLayout(new FillLayout(SWT.HORIZONTAL));
 
 		final Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayout(new GridLayout(2, false));
-
-		final Canvas guageCanvas = new Canvas(composite, SWT.NO_FOCUS);
-		guageCanvas.setLayout(new GridLayout(1, true));
-		final GridData gd_guageCanvas = new GridData(SWT.CENTER, SWT.FILL,
-				true, false, 1, 1);
-		gd_guageCanvas.widthHint = 136;
-		gd_guageCanvas.heightHint = 134;
-		guageCanvas.setLayoutData(gd_guageCanvas);
-
-		final Canvas historyCanvas = new Canvas(composite, SWT.NONE);
-		final GridData gd_historyCanvas = new GridData(SWT.FILL, SWT.FILL,
-				true, true, 1, 2);
-		gd_historyCanvas.heightHint = 153;
-		gd_historyCanvas.widthHint = 297;
-		historyCanvas.setLayoutData(gd_historyCanvas);
-		final LightweightSystem historyLWS = new LightweightSystem(
-				historyCanvas);
+		GridLayout gl_composite = new GridLayout(1, false);
+		gl_composite.marginTop = 5;
+		gl_composite.marginRight = 5;
+		gl_composite.marginLeft = 5;
+		gl_composite.marginBottom = 5;
+		composite.setLayout(gl_composite);
 
 		final XYGraph mashGraph = new XYGraph();
 		// xyGraph.setTitle("History");
@@ -214,7 +213,6 @@ public class MashPart {
 		trace.setBaseLine(BaseLine.ZERO);
 		trace.setAntiAliasing(true);
 		mashGraph.addTrace(trace);
-		historyLWS.setContents(mashGraph);
 
 		gaugeFigure = new GaugeFigure();
 		gaugeFigure.setBackgroundColor(XYGraphMediaFactory.getInstance()
@@ -231,14 +229,48 @@ public class MashPart {
 		gaugeFigure.setEffect3D(true);
 		gaugeFigure.setShowMarkers(true);
 		gaugeFigure.setValue(0);
+
+		SashForm sashForm_1 = new SashForm(composite, SWT.NONE);
+		sashForm_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
+				1, 1));
+
+		Composite composite_1 = new Composite(sashForm_1, SWT.NONE);
+		composite_1.setLayout(new GridLayout(1, false));
+
+		SashForm sashForm = new SashForm(composite_1, SWT.VERTICAL);
+		sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
+				1));
+
+		Group grpTunTemperature = new Group(sashForm, SWT.NONE);
+		grpTunTemperature.setText("Tun Temperature");
+		grpTunTemperature.setLayout(new GridLayout(1, false));
+
+		final Canvas guageCanvas = new Canvas(grpTunTemperature, SWT.NO_FOCUS);
+		GridData gd_guageCanvas = new GridData(SWT.FILL, SWT.FILL, true, true,
+				1, 1);
+		gd_guageCanvas.heightHint = 151;
+		gd_guageCanvas.widthHint = 189;
+		guageCanvas.setLayoutData(gd_guageCanvas);
+		GridLayout gl_guageCanvas = new GridLayout(1, true);
+		gl_guageCanvas.marginTop = 5;
+		gl_guageCanvas.marginRight = 5;
+		gl_guageCanvas.marginLeft = 5;
+		gl_guageCanvas.marginBottom = 5;
+		guageCanvas.setLayout(gl_guageCanvas);
 		final LightweightSystem lws = new LightweightSystem(guageCanvas);
 
+		Group grpSchedule = new Group(sashForm, SWT.NONE);
+		grpSchedule.setText("Schedule");
+		grpSchedule.setLayout(new GridLayout(1, false));
+
+		selectedSchedule = new Combo(grpSchedule, SWT.READ_ONLY);
+		selectedSchedule.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1));
+
 		final ScrolledComposite scrolledComposite = new ScrolledComposite(
-				composite, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		final GridData gd_scrolledComposite = new GridData(SWT.FILL, SWT.FILL,
-				true, true, 1, 1);
-		gd_scrolledComposite.widthHint = 167;
-		scrolledComposite.setLayoutData(gd_scrolledComposite);
+				grpSchedule, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				true, 1, 1));
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 
@@ -316,12 +348,25 @@ public class MashPart {
 		});
 		final TableColumn nameColumn = nameViewerColumn.getColumn();
 		nameColumn.setMoveable(true);
-		nameColumn.setWidth(120);
+		nameColumn.setWidth(113);
 		nameColumn.setText("Description");
 		mashSteps.setContentProvider(new ArrayContentProvider());
 		scrolledComposite.setContent(table);
 		scrolledComposite.setMinSize(table
 				.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		sashForm.setWeights(new int[] { 1, 1 });
+
+		Group grpHistory = new Group(sashForm_1, SWT.NONE);
+		grpHistory.setText("History");
+		grpHistory.setLayout(new GridLayout(1, false));
+
+		final Canvas historyCanvas = new Canvas(grpHistory, SWT.NONE);
+		historyCanvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				true, 1, 2));
+		final LightweightSystem historyLWS = new LightweightSystem(
+				historyCanvas);
+		sashForm_1.setWeights(new int[] { 1, 1 });
+		historyLWS.setContents(mashGraph);
 
 		final Composite statusBar = new Composite(composite, SWT.BORDER
 				| SWT.NO_FOCUS);
@@ -331,7 +376,7 @@ public class MashPart {
 		gl_statusBar.marginWidth = 1;
 		statusBar.setLayout(gl_statusBar);
 		final GridData gd_statusBar = new GridData(SWT.FILL, SWT.FILL, true,
-				false, 2, 1);
+				false, 1, 1);
 		gd_statusBar.widthHint = 459;
 		gd_statusBar.heightHint = 26;
 		statusBar.setLayoutData(gd_statusBar);
@@ -356,7 +401,11 @@ public class MashPart {
 		timerLabel.setText("00:00:00");
 		lws.setContents(gaugeFigure);
 
-		timerJob = new MashTimerJob(this);
+		try {
+			timerJob = new MashTimerJob(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -371,11 +420,13 @@ public class MashPart {
 		case PAUSE:
 			break;
 		case START:
-			timerJob.start();
+			if (timerJob != null)
+				timerJob.start(schedule);
 			break;
 		case STOP:
 			gaugeFigure.setValue(0);
-			timerJob.stop();
+			if (timerJob != null)
+				timerJob.stop();
 			break;
 		default:
 			break;

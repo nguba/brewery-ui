@@ -13,7 +13,7 @@ import brewery.SensorReply;
  */
 public final class ConsoleParser {
 	private enum State {
-		READY, TOKEN, REPLY, COMMAND, COMMAND_ARG;
+		READY, TOKEN, REPLY, COMMAND;
 	}
 
 	private final ConsoleParserEventListener listener;
@@ -28,7 +28,7 @@ public final class ConsoleParser {
 	}
 
 	public void parse(final String cmd) {
-		// System.out.println(cmd);
+		//System.out.println(cmd);
 		for (int i = 0, len = cmd.length(); i < len; i++) {
 			final char c = cmd.charAt(i);
 

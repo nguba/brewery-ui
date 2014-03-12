@@ -27,7 +27,6 @@ import brewery.Yeast;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
@@ -47,15 +46,10 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 	 * @generated
 	 */
 	public static BreweryPackage init() {
-		if (isInited) {
-			return (BreweryPackage) EPackage.Registry.INSTANCE
-					.getEPackage(BreweryPackage.eNS_URI);
-		}
+		if (isInited) return (BreweryPackage)EPackage.Registry.INSTANCE.getEPackage(BreweryPackage.eNS_URI);
 
 		// Obtain or create and register package
-		final BreweryPackageImpl theBreweryPackage = (BreweryPackageImpl) (EPackage.Registry.INSTANCE
-				.get(eNS_URI) instanceof BreweryPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI) : new BreweryPackageImpl());
+		BreweryPackageImpl theBreweryPackage = (BreweryPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BreweryPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new BreweryPackageImpl());
 
 		isInited = true;
 
@@ -68,113 +62,98 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 		// Mark meta-data to indicate it can't be changed
 		theBreweryPackage.freeze();
 
+  
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(BreweryPackage.eNS_URI,
-				theBreweryPackage);
+		EPackage.Registry.INSTANCE.put(BreweryPackage.eNS_URI, theBreweryPackage);
 		return theBreweryPackage;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass yeastEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass inventoryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass temperatureRangeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass fermenterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass mashStepEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass mashScheduleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass sensorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass pinEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass consoleCommandEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass consoleReplyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass sensorReplyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EEnum temperatureUnitEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static boolean isInited = false;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isCreated = false;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isInitialized = false;
@@ -199,16 +178,14 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 	}
 
 	/**
-	 * Creates the meta-model objects for the package. This method is guarded to
-	 * have no affect on any invocation but its first. <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated) {
-			return;
-		}
+		if (isCreated) return;
 		isCreated = true;
 
 		// Create classes and their features
@@ -243,6 +220,7 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 		mashScheduleEClass = createEClass(MASH_SCHEDULE);
 		createEReference(mashScheduleEClass, MASH_SCHEDULE__STEPS);
 		createEAttribute(mashScheduleEClass, MASH_SCHEDULE__NAME);
+		createEAttribute(mashScheduleEClass, MASH_SCHEDULE__TOTAL_TIME);
 
 		sensorEClass = createEClass(SENSOR);
 		createEAttribute(sensorEClass, SENSOR__VALUE);
@@ -267,17 +245,15 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public BreweryFactory getBreweryFactory() {
-		return (BreweryFactory) getEFactoryInstance();
+		return (BreweryFactory)getEFactoryInstance();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -287,29 +263,24 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getConsoleCommand_Name() {
-		return (EAttribute) consoleCommandEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute)consoleCommandEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getConsoleCommand_Value() {
-		return (EAttribute) consoleCommandEClass.getEStructuralFeatures()
-				.get(1);
+		return (EAttribute)consoleCommandEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -319,17 +290,15 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getConsoleReply_Name() {
-		return (EAttribute) consoleReplyEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)consoleReplyEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -339,47 +308,42 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getFermenter_Content() {
-		return (EAttribute) fermenterEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)fermenterEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getFermenter_Name() {
-		return (EAttribute) fermenterEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)fermenterEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getFermenter_Started() {
-		return (EAttribute) fermenterEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)fermenterEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getFermenter_Yeast() {
-		return (EReference) fermenterEClass.getEStructuralFeatures().get(1);
+		return (EReference)fermenterEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -389,17 +353,15 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getInventory_Yeast() {
-		return (EReference) inventoryEClass.getEStructuralFeatures().get(0);
+		return (EReference)inventoryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -409,27 +371,33 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getMashSchedule_Name() {
-		return (EAttribute) mashScheduleEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)mashScheduleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMashSchedule_TotalTime() {
+		return (EAttribute)mashScheduleEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getMashSchedule_Steps() {
-		return (EReference) mashScheduleEClass.getEStructuralFeatures().get(0);
+		return (EReference)mashScheduleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -439,57 +407,51 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getMashStep_Complete() {
-		return (EAttribute) mashStepEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)mashStepEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getMashStep_Description() {
-		return (EAttribute) mashStepEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)mashStepEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getMashStep_Pause() {
-		return (EAttribute) mashStepEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)mashStepEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getMashStep_RiseTime() {
-		return (EAttribute) mashStepEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)mashStepEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getMashStep_Temperature() {
-		return (EAttribute) mashStepEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)mashStepEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -499,17 +461,15 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getPin_Id() {
-		return (EAttribute) pinEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)pinEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -519,27 +479,24 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getSensor_Id() {
-		return (EAttribute) sensorEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)sensorEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getSensor_Value() {
-		return (EAttribute) sensorEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)sensorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -549,17 +506,15 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getSensorReply_Temperature() {
-		return (EAttribute) sensorReplyEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)sensorReplyEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -569,40 +524,33 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getTemperatureRange_High() {
-		return (EAttribute) temperatureRangeEClass.getEStructuralFeatures()
-				.get(2);
+		return (EAttribute)temperatureRangeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getTemperatureRange_Low() {
-		return (EAttribute) temperatureRangeEClass.getEStructuralFeatures()
-				.get(1);
+		return (EAttribute)temperatureRangeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getTemperatureRange_Unit() {
-		return (EAttribute) temperatureRangeEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute)temperatureRangeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -612,7 +560,6 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -622,52 +569,47 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getYeast_Attenuation() {
-		return (EAttribute) yeastEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)yeastEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getYeast_Flocculation() {
-		return (EAttribute) yeastEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)yeastEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getYeast_Manufacturer() {
-		return (EAttribute) yeastEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)yeastEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getYeast_Name() {
-		return (EAttribute) yeastEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)yeastEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getYeast_Range() {
-		return (EReference) yeastEClass.getEStructuralFeatures().get(4);
+		return (EReference)yeastEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -678,9 +620,7 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized) {
-			return;
-		}
+		if (isInitialized) return;
 		isInitialized = true;
 
 		// Initialize package
@@ -693,154 +633,61 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		sensorReplyEClass.getESuperTypes().add(getConsoleReply());
+		sensorReplyEClass.getESuperTypes().add(this.getConsoleReply());
 
 		// Initialize classes, features, and operations; add parameters
-		initEClass(yeastEClass, Yeast.class, "Yeast", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getYeast_Name(), ecorePackage.getEString(), "name",
-				null, 0, 1, Yeast.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getYeast_Flocculation(), ecorePackage.getEString(),
-				"flocculation", null, 0, 1, Yeast.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getYeast_Attenuation(), ecorePackage.getEString(),
-				"attenuation", null, 0, 1, Yeast.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getYeast_Manufacturer(), ecorePackage.getEString(),
-				"manufacturer", null, 0, 1, Yeast.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getYeast_Range(), getTemperatureRange(), null, "range",
-				null, 1, 1, Yeast.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(yeastEClass, Yeast.class, "Yeast", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getYeast_Name(), ecorePackage.getEString(), "name", null, 0, 1, Yeast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getYeast_Flocculation(), ecorePackage.getEString(), "flocculation", null, 0, 1, Yeast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getYeast_Attenuation(), ecorePackage.getEString(), "attenuation", null, 0, 1, Yeast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getYeast_Manufacturer(), ecorePackage.getEString(), "manufacturer", null, 0, 1, Yeast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getYeast_Range(), this.getTemperatureRange(), null, "range", null, 1, 1, Yeast.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(inventoryEClass, Inventory.class, "Inventory", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInventory_Yeast(), getYeast(), null, "yeast", null,
-				0, -1, Inventory.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(inventoryEClass, Inventory.class, "Inventory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInventory_Yeast(), this.getYeast(), null, "yeast", null, 0, -1, Inventory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(temperatureRangeEClass, TemperatureRange.class,
-				"TemperatureRange", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTemperatureRange_Unit(), getTemperatureUnit(),
-				"unit", null, 0, 1, TemperatureRange.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTemperatureRange_Low(), ecorePackage.getEInt(),
-				"low", null, 0, 1, TemperatureRange.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTemperatureRange_High(), ecorePackage.getEInt(),
-				"high", null, 0, 1, TemperatureRange.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(temperatureRangeEClass, TemperatureRange.class, "TemperatureRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTemperatureRange_Unit(), this.getTemperatureUnit(), "unit", null, 0, 1, TemperatureRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTemperatureRange_Low(), ecorePackage.getEInt(), "low", null, 0, 1, TemperatureRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTemperatureRange_High(), ecorePackage.getEInt(), "high", null, 0, 1, TemperatureRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(fermenterEClass, Fermenter.class, "Fermenter", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFermenter_Name(), ecorePackage.getEString(), "name",
-				null, 0, 1, Fermenter.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getFermenter_Yeast(), getYeast(), null, "yeast", null,
-				1, 1, Fermenter.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFermenter_Content(), ecorePackage.getEString(),
-				"content", null, 0, 1, Fermenter.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFermenter_Started(), ecorePackage.getEDate(),
-				"started", null, 0, 1, Fermenter.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(fermenterEClass, Fermenter.class, "Fermenter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFermenter_Name(), ecorePackage.getEString(), "name", null, 0, 1, Fermenter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFermenter_Yeast(), this.getYeast(), null, "yeast", null, 1, 1, Fermenter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFermenter_Content(), ecorePackage.getEString(), "content", null, 0, 1, Fermenter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFermenter_Started(), ecorePackage.getEDate(), "started", null, 0, 1, Fermenter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(mashStepEClass, MashStep.class, "MashStep", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMashStep_Temperature(), ecorePackage.getEInt(),
-				"temperature", null, 0, 1, MashStep.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMashStep_Pause(), ecorePackage.getEInt(), "pause",
-				null, 0, 1, MashStep.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getMashStep_Description(), ecorePackage.getEString(),
-				"description", null, 0, 1, MashStep.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMashStep_Complete(), ecorePackage.getEBoolean(),
-				"complete", null, 0, 1, MashStep.class, IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMashStep_RiseTime(), ecorePackage.getEInt(),
-				"riseTime", null, 0, 1, MashStep.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(mashStepEClass, MashStep.class, "MashStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMashStep_Temperature(), ecorePackage.getEDouble(), "temperature", null, 0, 1, MashStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMashStep_Pause(), ecorePackage.getELong(), "pause", null, 0, 1, MashStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMashStep_Description(), ecorePackage.getEString(), "description", null, 0, 1, MashStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMashStep_Complete(), ecorePackage.getEBoolean(), "complete", null, 0, 1, MashStep.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMashStep_RiseTime(), ecorePackage.getELong(), "riseTime", null, 0, 1, MashStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(mashScheduleEClass, MashSchedule.class, "MashSchedule",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMashSchedule_Steps(), getMashStep(), null, "steps",
-				null, 0, -1, MashSchedule.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMashSchedule_Name(), ecorePackage.getEString(),
-				"name", null, 0, 1, MashSchedule.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(mashScheduleEClass, MashSchedule.class, "MashSchedule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMashSchedule_Steps(), this.getMashStep(), null, "steps", null, 0, -1, MashSchedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMashSchedule_Name(), ecorePackage.getEString(), "name", null, 0, 1, MashSchedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMashSchedule_TotalTime(), ecorePackage.getELong(), "totalTime", null, 0, 1, MashSchedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(sensorEClass, Sensor.class, "Sensor", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSensor_Value(), ecorePackage.getEDouble(), "value",
-				null, 0, 1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getSensor_Id(), ecorePackage.getEString(), "id", null,
-				0, 1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(sensorEClass, Sensor.class, "Sensor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSensor_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSensor_Id(), ecorePackage.getEString(), "id", null, 0, 1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(pinEClass, Pin.class, "Pin", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPin_Id(), ecorePackage.getEString(), "id", null, 0,
-				1, Pin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(pinEClass, Pin.class, "Pin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPin_Id(), ecorePackage.getEString(), "id", null, 0, 1, Pin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(consoleCommandEClass, ConsoleCommand.class,
-				"ConsoleCommand", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConsoleCommand_Name(), ecorePackage.getEString(),
-				"name", null, 0, 1, ConsoleCommand.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getConsoleCommand_Value(),
-				ecorePackage.getEJavaObject(), "value", null, 0, 1,
-				ConsoleCommand.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(consoleCommandEClass, ConsoleCommand.class, "ConsoleCommand", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConsoleCommand_Name(), ecorePackage.getEString(), "name", null, 0, 1, ConsoleCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConsoleCommand_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, ConsoleCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(consoleReplyEClass, ConsoleReply.class, "ConsoleReply",
-				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConsoleReply_Name(), ecorePackage.getEString(),
-				"name", null, 0, 1, ConsoleReply.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(consoleReplyEClass, ConsoleReply.class, "ConsoleReply", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConsoleReply_Name(), ecorePackage.getEString(), "name", null, 0, 1, ConsoleReply.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(sensorReplyEClass, SensorReply.class, "SensorReply",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSensorReply_Temperature(), ecorePackage.getEDouble(),
-				"temperature", null, 0, 1, SensorReply.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(sensorReplyEClass, SensorReply.class, "SensorReply", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSensorReply_Temperature(), ecorePackage.getEDouble(), "temperature", null, 0, 1, SensorReply.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
-		initEEnum(temperatureUnitEEnum, TemperatureUnit.class,
-				"TemperatureUnit");
+		initEEnum(temperatureUnitEEnum, TemperatureUnit.class, "TemperatureUnit");
 		addEEnumLiteral(temperatureUnitEEnum, TemperatureUnit.CELSIUS);
 		addEEnumLiteral(temperatureUnitEEnum, TemperatureUnit.FARENHEIT);
 

@@ -40,6 +40,7 @@
     <genClasses ecoreClass="brewery.ecore#//MashSchedule">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference brewery.ecore#//MashSchedule/steps"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//MashSchedule/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//MashSchedule/totalTime"/>
     </genClasses>
     <genClasses ecoreClass="brewery.ecore#//Sensor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//Sensor/value"/>

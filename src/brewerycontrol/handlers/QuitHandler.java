@@ -11,16 +11,47 @@
  *******************************************************************************/
 package brewerycontrol.handlers;
 
+import gnu.io.CommPort;
+import gnu.io.SerialPort;
+
+import java.io.IOException;
+
+import javax.inject.Inject;
+
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * 
+ * @author nguba
+ *
+ */
 public class QuitHandler {
+	@Inject
+	CommPort port;
+
+	/**
+	 * 
+	 * @param workbench
+	 * @param shell
+	 */
 	@Execute
 	public void execute(final IWorkbench workbench, final Shell shell) {
 		if (MessageDialog.openConfirm(shell, "Confirmation",
 				"Do you want to exit?")) {
+			final SerialPort serialPort = (SerialPort) port;
+			serialPort.notifyOnDataAvailable(false);
+			try {
+				serialPort.getOutputStream().close();
+				serialPort.getInputStream().close();
+			} catch (final IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			serialPort.removeEventListener();
+			port.close();
 			workbench.close();
 		}
 	}

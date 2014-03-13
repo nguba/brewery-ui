@@ -4,7 +4,9 @@ package brewery;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -344,6 +346,40 @@ public interface BreweryPackage extends EPackage {
 		EAttribute SENSOR_REPLY__TEMPERATURE = eINSTANCE.getSensorReply_Temperature();
 
 		/**
+		 * The meta object literal for the '{@link brewery.impl.ArduinoControllerImpl <em>Arduino Controller</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see brewery.impl.ArduinoControllerImpl
+		 * @see brewery.impl.BreweryPackageImpl#getArduinoController()
+		 * @generated
+		 */
+		EClass ARDUINO_CONTROLLER = eINSTANCE.getArduinoController();
+
+		/**
+		 * The meta object literal for the '<em><b>Scan</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___SCAN = eINSTANCE.getArduinoController__Scan();
+
+		/**
+		 * The meta object literal for the '<em><b>Select</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___SELECT__COMMPORTIDENTIFIER = eINSTANCE.getArduinoController__Select__CommPortIdentifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Configure</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___CONFIGURE__INT_SERIALPORT = eINSTANCE.getArduinoController__Configure__int_SerialPort();
+
+		/**
 		 * The meta object literal for the '{@link brewery.TemperatureUnit <em>Temperature Unit</em>}' enum.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
@@ -352,6 +388,46 @@ public interface BreweryPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TEMPERATURE_UNIT = eINSTANCE.getTemperatureUnit();
+
+		/**
+		 * The meta object literal for the '<em>Comm Port Identifier</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gnu.io.CommPortIdentifier
+		 * @see brewery.impl.BreweryPackageImpl#getCommPortIdentifier()
+		 * @generated
+		 */
+		EDataType COMM_PORT_IDENTIFIER = eINSTANCE.getCommPortIdentifier();
+
+		/**
+		 * The meta object literal for the '<em>Port In Use Exception</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gnu.io.PortInUseException
+		 * @see brewery.impl.BreweryPackageImpl#getPortInUseException()
+		 * @generated
+		 */
+		EDataType PORT_IN_USE_EXCEPTION = eINSTANCE.getPortInUseException();
+
+		/**
+		 * The meta object literal for the '<em>Serial Port</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gnu.io.SerialPort
+		 * @see brewery.impl.BreweryPackageImpl#getSerialPort()
+		 * @generated
+		 */
+		EDataType SERIAL_PORT = eINSTANCE.getSerialPort();
+
+		/**
+		 * The meta object literal for the '<em>Unsupported Comm Operation Exception</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gnu.io.UnsupportedCommOperationException
+		 * @see brewery.impl.BreweryPackageImpl#getUnsupportedCommOperationException()
+		 * @generated
+		 */
+		EDataType UNSUPPORTED_COMM_OPERATION_EXCEPTION = eINSTANCE.getUnsupportedCommOperationException();
 
 	}
 
@@ -943,6 +1019,61 @@ public interface BreweryPackage extends EPackage {
 	int SENSOR_REPLY_OPERATION_COUNT = CONSOLE_REPLY_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link brewery.impl.ArduinoControllerImpl <em>Arduino Controller</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see brewery.impl.ArduinoControllerImpl
+	 * @see brewery.impl.BreweryPackageImpl#getArduinoController()
+	 * @generated
+	 */
+	int ARDUINO_CONTROLLER = 11;
+
+	/**
+	 * The number of structural features of the '<em>Arduino Controller</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER_FEATURE_COUNT = 0;
+
+	/**
+	 * The operation id for the '<em>Scan</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___SCAN = 0;
+
+	/**
+	 * The operation id for the '<em>Select</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___SELECT__COMMPORTIDENTIFIER = 1;
+
+	/**
+	 * The operation id for the '<em>Configure</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___CONFIGURE__INT_SERIALPORT = 2;
+
+	/**
+	 * The number of operations of the '<em>Arduino Controller</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER_OPERATION_COUNT = 3;
+
+	/**
 	 * The meta object id for the '{@link brewery.TemperatureUnit <em>Temperature Unit</em>}' enum.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -950,7 +1081,47 @@ public interface BreweryPackage extends EPackage {
 	 * @see brewery.impl.BreweryPackageImpl#getTemperatureUnit()
 	 * @generated
 	 */
-	int TEMPERATURE_UNIT = 11;
+	int TEMPERATURE_UNIT = 12;
+
+	/**
+	 * The meta object id for the '<em>Comm Port Identifier</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gnu.io.CommPortIdentifier
+	 * @see brewery.impl.BreweryPackageImpl#getCommPortIdentifier()
+	 * @generated
+	 */
+	int COMM_PORT_IDENTIFIER = 13;
+
+	/**
+	 * The meta object id for the '<em>Port In Use Exception</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gnu.io.PortInUseException
+	 * @see brewery.impl.BreweryPackageImpl#getPortInUseException()
+	 * @generated
+	 */
+	int PORT_IN_USE_EXCEPTION = 14;
+
+	/**
+	 * The meta object id for the '<em>Serial Port</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gnu.io.SerialPort
+	 * @see brewery.impl.BreweryPackageImpl#getSerialPort()
+	 * @generated
+	 */
+	int SERIAL_PORT = 15;
+
+	/**
+	 * The meta object id for the '<em>Unsupported Comm Operation Exception</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gnu.io.UnsupportedCommOperationException
+	 * @see brewery.impl.BreweryPackageImpl#getUnsupportedCommOperationException()
+	 * @generated
+	 */
+	int UNSUPPORTED_COMM_OPERATION_EXCEPTION = 16;
 
 	/**
 	 * Returns the factory that creates the instances of the model. <!--
@@ -1272,6 +1443,46 @@ public interface BreweryPackage extends EPackage {
 	EAttribute getSensorReply_Temperature();
 
 	/**
+	 * Returns the meta object for class '{@link brewery.ArduinoController <em>Arduino Controller</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Arduino Controller</em>'.
+	 * @see brewery.ArduinoController
+	 * @generated
+	 */
+	EClass getArduinoController();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#scan() <em>Scan</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Scan</em>' operation.
+	 * @see brewery.ArduinoController#scan()
+	 * @generated
+	 */
+	EOperation getArduinoController__Scan();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#select(gnu.io.CommPortIdentifier) <em>Select</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Select</em>' operation.
+	 * @see brewery.ArduinoController#select(gnu.io.CommPortIdentifier)
+	 * @generated
+	 */
+	EOperation getArduinoController__Select__CommPortIdentifier();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#configure(int, gnu.io.SerialPort) <em>Configure</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Configure</em>' operation.
+	 * @see brewery.ArduinoController#configure(int, gnu.io.SerialPort)
+	 * @generated
+	 */
+	EOperation getArduinoController__Configure__int_SerialPort();
+
+	/**
 	 * Returns the meta object for class '{@link brewery.TemperatureRange
 	 * <em>Temperature Range</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
@@ -1328,6 +1539,50 @@ public interface BreweryPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getTemperatureUnit();
+
+	/**
+	 * Returns the meta object for data type '{@link gnu.io.CommPortIdentifier <em>Comm Port Identifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Comm Port Identifier</em>'.
+	 * @see gnu.io.CommPortIdentifier
+	 * @model instanceClass="gnu.io.CommPortIdentifier"
+	 * @generated
+	 */
+	EDataType getCommPortIdentifier();
+
+	/**
+	 * Returns the meta object for data type '{@link gnu.io.PortInUseException <em>Port In Use Exception</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Port In Use Exception</em>'.
+	 * @see gnu.io.PortInUseException
+	 * @model instanceClass="gnu.io.PortInUseException"
+	 * @generated
+	 */
+	EDataType getPortInUseException();
+
+	/**
+	 * Returns the meta object for data type '{@link gnu.io.SerialPort <em>Serial Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Serial Port</em>'.
+	 * @see gnu.io.SerialPort
+	 * @model instanceClass="gnu.io.SerialPort"
+	 * @generated
+	 */
+	EDataType getSerialPort();
+
+	/**
+	 * Returns the meta object for data type '{@link gnu.io.UnsupportedCommOperationException <em>Unsupported Comm Operation Exception</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Unsupported Comm Operation Exception</em>'.
+	 * @see gnu.io.UnsupportedCommOperationException
+	 * @model instanceClass="gnu.io.UnsupportedCommOperationException"
+	 * @generated
+	 */
+	EDataType getUnsupportedCommOperationException();
 
 	/**
 	 * Returns the meta object for class '{@link brewery.Yeast <em>Yeast</em>}'.

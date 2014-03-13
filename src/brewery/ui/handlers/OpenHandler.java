@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *     Lars Vogel <lars.Vogel@gmail.com> - Bug 419770
  *******************************************************************************/
-package brewerycontrol.handlers;
+package brewery.ui.handlers;
 
 import java.io.File;
 import java.util.Map;
@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import brewery.BreweryFactory;
 import brewery.MashSchedule;
-import brewerycontrol.BreweryEventTopic;
+import brewery.ui.BreweryEventTopic;
 
 /**
  * 

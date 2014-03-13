@@ -59,4 +59,19 @@
   <eClassifiers xsi:type="ecore:EClass" name="SensorReply" eSuperTypes="#//ConsoleReply">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="temperature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArduinoController">
+    <eOperations name="scan" upperBound="-1" eType="#//CommPortIdentifier"/>
+    <eOperations name="select" eType="#//SerialPort" eExceptions="#//PortInUseException">
+      <eParameters name="portIdentifier" lowerBound="1" eType="#//CommPortIdentifier"/>
+    </eOperations>
+    <eOperations name="configure" eExceptions="#//UnsupportedCommOperationException">
+      <eParameters name="dataRate" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="port" eType="#//SerialPort"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="CommPortIdentifier" instanceClassName="gnu.io.CommPortIdentifier"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="PortInUseException" instanceClassName="gnu.io.PortInUseException"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="SerialPort" instanceClassName="gnu.io.SerialPort"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="UnsupportedCommOperationException"
+      instanceClassName="gnu.io.UnsupportedCommOperationException"/>
 </ecore:EPackage>

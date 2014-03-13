@@ -1,4 +1,4 @@
-package brewerycontrol.parts;
+package brewery.ui.parts;
 
 import gnu.io.CommPort;
 
@@ -17,13 +17,16 @@ import org.csstudio.swt.xygraph.figures.XYGraph;
 import org.csstudio.swt.xygraph.linearscale.Range;
 import org.csstudio.swt.xygraph.util.XYGraphMediaFactory;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -41,6 +44,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.ProgressBar;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -48,9 +52,11 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import brewery.MashSchedule;
 import brewery.MashStep;
 import brewery.Sensor;
-import brewerycontrol.BreweryEventTopic;
-import brewerycontrol.job.MashTimerJob;
-import brewerycontrol.job.SensorEventHandler;
+import brewery.ui.BreweryEventTopic;
+import brewery.ui.job.MashTimerJob;
+import brewery.ui.job.SensorEventHandler;
+
+import org.eclipse.swt.widgets.Label;
 
 /**
  * 
@@ -61,7 +67,11 @@ public class MashPart {
 	@Inject
 	UISynchronize sync;
 	@Inject
+	@Optional
 	private CommPort serialPort;
+
+	@Inject
+	private Shell shell;
 
 	GaugeFigure gaugeFigure;
 	CircularBufferDataProvider provider;
@@ -76,6 +86,8 @@ public class MashPart {
 	IEventBroker broker;
 	private Combo selectedSchedule;
 	private MashSchedule schedule;
+	private ProgressBar progressBar;
+	private CLabel statusLabel;
 
 	@Inject
 	public MashPart() {
@@ -164,7 +176,20 @@ public class MashPart {
 	}
 
 	/**
-	 * listens for pin 5
+	 * updates the status label with the message
+	 * 
+	 * @param message
+	 */
+	@Inject
+	@Optional
+	void updateStatus(
+			@UIEventTopic(BreweryEventTopic.MASH_STATUS) final String message) {
+		statusLabel.setText(message);
+	}
+
+	/**
+	 * listens for pin 5 TODO decouple this from the main mash scheduler so we
+	 * can get readings on demand
 	 * 
 	 * @param pin
 	 */
@@ -172,12 +197,15 @@ public class MashPart {
 	@Optional
 	void pinEventReceived(
 			@UIEventTopic(BreweryEventTopic.SENSOR) final Sensor sensor) {
-		final Job job = new SensorEventHandler(this, "sensor/mash/ui", sensor);
-		job.schedule();
+		final Job sensorJob = new SensorEventHandler(this, "sensor/mash/ui",
+				sensor);
+		sensorJob.schedule();
 	}
 
 	@PostConstruct
-	public void postConstruct(final Composite parent) {
+	public void postConstruct(
+			@Preference(nodePath = "brewery.prefs.serial") IEclipsePreferences prefs,
+			final Composite parent) {
 
 		parent.setLayout(new FillLayout(SWT.HORIZONTAL));
 
@@ -292,7 +320,7 @@ public class MashPart {
 			public String getText(final Object element) {
 				if (element != null) {
 					final MashStep step = (MashStep) element;
-					return String.valueOf(step.getPause() / 60 / 1000 ) + " min";
+					return String.valueOf(step.getPause() / 60 / 1000) + " min";
 				} else {
 					return "";
 				}
@@ -354,7 +382,7 @@ public class MashPart {
 		scrolledComposite.setContent(table);
 		scrolledComposite.setMinSize(table
 				.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-		sashForm.setWeights(new int[] {287, 247});
+		sashForm.setWeights(new int[] { 287, 247 });
 
 		Group grpHistory = new Group(sashForm_1, SWT.NONE);
 		grpHistory.setText("History");
@@ -365,12 +393,12 @@ public class MashPart {
 				true, 1, 2));
 		final LightweightSystem historyLWS = new LightweightSystem(
 				historyCanvas);
-		sashForm_1.setWeights(new int[] {266, 511});
+		sashForm_1.setWeights(new int[] { 266, 511 });
 		historyLWS.setContents(mashGraph);
 
 		final Composite statusBar = new Composite(composite, SWT.BORDER
 				| SWT.NO_FOCUS);
-		final GridLayout gl_statusBar = new GridLayout(2, false);
+		final GridLayout gl_statusBar = new GridLayout(4, false);
 		gl_statusBar.marginHeight = 1;
 		gl_statusBar.verticalSpacing = 1;
 		gl_statusBar.marginWidth = 1;
@@ -381,11 +409,17 @@ public class MashPart {
 		gd_statusBar.heightHint = 26;
 		statusBar.setLayoutData(gd_statusBar);
 
-		final ProgressBar progressBar = new ProgressBar(statusBar, SWT.NONE);
+		progressBar = new ProgressBar(statusBar, SWT.NONE);
 		final GridData gd_progressBar = new GridData(SWT.FILL, SWT.CENTER,
 				true, false, 1, 1);
 		gd_progressBar.heightHint = 23;
 		progressBar.setLayoutData(gd_progressBar);
+
+		statusLabel = new CLabel(statusBar, SWT.NONE);
+		GridData gd_statusLabel = new GridData(SWT.FILL, SWT.CENTER, false,
+				false, 1, 1);
+		gd_statusLabel.widthHint = 175;
+		statusLabel.setLayoutData(gd_statusLabel);
 
 		timerLabel = new CLabel(statusBar, SWT.BORDER | SWT.SHADOW_IN
 				| SWT.SHADOW_OUT | SWT.CENTER);
@@ -394,17 +428,13 @@ public class MashPart {
 		timerLabel.setForeground(SWTResourceManager
 				.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 		timerLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		final GridData gd_lblNewLabel = new GridData(SWT.RIGHT, SWT.CENTER,
-				false, false, 1, 1);
-		gd_lblNewLabel.widthHint = 77;
-		timerLabel.setLayoutData(gd_lblNewLabel);
 		timerLabel.setText("00:00:00");
+		new Label(statusBar, SWT.NONE);
 		lws.setContents(gaugeFigure);
-
-		try {
-			timerJob = new MashTimerJob(this);
-		} catch (IOException e) {
-			e.printStackTrace();
+		
+		String name = prefs.get("port", null);
+		if(name != null) {
+			statusLabel.setText(name);
 		}
 	}
 
@@ -421,6 +451,26 @@ public class MashPart {
 			logger.info("PAUSE Mash");
 			break;
 		case START:
+			if (serialPort == null) {
+				MessageDialog
+						.openError(shell, "Arduino not found",
+								"No Arduino board has been found.  Try configuring the com port.");
+				return;
+			}
+			try {
+				if (timerJob != null) {
+					boolean result = MessageDialog.openConfirm(shell,
+							"Mash already in progress",
+							"Abort the current Mash program?");
+					if (result)
+						timerJob.stop();
+					else
+						return;
+				}
+				timerJob = new MashTimerJob(this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			logger.info("START Mash");
 			provider.clearTrace();
 			if (timerJob != null)
@@ -450,5 +500,13 @@ public class MashPart {
 	 */
 	@Persist
 	public void save() {
+	}
+
+	public ProgressBar getProgressBar() {
+		return progressBar;
+	}
+
+	public CLabel getStatusLabel() {
+		return statusLabel;
 	}
 }

@@ -14,6 +14,8 @@ import org.junit.Test;
 import brewery.BreweryFactory;
 import brewery.MashSchedule;
 import brewery.MashStep;
+import brewery.ui.monitor.MashManager;
+import brewery.ui.monitor.MashManagerEventListener;
 
 /**
  * @author nguba

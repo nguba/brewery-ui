@@ -13,6 +13,8 @@ import org.junit.Test;
 import brewery.ConsoleCommand;
 import brewery.ConsoleReply;
 import brewery.SensorReply;
+import brewery.ui.monitor.ConsoleParser;
+import brewery.ui.monitor.ConsoleParserEventListener;
 
 /**
  * @author nguba

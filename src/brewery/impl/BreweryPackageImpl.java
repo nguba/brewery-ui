@@ -2,13 +2,15 @@
  */
 package brewery.impl;
 
+import brewery.ArduinoController;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import brewery.BreweryFactory;
 import brewery.BreweryPackage;
 import brewery.ConsoleCommand;
@@ -23,6 +25,10 @@ import brewery.SensorReply;
 import brewery.TemperatureRange;
 import brewery.TemperatureUnit;
 import brewery.Yeast;
+import gnu.io.CommPortIdentifier;
+import gnu.io.PortInUseException;
+import gnu.io.SerialPort;
+import gnu.io.UnsupportedCommOperationException;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
@@ -135,10 +141,45 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 	private EClass sensorReplyEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass arduinoControllerEClass = null;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EEnum temperatureUnitEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType commPortIdentifierEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType portInUseExceptionEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType serialPortEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType unsupportedCommOperationExceptionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -239,8 +280,19 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 		sensorReplyEClass = createEClass(SENSOR_REPLY);
 		createEAttribute(sensorReplyEClass, SENSOR_REPLY__TEMPERATURE);
 
+		arduinoControllerEClass = createEClass(ARDUINO_CONTROLLER);
+		createEOperation(arduinoControllerEClass, ARDUINO_CONTROLLER___SCAN);
+		createEOperation(arduinoControllerEClass, ARDUINO_CONTROLLER___SELECT__COMMPORTIDENTIFIER);
+		createEOperation(arduinoControllerEClass, ARDUINO_CONTROLLER___CONFIGURE__INT_SERIALPORT);
+
 		// Create enums
 		temperatureUnitEEnum = createEEnum(TEMPERATURE_UNIT);
+
+		// Create data types
+		commPortIdentifierEDataType = createEDataType(COMM_PORT_IDENTIFIER);
+		portInUseExceptionEDataType = createEDataType(PORT_IN_USE_EXCEPTION);
+		serialPortEDataType = createEDataType(SERIAL_PORT);
+		unsupportedCommOperationExceptionEDataType = createEDataType(UNSUPPORTED_COMM_OPERATION_EXCEPTION);
 	}
 
 	/**
@@ -514,6 +566,42 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getArduinoController() {
+		return arduinoControllerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getArduinoController__Scan() {
+		return arduinoControllerEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getArduinoController__Select__CommPortIdentifier() {
+		return arduinoControllerEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getArduinoController__Configure__int_SerialPort() {
+		return arduinoControllerEClass.getEOperations().get(2);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -556,6 +644,42 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 	@Override
 	public EEnum getTemperatureUnit() {
 		return temperatureUnitEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getCommPortIdentifier() {
+		return commPortIdentifierEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getPortInUseException() {
+		return portInUseExceptionEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getSerialPort() {
+		return serialPortEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getUnsupportedCommOperationException() {
+		return unsupportedCommOperationExceptionEDataType;
 	}
 
 	/**
@@ -686,10 +810,29 @@ public class BreweryPackageImpl extends EPackageImpl implements BreweryPackage {
 		initEClass(sensorReplyEClass, SensorReply.class, "SensorReply", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSensorReply_Temperature(), ecorePackage.getEDouble(), "temperature", null, 0, 1, SensorReply.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(arduinoControllerEClass, ArduinoController.class, "ArduinoController", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEOperation(getArduinoController__Scan(), this.getCommPortIdentifier(), "scan", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		EOperation op = initEOperation(getArduinoController__Select__CommPortIdentifier(), this.getSerialPort(), "select", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getCommPortIdentifier(), "portIdentifier", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getPortInUseException());
+
+		op = initEOperation(getArduinoController__Configure__int_SerialPort(), null, "configure", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "dataRate", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getSerialPort(), "port", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getUnsupportedCommOperationException());
+
 		// Initialize enums and add enum literals
 		initEEnum(temperatureUnitEEnum, TemperatureUnit.class, "TemperatureUnit");
 		addEEnumLiteral(temperatureUnitEEnum, TemperatureUnit.CELSIUS);
 		addEEnumLiteral(temperatureUnitEEnum, TemperatureUnit.FARENHEIT);
+
+		// Initialize data types
+		initEDataType(commPortIdentifierEDataType, CommPortIdentifier.class, "CommPortIdentifier", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(portInUseExceptionEDataType, PortInUseException.class, "PortInUseException", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(serialPortEDataType, SerialPort.class, "SerialPort", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(unsupportedCommOperationExceptionEDataType, UnsupportedCommOperationException.class, "UnsupportedCommOperationException", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

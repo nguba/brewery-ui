@@ -9,6 +9,10 @@
       <genEnumLiterals ecoreEnumLiteral="brewery.ecore#//TemperatureUnit/Celsius"/>
       <genEnumLiterals ecoreEnumLiteral="brewery.ecore#//TemperatureUnit/Farenheit"/>
     </genEnums>
+    <genDataTypes ecoreDataType="brewery.ecore#//CommPortIdentifier"/>
+    <genDataTypes ecoreDataType="brewery.ecore#//PortInUseException"/>
+    <genDataTypes ecoreDataType="brewery.ecore#//SerialPort"/>
+    <genDataTypes ecoreDataType="brewery.ecore#//UnsupportedCommOperationException"/>
     <genClasses ecoreClass="brewery.ecore#//Yeast">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//Yeast/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//Yeast/flocculation"/>
@@ -58,6 +62,16 @@
     </genClasses>
     <genClasses ecoreClass="brewery.ecore#//SensorReply">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//SensorReply/temperature"/>
+    </genClasses>
+    <genClasses ecoreClass="brewery.ecore#//ArduinoController">
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/scan"/>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/select">
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/select/portIdentifier"/>
+      </genOperations>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/configure">
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/configure/dataRate"/>
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/configure/port"/>
+      </genOperations>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

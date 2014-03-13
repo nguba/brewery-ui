@@ -1,4 +1,4 @@
-package brewerycontrol.parts;
+package brewery.ui.parts;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

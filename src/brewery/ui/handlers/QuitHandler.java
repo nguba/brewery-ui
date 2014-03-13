@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *     Lars Vogel <lars.Vogel@gmail.com> - Bug 419770
  *******************************************************************************/
-package brewerycontrol.handlers;
+package brewery.ui.handlers;
 
 import gnu.io.CommPort;
 import gnu.io.SerialPort;
@@ -19,6 +19,7 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -26,10 +27,11 @@ import org.eclipse.swt.widgets.Shell;
 /**
  * 
  * @author nguba
- *
+ * 
  */
 public class QuitHandler {
 	@Inject
+	@Optional
 	CommPort port;
 
 	/**
@@ -41,17 +43,19 @@ public class QuitHandler {
 	public void execute(final IWorkbench workbench, final Shell shell) {
 		if (MessageDialog.openConfirm(shell, "Confirmation",
 				"Do you want to exit?")) {
-			final SerialPort serialPort = (SerialPort) port;
-			serialPort.notifyOnDataAvailable(false);
-			try {
-				serialPort.getOutputStream().close();
-				serialPort.getInputStream().close();
-			} catch (final IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (port != null) {
+				final SerialPort serialPort = (SerialPort) port;
+				serialPort.notifyOnDataAvailable(false);
+				try {
+					serialPort.getOutputStream().close();
+					serialPort.getInputStream().close();
+				} catch (final IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				serialPort.removeEventListener();
+				port.close();
 			}
-			serialPort.removeEventListener();
-			port.close();
 			workbench.close();
 		}
 	}

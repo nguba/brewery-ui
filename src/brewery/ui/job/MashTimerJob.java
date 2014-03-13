@@ -1,7 +1,7 @@
 /**
  * 
  */
-package brewerycontrol.job;
+package brewery.ui.job;
 
 import gnu.io.CommPort;
 
@@ -22,15 +22,16 @@ import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.swt.custom.CLabel;
+import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.TableItem;
 
 import brewery.MashSchedule;
 import brewery.MashStep;
-import brewerycontrol.BreweryEventTopic;
-import brewerycontrol.monitor.MashManager;
-import brewerycontrol.monitor.MashManagerEventListener;
-import brewerycontrol.parts.MashPart;
-import brewerycontrol.parts.MashPartCommand;
+import brewery.ui.BreweryEventTopic;
+import brewery.ui.monitor.MashManager;
+import brewery.ui.monitor.MashManagerEventListener;
+import brewery.ui.parts.MashPart;
+import brewery.ui.parts.MashPartCommand;
 
 /**
  * @author nguba_000
@@ -52,6 +53,7 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 	private IEventBroker broker;
 	private Logger logger;
 	private CheckboxTableViewer scheduleTable;
+	private ProgressBar progressBar;
 
 	/**
 	 * 
@@ -70,6 +72,7 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 		broker = mashPart.getBroker();
 		logger = mashPart.getLogger();
 		scheduleTable = mashPart.getMashScheduleTable();
+		progressBar = mashPart.getProgressBar();
 	}
 
 	/**
@@ -97,6 +100,7 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 						- startDate.getTime());
 				calendar.add(Calendar.HOUR, -1);
 				final String format = dateFormat.format(calendar.getTime());
+				// TODO refactor this into it's own job so we can decouple this
 				try {
 					outputStream.write("[sensor]".getBytes());
 					outputStream.flush();
@@ -112,13 +116,16 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 		return Status.OK_STATUS;
 	}
 
+	int steps = 0; 
+	
 	/**
 	 * @param schedule
 	 * 
 	 */
 	public void start(MashSchedule schedule) {
 		try {
-			mashManager.start(schedule);
+			mashManager.start(schedule); 
+			progressBar.setMaximum(schedule.getSteps().size() * 2);
 			shouldRun = true;
 			startDate = new Date();
 			schedule(DELAY);
@@ -138,6 +145,7 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 	@Override
 	public void newSetpointEvent(MashStep step) {
 		logger.info("SETPOINT " + step);
+		//progressBar.setSelection(itemIndex + 1);
 		final StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("[setpoint ");
 		stringBuilder.append(new Double(step.getTemperature()));
@@ -171,6 +179,7 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 	@Override
 	public void setpointReachedEvent(MashStep step) {
 		logger.info("SETPOINT REACHED " + step);
+		progressBar.setSelection(++steps);
 	}
 
 	public void setCurrentTemp(double value) {
@@ -182,6 +191,7 @@ public final class MashTimerJob extends Job implements MashManagerEventListener 
 	@Override
 	public void stepCompleteEvent(MashStep step) {
 		logger.info("STEP COMPLETE " + step);
+		progressBar.setSelection(++steps);
 		TableItem item = scheduleTable.getTable().getItem(itemIndex);
 		item.setChecked(true);
 		itemIndex++;

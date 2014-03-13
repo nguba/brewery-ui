@@ -1,4 +1,4 @@
-package brewerycontrol;
+package brewery.ui.dialog;
 
 import java.io.IOException;
 import java.util.Collections;

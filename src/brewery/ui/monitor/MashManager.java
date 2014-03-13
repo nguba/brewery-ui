@@ -1,7 +1,7 @@
 /**
  * 
  */
-package brewerycontrol.monitor;
+package brewery.ui.monitor;
 
 import java.io.IOException;
 import java.util.Iterator;

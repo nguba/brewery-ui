@@ -16,7 +16,7 @@
             name="Guba&apos;s Brewery">
          <property
                name="lifeCycleURI"
-               value="bundleclass://brewery-ui/brewerycontrol.monitor.LifecycleManager">
+               value="bundleclass://brewery-ui/brewery.ui.monitor.ArduinoManager">
          </property>
          <property
                name="appName"

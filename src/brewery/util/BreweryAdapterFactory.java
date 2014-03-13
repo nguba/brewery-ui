@@ -2,6 +2,7 @@
  */
 package brewery.util;
 
+import brewery.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -84,6 +85,10 @@ public class BreweryAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSensorReply(SensorReply object) {
 				return createSensorReplyAdapter();
+			}
+			@Override
+			public Adapter caseArduinoController(ArduinoController object) {
+				return createArduinoControllerAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -256,6 +261,20 @@ public class BreweryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSensorReplyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link brewery.ArduinoController <em>Arduino Controller</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see brewery.ArduinoController
+	 * @generated
+	 */
+	public Adapter createArduinoControllerAdapter() {
 		return null;
 	}
 

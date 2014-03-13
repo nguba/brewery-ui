@@ -2,6 +2,7 @@
  */
 package brewery.util;
 
+import brewery.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -178,6 +179,21 @@ public class BrewerySwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Arduino Controller</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Arduino Controller</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArduinoController(ArduinoController object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Temperature Range</em>'.
 	 * <!-- begin-user-doc --> This implementation
 	 * returns null; returning a non-null result will terminate the switch. <!--
@@ -294,6 +310,12 @@ public class BrewerySwitch<T> extends Switch<T> {
 				SensorReply sensorReply = (SensorReply)theEObject;
 				T result = caseSensorReply(sensorReply);
 				if (result == null) result = caseConsoleReply(sensorReply);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BreweryPackage.ARDUINO_CONTROLLER: {
+				ArduinoController arduinoController = (ArduinoController)theEObject;
+				T result = caseArduinoController(arduinoController);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

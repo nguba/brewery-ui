@@ -5,11 +5,11 @@
       <children xsi:type="advanced:Perspective" xmi:id="_1VBMeJk2EeO3BfkAMF08ng">
         <children xsi:type="basic:PartSashContainer" xmi:id="_1VBMeZk2EeO3BfkAMF08ng">
           <children xsi:type="basic:PartStack" xmi:id="_1VBMepk2EeO3BfkAMF08ng">
-            <children xsi:type="basic:Part" xmi:id="_9c5uEJopEeOprfHuY1tYSQ" elementId="brewery-ui.part.1" contributionURI="bundleclass://brewery-ui/brewerycontrol.parts.MashPart" label="Mash Schedule"/>
-            <children xsi:type="basic:Part" xmi:id="_I2a_YJlLEeO3BfkAMF08ng" elementId="brewery-ui.part.0" contributionURI="bundleclass://brewery-ui/brewerycontrol.parts.FermentationPart" label="Fermentor 1"/>
-            <children xsi:type="basic:Part" xmi:id="_Kq0g4JoqEeOprfHuY1tYSQ" elementId="brewery-ui.part.2" contributionURI="bundleclass://brewery-ui/brewerycontrol.parts.FermentationPart" label="Fermentor 2"/>
-            <children xsi:type="basic:Part" xmi:id="_M-_i8JoqEeOprfHuY1tYSQ" elementId="brewery-ui.part.3" contributionURI="bundleclass://brewery-ui/brewerycontrol.parts.FermentationPart" label="Fermentor 3"/>
-            <children xsi:type="basic:Part" xmi:id="_PMLzQJoqEeOprfHuY1tYSQ" elementId="brewery-ui.part.4" contributionURI="bundleclass://brewery-ui/brewerycontrol.parts.FermentationPart" label="Fermentor 4"/>
+            <children xsi:type="basic:Part" xmi:id="_9c5uEJopEeOprfHuY1tYSQ" elementId="brewery-ui.part.1" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.MashPart" label="Mash Schedule"/>
+            <children xsi:type="basic:Part" xmi:id="_I2a_YJlLEeO3BfkAMF08ng" elementId="brewery-ui.part.0" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.FermentationPart" label="Fermentor 1"/>
+            <children xsi:type="basic:Part" xmi:id="_Kq0g4JoqEeOprfHuY1tYSQ" elementId="brewery-ui.part.2" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.FermentationPart" label="Fermentor 2"/>
+            <children xsi:type="basic:Part" xmi:id="_M-_i8JoqEeOprfHuY1tYSQ" elementId="brewery-ui.part.3" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.FermentationPart" label="Fermentor 3"/>
+            <children xsi:type="basic:Part" xmi:id="_PMLzQJoqEeOprfHuY1tYSQ" elementId="brewery-ui.part.4" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.FermentationPart" label="Fermentor 4"/>
           </children>
         </children>
       </children>
@@ -26,6 +26,9 @@
       <children xsi:type="menu:Menu" xmi:id="_1Pq_AJoKEeO3BfkAMF08ng" elementId="brewery-ui.menu.0" label="Tools">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_5yBI0JoKEeO3BfkAMF08ng" elementId="brewery-ui.handledmenuitem.0" label="Add Yeast Profile" command="_ichCAJoKEeO3BfkAMF08ng"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_lTQ6EKnLEeOV1Ooj1t2EhA" elementId="brewery-ui.handledmenuitem." label="Tune PID" command="_oeNMEKnLEeOV1Ooj1t2EhA"/>
+        <children xsi:type="menu:Menu" xmi:id="_4xMjcKq9EeOV1Ooj1t2EhA" elementId="brewery-ui.menu.1" label="Serial Port">
+          <children xsi:type="menu:DynamicMenuContribution" xmi:id="_FS7lsKq-EeOV1Ooj1t2EhA" elementId="brewery-ui.dynamicmenucontribution.0" label="" contributionURI="bundleclass://brewery-ui/brewery.ui.menu.ComPortMenuContributor"/>
+        </children>
       </children>
     </mainMenu>
     <trimBars xmi:id="_1VBMfJk2EeO3BfkAMF08ng">
@@ -38,14 +41,14 @@
       </children>
     </trimBars>
   </children>
-  <handlers xmi:id="_1VBMZJk2EeO3BfkAMF08ng" elementId="brewery-ui.handler.quitCommand" contributionURI="bundleclass://brewery-ui/brewerycontrol.handlers.QuitHandler" command="_1VBMY5k2EeO3BfkAMF08ng"/>
-  <handlers xmi:id="_1VBMaJk2EeO3BfkAMF08ng" elementId="brewery-ui.handler.openCommand" contributionURI="bundleclass://brewery-ui/brewerycontrol.handlers.OpenHandler" command="_1VBMZ5k2EeO3BfkAMF08ng"/>
-  <handlers xmi:id="_1VBMa5k2EeO3BfkAMF08ng" elementId="brewery-ui.handler.saveCommand" contributionURI="bundleclass://brewery-ui/brewerycontrol.handlers.SaveHandler" command="_1VBMapk2EeO3BfkAMF08ng"/>
-  <handlers xmi:id="_1VBMbpk2EeO3BfkAMF08ng" elementId="brewery-ui.handler.aboutCommand" contributionURI="bundleclass://brewery-ui/brewerycontrol.handlers.AboutHandler" command="_1VBMbZk2EeO3BfkAMF08ng"/>
-  <handlers xmi:id="_mCPykJoKEeO3BfkAMF08ng" elementId="brewery-ui.handler.0" contributionURI="bundleclass://brewery-ui/brewerycontrol.handlers.AddYeastHandler" command="_ichCAJoKEeO3BfkAMF08ng"/>
-  <handlers xmi:id="_Zj560KhpEeOBFdeSkp9FqQ" elementId="brewery-ui.handler.mash.start" contributionURI="bundleclass://brewery-ui/brewerycontrol.handlers.StartMashHandler" command="_WAJgMKhpEeOBFdeSkp9FqQ"/>
-  <handlers xmi:id="_RGaCsKhsEeOBFdeSkp9FqQ" elementId="brewery-ui.handler.mash.stop" contributionURI="bundleclass://brewery-ui/brewerycontrol.handlers.StopMashHandler" command="_MkLNoKhsEeOBFdeSkp9FqQ"/>
-  <handlers xmi:id="_q1i24KnLEeOV1Ooj1t2EhA" elementId="brewery-ui.handler.1" contributionURI="bundleclass://brewery-ui/brewerycontrol.handlers.TunePIDControllerHandler" command="_oeNMEKnLEeOV1Ooj1t2EhA"/>
+  <handlers xmi:id="_1VBMZJk2EeO3BfkAMF08ng" elementId="brewery-ui.handler.quitCommand" contributionURI="bundleclass://brewery-ui/brewery.ui.handlers.QuitHandler" command="_1VBMY5k2EeO3BfkAMF08ng"/>
+  <handlers xmi:id="_1VBMaJk2EeO3BfkAMF08ng" elementId="brewery-ui.handler.openCommand" contributionURI="bundleclass://brewery-ui/brewery.ui.handlers.OpenHandler" command="_1VBMZ5k2EeO3BfkAMF08ng"/>
+  <handlers xmi:id="_1VBMa5k2EeO3BfkAMF08ng" elementId="brewery-ui.handler.saveCommand" contributionURI="bundleclass://brewery-ui/brewery.ui.handlers.SaveHandler" command="_1VBMapk2EeO3BfkAMF08ng"/>
+  <handlers xmi:id="_1VBMbpk2EeO3BfkAMF08ng" elementId="brewery-ui.handler.aboutCommand" contributionURI="bundleclass://brewery-ui/brewery.ui.handlers.AboutHandler" command="_1VBMbZk2EeO3BfkAMF08ng"/>
+  <handlers xmi:id="_mCPykJoKEeO3BfkAMF08ng" elementId="brewery-ui.handler.0" contributionURI="bundleclass://brewery-ui/brewery.ui.handlers.AddYeastHandler" command="_ichCAJoKEeO3BfkAMF08ng"/>
+  <handlers xmi:id="_Zj560KhpEeOBFdeSkp9FqQ" elementId="brewery-ui.handler.mash.start" contributionURI="bundleclass://brewery-ui/brewery.ui.handlers.StartMashHandler" command="_WAJgMKhpEeOBFdeSkp9FqQ"/>
+  <handlers xmi:id="_RGaCsKhsEeOBFdeSkp9FqQ" elementId="brewery-ui.handler.mash.stop" contributionURI="bundleclass://brewery-ui/brewery.ui.handlers.StopMashHandler" command="_MkLNoKhsEeOBFdeSkp9FqQ"/>
+  <handlers xmi:id="_q1i24KnLEeOV1Ooj1t2EhA" elementId="brewery-ui.handler.1" contributionURI="bundleclass://brewery-ui/brewery.ui.handlers.TunePIDControllerHandler" command="_oeNMEKnLEeOV1Ooj1t2EhA"/>
   <bindingTables xmi:id="_1VBMZZk2EeO3BfkAMF08ng" bindingContext="_1VBMYJk2EeO3BfkAMF08ng">
     <bindings xmi:id="_1VBMZpk2EeO3BfkAMF08ng" keySequence="M1+Q" command="_1VBMY5k2EeO3BfkAMF08ng"/>
     <bindings xmi:id="_1VBMaZk2EeO3BfkAMF08ng" keySequence="M1+O" command="_1VBMZ5k2EeO3BfkAMF08ng"/>

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package brewerycontrol.handlers;
+package brewery.ui.handlers;
 
 import javax.inject.Inject;
 
@@ -10,8 +10,8 @@ import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.swt.widgets.Shell;
 
-import brewerycontrol.BreweryEventTopic;
-import brewerycontrol.parts.MashPartCommand;
+import brewery.ui.BreweryEventTopic;
+import brewery.ui.parts.MashPartCommand;
 
 /**
  * @author nguba_000

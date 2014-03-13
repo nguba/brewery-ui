@@ -1,7 +1,7 @@
 /**
  * 
  */
-package brewerycontrol.parts;
+package brewery.ui.parts;
 
 /**
  * @author nguba_000

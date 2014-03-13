@@ -2,6 +2,11 @@
  */
 package brewery.impl;
 
+import brewery.*;
+import gnu.io.CommPortIdentifier;
+import gnu.io.PortInUseException;
+import gnu.io.SerialPort;
+import gnu.io.UnsupportedCommOperationException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -76,6 +81,78 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CommPortIdentifier createCommPortIdentifierFromString(EDataType eDataType, String initialValue) {
+		return (CommPortIdentifier)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCommPortIdentifierToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PortInUseException createPortInUseExceptionFromString(EDataType eDataType, String initialValue) {
+		return (PortInUseException)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPortInUseExceptionToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SerialPort createSerialPortFromString(EDataType eDataType, String initialValue) {
+		return (SerialPort)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSerialPortToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnsupportedCommOperationException createUnsupportedCommOperationExceptionFromString(EDataType eDataType, String initialValue) {
+		return (UnsupportedCommOperationException)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUnsupportedCommOperationExceptionToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -84,6 +161,14 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 		switch (eDataType.getClassifierID()) {
 			case BreweryPackage.TEMPERATURE_UNIT:
 				return convertTemperatureUnitToString(eDataType, instanceValue);
+			case BreweryPackage.COMM_PORT_IDENTIFIER:
+				return convertCommPortIdentifierToString(eDataType, instanceValue);
+			case BreweryPackage.PORT_IN_USE_EXCEPTION:
+				return convertPortInUseExceptionToString(eDataType, instanceValue);
+			case BreweryPackage.SERIAL_PORT:
+				return convertSerialPortToString(eDataType, instanceValue);
+			case BreweryPackage.UNSUPPORTED_COMM_OPERATION_EXCEPTION:
+				return convertUnsupportedCommOperationExceptionToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -106,6 +191,7 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 			case BreweryPackage.PIN: return createPin();
 			case BreweryPackage.CONSOLE_COMMAND: return createConsoleCommand();
 			case BreweryPackage.SENSOR_REPLY: return createSensorReply();
+			case BreweryPackage.ARDUINO_CONTROLLER: return createArduinoController();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -140,6 +226,14 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 		switch (eDataType.getClassifierID()) {
 			case BreweryPackage.TEMPERATURE_UNIT:
 				return createTemperatureUnitFromString(eDataType, initialValue);
+			case BreweryPackage.COMM_PORT_IDENTIFIER:
+				return createCommPortIdentifierFromString(eDataType, initialValue);
+			case BreweryPackage.PORT_IN_USE_EXCEPTION:
+				return createPortInUseExceptionFromString(eDataType, initialValue);
+			case BreweryPackage.SERIAL_PORT:
+				return createSerialPortFromString(eDataType, initialValue);
+			case BreweryPackage.UNSUPPORTED_COMM_OPERATION_EXCEPTION:
+				return createUnsupportedCommOperationExceptionFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -203,6 +297,16 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 	public SensorReply createSensorReply() {
 		SensorReplyImpl sensorReply = new SensorReplyImpl();
 		return sensorReply;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ArduinoController createArduinoController() {
+		ArduinoControllerImpl arduinoController = new ArduinoControllerImpl();
+		return arduinoController;
 	}
 
 	/**

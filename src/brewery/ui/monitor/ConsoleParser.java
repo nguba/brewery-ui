@@ -1,7 +1,7 @@
 /**
  * 
  */
-package brewerycontrol.monitor;
+package brewery.ui.monitor;
 
 import brewery.BreweryFactory;
 import brewery.ConsoleCommand;

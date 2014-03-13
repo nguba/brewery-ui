@@ -1,4 +1,4 @@
-package brewerycontrol.parts;
+package brewery.ui.parts;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;

@@ -1,12 +1,12 @@
-package brewerycontrol.handlers;
+package brewery.ui.handlers;
 
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.services.events.IEventBroker;
 
-import brewerycontrol.BreweryEventTopic;
-import brewerycontrol.parts.MashPartCommand;
+import brewery.ui.BreweryEventTopic;
+import brewery.ui.parts.MashPartCommand;
 
 /**
  * 

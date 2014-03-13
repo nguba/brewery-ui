@@ -92,6 +92,15 @@ public interface BreweryFactory extends EFactory {
 	SensorReply createSensorReply();
 
 	/**
+	 * Returns a new object of class '<em>Arduino Controller</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Arduino Controller</em>'.
+	 * @generated
+	 */
+	ArduinoController createArduinoController();
+
+	/**
 	 * Returns a new object of class '<em>Temperature Range</em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 

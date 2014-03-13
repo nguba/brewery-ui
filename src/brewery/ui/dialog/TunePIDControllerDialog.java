@@ -1,4 +1,4 @@
-package brewerycontrol;
+package brewery.ui.dialog;
 
 import javax.inject.Inject;
 import javax.inject.Named;

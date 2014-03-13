@@ -1,4 +1,4 @@
-package brewerycontrol;
+package brewery.ui;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

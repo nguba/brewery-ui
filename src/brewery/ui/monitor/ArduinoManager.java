@@ -1,13 +1,14 @@
 /**
  * 
  */
-package brewerycontrol.monitor;
+package brewery.ui.monitor;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+import gnu.io.UnsupportedCommOperationException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,13 +37,13 @@ import brewery.ConsoleCommand;
 import brewery.Inventory;
 import brewery.Sensor;
 import brewery.SensorReply;
-import brewerycontrol.BreweryEventTopic;
+import brewery.ui.BreweryEventTopic;
 
 /**
  * @author nguba_000
  * 
  */
-public final class LifecycleManager implements SerialPortEventListener,
+public final class ArduinoManager implements SerialPortEventListener,
 		ConsoleParserEventListener {
 
 	private static final String SETTINGS_FILENAME = "brewery-settings.bctl";
@@ -64,7 +65,7 @@ public final class LifecycleManager implements SerialPortEventListener,
 	/**
 	 * 
 	 */
-	public LifecycleManager() {
+	public ArduinoManager() {
 		BreweryFactory.eINSTANCE.eClass();
 		final Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 		final Map<String, Object> m = reg.getExtensionToFactoryMap();
@@ -112,6 +113,20 @@ public final class LifecycleManager implements SerialPortEventListener,
 		return portId;
 	}
 
+	void init() throws Exception {
+		final CommPortIdentifier portIdentifier = findPort();
+		serialPort = (SerialPort) portIdentifier.open(
+				this.getClass().getName(), TIME_OUT);
+		serialPort.setSerialPortParams(DATA_RATE, SerialPort.DATABITS_8,
+				SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+
+		input = new BufferedReader(new InputStreamReader(
+				serialPort.getInputStream()));
+		eventBroker.send("arduino/init", portIdentifier);
+		serialPort.addEventListener(this);
+		serialPort.notifyOnDataAvailable(true);
+		//context.set(CommPort.class, serialPort);
+	}
 	/**
 	 * 
 	 * @param eventBroker
@@ -125,18 +140,7 @@ public final class LifecycleManager implements SerialPortEventListener,
 			throws Exception {
 		logger.info("Contacting Arduino");
 		this.eventBroker = eventBroker;
-		final CommPortIdentifier portIdentifier = findPort();
-		serialPort = (SerialPort) portIdentifier.open(
-				this.getClass().getName(), TIME_OUT);
-		serialPort.setSerialPortParams(DATA_RATE, SerialPort.DATABITS_8,
-				SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
-
-		input = new BufferedReader(new InputStreamReader(
-				serialPort.getInputStream()));
-		eventBroker.send("arduino/init", portIdentifier);
-		serialPort.addEventListener(this);
-		serialPort.notifyOnDataAvailable(true);
-		context.set(CommPort.class, serialPort);
+		
 
 		final ResourceSet resSet = new ResourceSetImpl();
 		final URI uri = URI.createURI(SETTINGS_FILENAME);

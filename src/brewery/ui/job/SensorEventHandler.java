@@ -1,4 +1,4 @@
-package brewerycontrol.job;
+package brewery.ui.job;
 
 import java.util.Calendar;
 
@@ -8,7 +8,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 
 import brewery.Sensor;
-import brewerycontrol.parts.MashPart;
+import brewery.ui.parts.MashPart;
 
 public final class SensorEventHandler extends Job {
 	/**

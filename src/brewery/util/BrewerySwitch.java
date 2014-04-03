@@ -3,6 +3,8 @@
 package brewery.util;
 
 import brewery.*;
+import brewery.ui.monitor.ConsoleParserEventListener;
+import gnu.io.SerialPortEventListener;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -194,6 +196,51 @@ public class BrewerySwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Serial Port Event Listener</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Serial Port Event Listener</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSerialPortEventListener(SerialPortEventListener object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Console Parser Event Listener</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Console Parser Event Listener</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConsoleParserEventListener(ConsoleParserEventListener object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>PID</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>PID</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePID(PID object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Temperature Range</em>'.
 	 * <!-- begin-user-doc --> This implementation
 	 * returns null; returning a non-null result will terminate the switch. <!--
@@ -316,6 +363,26 @@ public class BrewerySwitch<T> extends Switch<T> {
 			case BreweryPackage.ARDUINO_CONTROLLER: {
 				ArduinoController arduinoController = (ArduinoController)theEObject;
 				T result = caseArduinoController(arduinoController);
+				if (result == null) result = caseSerialPortEventListener(arduinoController);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BreweryPackage.SERIAL_PORT_EVENT_LISTENER: {
+				SerialPortEventListener serialPortEventListener = (SerialPortEventListener)theEObject;
+				T result = caseSerialPortEventListener(serialPortEventListener);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BreweryPackage.CONSOLE_PARSER_EVENT_LISTENER: {
+				ConsoleParserEventListener consoleParserEventListener = (ConsoleParserEventListener)theEObject;
+				T result = caseConsoleParserEventListener(consoleParserEventListener);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BreweryPackage.PID: {
+				PID pid = (PID)theEObject;
+				T result = casePID(pid);
+				if (result == null) result = caseConsoleReply(pid);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

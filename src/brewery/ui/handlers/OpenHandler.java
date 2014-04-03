@@ -16,8 +16,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,6 +29,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
+import org.osgi.service.prefs.BackingStoreException;
 
 import brewery.BreweryFactory;
 import brewery.MashSchedule;
@@ -40,7 +44,12 @@ public class OpenHandler {
 
 	@Inject
 	private IEventBroker eventBroker;
-
+	@Inject
+	private Logger logger;
+	@Inject
+	@Preference(nodePath = "brewery.prefs.main")
+	private IEclipsePreferences prefs;
+	
 	/**
 	 * 
 	 * @param shell
@@ -61,9 +70,10 @@ public class OpenHandler {
 		final ResourceSet resSet = new ResourceSetImpl();
 
 		final URI uri = URI.createFileURI(fileName);
-		System.out.println(uri);
+		
 		Resource resource = resSet.createResource(uri);
-
+		logger.info("Open: " + uri);
+		
 		MashSchedule schedule = null;
 
 		final File f = new File(fileName);
@@ -75,6 +85,13 @@ public class OpenHandler {
 			}
 		}
 		if (schedule != null) {
+			prefs.put("schedule", uri.path());
+			try {
+				prefs.flush();
+				logger.info("Saved prefs:  scheulde=" + prefs.get("schedule", null));
+			} catch (BackingStoreException e) {
+				e.printStackTrace();
+			}
 			eventBroker.send(BreweryEventTopic.MASH_SCHEDULE, schedule);
 		}
 	}

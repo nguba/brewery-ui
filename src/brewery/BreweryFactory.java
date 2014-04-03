@@ -101,6 +101,15 @@ public interface BreweryFactory extends EFactory {
 	ArduinoController createArduinoController();
 
 	/**
+	 * Returns a new object of class '<em>PID</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>PID</em>'.
+	 * @generated
+	 */
+	PID createPID();
+
+	/**
 	 * Returns a new object of class '<em>Temperature Range</em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 

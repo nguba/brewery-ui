@@ -3,8 +3,13 @@
  */
 package brewery.ui.monitor;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.StringTokenizer;
+
 import brewery.BreweryFactory;
 import brewery.ConsoleCommand;
+import brewery.PID;
 import brewery.SensorReply;
 
 /**
@@ -16,19 +21,22 @@ public final class ConsoleParser {
 		READY, TOKEN, REPLY, COMMAND;
 	}
 
-	private final ConsoleParserEventListener listener;
+	private List<ConsoleParserEventListener> listeners = new LinkedList<>();
 
 	private State state = State.READY;
 
 	private final StringBuilder buf = new StringBuilder();
 
-	public ConsoleParser(final ConsoleParserEventListener listener) {
+	/**
+	 * 
+	 */
+	public ConsoleParser() {
 		super();
-		this.listener = listener;
 	}
 
 	public void parse(final String cmd) {
-		//System.out.println(cmd);
+		for (ConsoleParserEventListener listener : listeners)
+			listener.onInput(cmd);
 		for (int i = 0, len = cmd.length(); i < len; i++) {
 			final char c = cmd.charAt(i);
 
@@ -63,9 +71,37 @@ public final class ConsoleParser {
 								.createSensorReply();
 						reply.setName(name);
 						if (arg != null) {
-							reply.setTemperature(Double.parseDouble(arg));
+							StringTokenizer t = new StringTokenizer(arg);
+							if(t.countTokens() == 2) {
+							reply.setId(t.nextToken());
+							reply.setTemperature(Double.parseDouble(t.nextToken()));
+							}
+							else {
+								System.err.println("Wrong sensor token count: " + cmd);
+							}
 						}
-						listener.onSensorReply(reply);
+						for (ConsoleParserEventListener listener : listeners)
+							listener.onSensorReply(reply);
+						break;
+					case "pid":
+						if(arg != null) {
+							StringTokenizer t = new StringTokenizer(arg);
+							if(t.countTokens() == 3) {
+								double kP = Double.parseDouble(t.nextToken());
+								double kI = Double.parseDouble(t.nextToken());
+								double kD = Double.parseDouble(t.nextToken());
+								final PID pid = BreweryFactory.eINSTANCE.createPID();
+								pid.setP((int) kP);
+								pid.setI((int) kI);
+								pid.setD((int) kD);
+								
+								for (ConsoleParserEventListener listener : listeners)
+									listener.onPIDReply(pid);
+							}
+							else {
+								System.err.println("Wrong sensor token count: " + cmd);
+							}
+						}
 						break;
 					}
 					buf.delete(0, buf.length());
@@ -87,7 +123,8 @@ public final class ConsoleParser {
 					}
 					command.setName(buf.toString());
 					buf.delete(0, buf.length());
-					listener.onCommand(command);
+					for (ConsoleParserEventListener listener : listeners)
+						listener.onCommand(command);
 				} else {
 					buf.append(c);
 				}
@@ -95,6 +132,12 @@ public final class ConsoleParser {
 			default:
 				System.out.println(c);
 			}
+		}
+	}
+
+	public void addListener(ConsoleParserEventListener listener) {
+		if(listeners != null) {
+			listeners.add(listener);
 		}
 	}
 

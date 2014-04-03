@@ -9,10 +9,23 @@
       <genEnumLiterals ecoreEnumLiteral="brewery.ecore#//TemperatureUnit/Celsius"/>
       <genEnumLiterals ecoreEnumLiteral="brewery.ecore#//TemperatureUnit/Farenheit"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="brewery.ecore#//Command">
+      <genEnumLiterals ecoreEnumLiteral="brewery.ecore#//Command/sensor"/>
+      <genEnumLiterals ecoreEnumLiteral="brewery.ecore#//Command/setpoint"/>
+      <genEnumLiterals ecoreEnumLiteral="brewery.ecore#//Command/p"/>
+      <genEnumLiterals ecoreEnumLiteral="brewery.ecore#//Command/i"/>
+      <genEnumLiterals ecoreEnumLiteral="brewery.ecore#//Command/d"/>
+      <genEnumLiterals ecoreEnumLiteral="brewery.ecore#//Command/pid"/>
+    </genEnums>
     <genDataTypes ecoreDataType="brewery.ecore#//CommPortIdentifier"/>
     <genDataTypes ecoreDataType="brewery.ecore#//PortInUseException"/>
     <genDataTypes ecoreDataType="brewery.ecore#//SerialPort"/>
     <genDataTypes ecoreDataType="brewery.ecore#//UnsupportedCommOperationException"/>
+    <genDataTypes ecoreDataType="brewery.ecore#//IOException"/>
+    <genDataTypes ecoreDataType="brewery.ecore#//Writer"/>
+    <genDataTypes ecoreDataType="brewery.ecore#//Reader"/>
+    <genDataTypes ecoreDataType="brewery.ecore#//StringBuilder"/>
+    <genDataTypes ecoreDataType="brewery.ecore#//IEventBroker"/>
     <genClasses ecoreClass="brewery.ecore#//Yeast">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//Yeast/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//Yeast/flocculation"/>
@@ -45,6 +58,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference brewery.ecore#//MashSchedule/steps"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//MashSchedule/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//MashSchedule/totalTime"/>
+      <genOperations ecoreOperation="brewery.ecore#//MashSchedule/complete">
+        <genParameters ecoreParameter="brewery.ecore#//MashSchedule/complete/step"/>
+      </genOperations>
+      <genOperations ecoreOperation="brewery.ecore#//MashSchedule/next"/>
+      <genOperations ecoreOperation="brewery.ecore#//MashSchedule/hasNext"/>
     </genClasses>
     <genClasses ecoreClass="brewery.ecore#//Sensor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//Sensor/value"/>
@@ -62,16 +80,52 @@
     </genClasses>
     <genClasses ecoreClass="brewery.ecore#//SensorReply">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//SensorReply/temperature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//SensorReply/id"/>
     </genClasses>
     <genClasses ecoreClass="brewery.ecore#//ArduinoController">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//ArduinoController/writer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//ArduinoController/reader"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//ArduinoController/currentPort"/>
       <genOperations ecoreOperation="brewery.ecore#//ArduinoController/scan"/>
-      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/select">
-        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/select/portIdentifier"/>
-      </genOperations>
       <genOperations ecoreOperation="brewery.ecore#//ArduinoController/configure">
         <genParameters ecoreParameter="brewery.ecore#//ArduinoController/configure/dataRate"/>
         <genParameters ecoreParameter="brewery.ecore#//ArduinoController/configure/port"/>
       </genOperations>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/start">
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/start/serialPortName"/>
+      </genOperations>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/sendSensorCommand"/>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/sendSetpointCommand">
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/sendSetpointCommand/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/sendSensorPCommand">
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/sendSensorPCommand/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/sendSensorICommand">
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/sendSensorICommand/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/sendSensorDCommand">
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/sendSensorDCommand/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/addListener">
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/addListener/listener"/>
+      </genOperations>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/setEventBroker">
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/setEventBroker/eventBroker"/>
+      </genOperations>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/sendPIDCommand"/>
+      <genOperations ecoreOperation="brewery.ecore#//ArduinoController/sendTuneCommand">
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/sendTuneCommand/p"/>
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/sendTuneCommand/i"/>
+        <genParameters ecoreParameter="brewery.ecore#//ArduinoController/sendTuneCommand/d"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="brewery.ecore#//SerialPortEventListener"/>
+    <genClasses image="false" ecoreClass="brewery.ecore#//ConsoleParserEventListener"/>
+    <genClasses ecoreClass="brewery.ecore#//PID">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//PID/p"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//PID/i"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brewery.ecore#//PID/d"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

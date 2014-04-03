@@ -7,6 +7,8 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
 import gnu.io.UnsupportedCommOperationException;
+import java.io.IOException;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -85,6 +87,26 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Command createCommandFromString(EDataType eDataType, String initialValue) {
+		Command result = Command.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCommandToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CommPortIdentifier createCommPortIdentifierFromString(EDataType eDataType, String initialValue) {
 		return (CommPortIdentifier)super.createFromString(eDataType, initialValue);
 	}
@@ -153,6 +175,60 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IOException createIOExceptionFromString(EDataType eDataType, String initialValue) {
+		return (IOException)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertIOExceptionToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StringBuilder createStringBuilderFromString(EDataType eDataType, String initialValue) {
+		return (StringBuilder)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertStringBuilderToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IEventBroker createIEventBrokerFromString(EDataType eDataType, String initialValue) {
+		return (IEventBroker)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertIEventBrokerToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -161,6 +237,8 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 		switch (eDataType.getClassifierID()) {
 			case BreweryPackage.TEMPERATURE_UNIT:
 				return convertTemperatureUnitToString(eDataType, instanceValue);
+			case BreweryPackage.COMMAND:
+				return convertCommandToString(eDataType, instanceValue);
 			case BreweryPackage.COMM_PORT_IDENTIFIER:
 				return convertCommPortIdentifierToString(eDataType, instanceValue);
 			case BreweryPackage.PORT_IN_USE_EXCEPTION:
@@ -169,6 +247,12 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 				return convertSerialPortToString(eDataType, instanceValue);
 			case BreweryPackage.UNSUPPORTED_COMM_OPERATION_EXCEPTION:
 				return convertUnsupportedCommOperationExceptionToString(eDataType, instanceValue);
+			case BreweryPackage.IO_EXCEPTION:
+				return convertIOExceptionToString(eDataType, instanceValue);
+			case BreweryPackage.STRING_BUILDER:
+				return convertStringBuilderToString(eDataType, instanceValue);
+			case BreweryPackage.IEVENT_BROKER:
+				return convertIEventBrokerToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -192,6 +276,7 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 			case BreweryPackage.CONSOLE_COMMAND: return createConsoleCommand();
 			case BreweryPackage.SENSOR_REPLY: return createSensorReply();
 			case BreweryPackage.ARDUINO_CONTROLLER: return createArduinoController();
+			case BreweryPackage.PID: return createPID();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -226,6 +311,8 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 		switch (eDataType.getClassifierID()) {
 			case BreweryPackage.TEMPERATURE_UNIT:
 				return createTemperatureUnitFromString(eDataType, initialValue);
+			case BreweryPackage.COMMAND:
+				return createCommandFromString(eDataType, initialValue);
 			case BreweryPackage.COMM_PORT_IDENTIFIER:
 				return createCommPortIdentifierFromString(eDataType, initialValue);
 			case BreweryPackage.PORT_IN_USE_EXCEPTION:
@@ -234,6 +321,12 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 				return createSerialPortFromString(eDataType, initialValue);
 			case BreweryPackage.UNSUPPORTED_COMM_OPERATION_EXCEPTION:
 				return createUnsupportedCommOperationExceptionFromString(eDataType, initialValue);
+			case BreweryPackage.IO_EXCEPTION:
+				return createIOExceptionFromString(eDataType, initialValue);
+			case BreweryPackage.STRING_BUILDER:
+				return createStringBuilderFromString(eDataType, initialValue);
+			case BreweryPackage.IEVENT_BROKER:
+				return createIEventBrokerFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -307,6 +400,16 @@ public class BreweryFactoryImpl extends EFactoryImpl implements BreweryFactory {
 	public ArduinoController createArduinoController() {
 		ArduinoControllerImpl arduinoController = new ArduinoControllerImpl();
 		return arduinoController;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PID createPID() {
+		PIDImpl pid = new PIDImpl();
+		return pid;
 	}
 
 	/**

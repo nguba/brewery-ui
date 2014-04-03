@@ -8,5 +8,5 @@ package brewery.ui.parts;
  * 
  */
 public enum MashPartCommand {
-	START, STOP, PAUSE;
+	START, STOP, PAUSE, RUNNING;
 }

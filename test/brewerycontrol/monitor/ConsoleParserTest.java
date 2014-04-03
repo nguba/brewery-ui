@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import brewery.ConsoleCommand;
 import brewery.ConsoleReply;
+import brewery.PID;
 import brewery.SensorReply;
 import brewery.ui.monitor.ConsoleParser;
 import brewery.ui.monitor.ConsoleParserEventListener;
@@ -59,7 +60,8 @@ public class ConsoleParserTest implements ConsoleParserEventListener {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		parser = new ConsoleParser(this);
+		parser = new ConsoleParser();
+		parser.addListener(this);
 	}
 
 	/**
@@ -99,7 +101,7 @@ public class ConsoleParserTest implements ConsoleParserEventListener {
 
 	@Test
 	public void testParseSuccessiveCommandsAndReply() {
-		final String cmd = "[setpoint 22.00]\n[sensor]\n[@sensor 33.00]";
+		final String cmd = "[setpoint 22.00]\n[sensor]\n[@sensor ABCD 33.00]";
 		parser.parse(cmd);
 		Assert.assertNotNull(cmdResult);
 		Assert.assertEquals(Double.valueOf("33.00").doubleValue(),
@@ -108,9 +110,26 @@ public class ConsoleParserTest implements ConsoleParserEventListener {
 
 	@Test
 	public void testReply() {
-		final String cmd = "[@sensor 22.00]";
+		final String cmd = "[@sensor AEDDE 22.00]";
 		parser.parse(cmd);
 		Assert.assertEquals(Double.valueOf("22.00").doubleValue(),
 				((SensorReply) reply).getTemperature(), 0);
+	}
+
+	@Test
+	public void testPIDReply() {
+		final String cmd = "[@pid 111.00 222.00 333.00]";
+		parser.parse(cmd);
+		System.out.println(reply);
+	}
+	@Override
+	public void onInput(String cmd) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPIDReply(PID pid) {
+		reply = pid;
 	}
 }

@@ -99,8 +99,9 @@ public class MashManager {
 			step.setRiseTime(now - timer);
 			long totalTime = now - startTime;
 			schedule.setTotalTime(totalTime);
-			if (listener != null)
+			if (listener != null) {
 				listener.scheduleCompleteEvent(schedule);
+			}
 			break;
 		case REST:
 			long lapsed = now - timer;

@@ -16,6 +16,7 @@ public final class SensorEventHandler extends Job {
 	 */
 	private final MashPart mashPart;
 	private final Sensor sensor;
+	private final Calendar calendar = Calendar.getInstance();
 
 	public SensorEventHandler(final MashPart mashPart, final String name,
 			final Sensor sensor) {
@@ -36,12 +37,13 @@ public final class SensorEventHandler extends Job {
 			@Override
 			public void run() {
 				final double value = sensor.getValue();
-				System.out.println(value);
 				mashPart.getGaugeFigure().setValue(value);
 				mashPart.getProvider().setCurrentYData(value);
-				mashPart.getTimerJob().setCurrentTemp(value);
-				mashPart.getCalendar().add(Calendar.HOUR, 1);
-				final long newValue = mashPart.getCalendar().getTimeInMillis() / 1000 / 60;
+				MashTimerJob timerJob = mashPart.getTimerJob();
+				if (timerJob != null)
+					timerJob.setCurrentTemp(value);
+				calendar.add(Calendar.HOUR, 1);
+				final long newValue = calendar.getTimeInMillis() / 1000 / 60;
 				mashPart.getProvider().setCurrentXData(newValue);
 			}
 		});

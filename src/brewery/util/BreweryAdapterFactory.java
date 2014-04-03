@@ -3,6 +3,8 @@
 package brewery.util;
 
 import brewery.*;
+import brewery.ui.monitor.ConsoleParserEventListener;
+import gnu.io.SerialPortEventListener;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -89,6 +91,18 @@ public class BreweryAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseArduinoController(ArduinoController object) {
 				return createArduinoControllerAdapter();
+			}
+			@Override
+			public Adapter caseSerialPortEventListener(SerialPortEventListener object) {
+				return createSerialPortEventListenerAdapter();
+			}
+			@Override
+			public Adapter caseConsoleParserEventListener(ConsoleParserEventListener object) {
+				return createConsoleParserEventListenerAdapter();
+			}
+			@Override
+			public Adapter casePID(PID object) {
+				return createPIDAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -275,6 +289,48 @@ public class BreweryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createArduinoControllerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gnu.io.SerialPortEventListener <em>Serial Port Event Listener</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gnu.io.SerialPortEventListener
+	 * @generated
+	 */
+	public Adapter createSerialPortEventListenerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link brewery.ui.monitor.ConsoleParserEventListener <em>Console Parser Event Listener</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see brewery.ui.monitor.ConsoleParserEventListener
+	 * @generated
+	 */
+	public Adapter createConsoleParserEventListenerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link brewery.PID <em>PID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see brewery.PID
+	 * @generated
+	 */
+	public Adapter createPIDAdapter() {
 		return null;
 	}
 

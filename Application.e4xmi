@@ -5,11 +5,9 @@
       <children xsi:type="advanced:Perspective" xmi:id="_1VBMeJk2EeO3BfkAMF08ng">
         <children xsi:type="basic:PartSashContainer" xmi:id="_1VBMeZk2EeO3BfkAMF08ng">
           <children xsi:type="basic:PartStack" xmi:id="_1VBMepk2EeO3BfkAMF08ng">
-            <children xsi:type="basic:Part" xmi:id="_9c5uEJopEeOprfHuY1tYSQ" elementId="brewery-ui.part.1" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.MashPart" label="Mash Schedule"/>
-            <children xsi:type="basic:Part" xmi:id="_I2a_YJlLEeO3BfkAMF08ng" elementId="brewery-ui.part.0" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.FermentationPart" label="Fermentor 1"/>
-            <children xsi:type="basic:Part" xmi:id="_Kq0g4JoqEeOprfHuY1tYSQ" elementId="brewery-ui.part.2" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.FermentationPart" label="Fermentor 2"/>
-            <children xsi:type="basic:Part" xmi:id="_M-_i8JoqEeOprfHuY1tYSQ" elementId="brewery-ui.part.3" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.FermentationPart" label="Fermentor 3"/>
-            <children xsi:type="basic:Part" xmi:id="_PMLzQJoqEeOprfHuY1tYSQ" elementId="brewery-ui.part.4" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.FermentationPart" label="Fermentor 4"/>
+            <children xsi:type="basic:Part" xmi:id="_9c5uEJopEeOprfHuY1tYSQ" elementId="brewery-ui.part.mash" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.MashPart" label="Mash Schedule"/>
+            <children xsi:type="basic:Part" xmi:id="_8mp5IKwdEeOV1Ooj1t2EhA" elementId="brewery-ui.part.0" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.ConsolePart" label="Console"/>
+            <children xsi:type="basic:InputPart" xmi:id="_ncUrMLM1EeOHKsDJ-zDGCg" elementId="brewery-ui.inputpart.0" contributionURI="bundleclass://brewery-ui/brewery.ui.parts.Console"/>
           </children>
         </children>
       </children>

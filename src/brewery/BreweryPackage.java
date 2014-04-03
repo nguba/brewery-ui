@@ -249,6 +249,30 @@ public interface BreweryPackage extends EPackage {
 		EAttribute MASH_SCHEDULE__TOTAL_TIME = eINSTANCE.getMashSchedule_TotalTime();
 
 		/**
+		 * The meta object literal for the '<em><b>Complete</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MASH_SCHEDULE___COMPLETE__MASHSTEP = eINSTANCE.getMashSchedule__Complete__MashStep();
+
+		/**
+		 * The meta object literal for the '<em><b>Next</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MASH_SCHEDULE___NEXT = eINSTANCE.getMashSchedule__Next();
+
+		/**
+		 * The meta object literal for the '<em><b>Has Next</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MASH_SCHEDULE___HAS_NEXT = eINSTANCE.getMashSchedule__HasNext();
+
+		/**
 		 * The meta object literal for the '{@link brewery.impl.SensorImpl
 		 * <em>Sensor</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
@@ -346,6 +370,14 @@ public interface BreweryPackage extends EPackage {
 		EAttribute SENSOR_REPLY__TEMPERATURE = eINSTANCE.getSensorReply_Temperature();
 
 		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SENSOR_REPLY__ID = eINSTANCE.getSensorReply_Id();
+
+		/**
 		 * The meta object literal for the '{@link brewery.impl.ArduinoControllerImpl <em>Arduino Controller</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -356,20 +388,36 @@ public interface BreweryPackage extends EPackage {
 		EClass ARDUINO_CONTROLLER = eINSTANCE.getArduinoController();
 
 		/**
+		 * The meta object literal for the '<em><b>Writer</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARDUINO_CONTROLLER__WRITER = eINSTANCE.getArduinoController_Writer();
+
+		/**
+		 * The meta object literal for the '<em><b>Reader</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARDUINO_CONTROLLER__READER = eINSTANCE.getArduinoController_Reader();
+
+		/**
+		 * The meta object literal for the '<em><b>Current Port</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARDUINO_CONTROLLER__CURRENT_PORT = eINSTANCE.getArduinoController_CurrentPort();
+
+		/**
 		 * The meta object literal for the '<em><b>Scan</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation ARDUINO_CONTROLLER___SCAN = eINSTANCE.getArduinoController__Scan();
-
-		/**
-		 * The meta object literal for the '<em><b>Select</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ARDUINO_CONTROLLER___SELECT__COMMPORTIDENTIFIER = eINSTANCE.getArduinoController__Select__CommPortIdentifier();
 
 		/**
 		 * The meta object literal for the '<em><b>Configure</b></em>' operation.
@@ -380,6 +428,140 @@ public interface BreweryPackage extends EPackage {
 		EOperation ARDUINO_CONTROLLER___CONFIGURE__INT_SERIALPORT = eINSTANCE.getArduinoController__Configure__int_SerialPort();
 
 		/**
+		 * The meta object literal for the '<em><b>Start</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___START__STRING = eINSTANCE.getArduinoController__Start__String();
+
+		/**
+		 * The meta object literal for the '<em><b>Send Sensor Command</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___SEND_SENSOR_COMMAND = eINSTANCE.getArduinoController__SendSensorCommand();
+
+		/**
+		 * The meta object literal for the '<em><b>Send Setpoint Command</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___SEND_SETPOINT_COMMAND__DOUBLE = eINSTANCE.getArduinoController__SendSetpointCommand__double();
+
+		/**
+		 * The meta object literal for the '<em><b>Send Sensor PCommand</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___SEND_SENSOR_PCOMMAND__INT = eINSTANCE.getArduinoController__SendSensorPCommand__int();
+
+		/**
+		 * The meta object literal for the '<em><b>Send Sensor ICommand</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___SEND_SENSOR_ICOMMAND__INT = eINSTANCE.getArduinoController__SendSensorICommand__int();
+
+		/**
+		 * The meta object literal for the '<em><b>Send Sensor DCommand</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___SEND_SENSOR_DCOMMAND__INT = eINSTANCE.getArduinoController__SendSensorDCommand__int();
+
+		/**
+		 * The meta object literal for the '<em><b>Add Listener</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___ADD_LISTENER__CONSOLEPARSEREVENTLISTENER = eINSTANCE.getArduinoController__AddListener__ConsoleParserEventListener();
+
+		/**
+		 * The meta object literal for the '<em><b>Set Event Broker</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___SET_EVENT_BROKER__IEVENTBROKER = eINSTANCE.getArduinoController__SetEventBroker__IEventBroker();
+
+		/**
+		 * The meta object literal for the '<em><b>Send PID Command</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___SEND_PID_COMMAND = eINSTANCE.getArduinoController__SendPIDCommand();
+
+		/**
+		 * The meta object literal for the '<em><b>Send Tune Command</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARDUINO_CONTROLLER___SEND_TUNE_COMMAND__INT_INT_INT = eINSTANCE.getArduinoController__SendTuneCommand__int_int_int();
+
+		/**
+		 * The meta object literal for the '{@link gnu.io.SerialPortEventListener <em>Serial Port Event Listener</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gnu.io.SerialPortEventListener
+		 * @see brewery.impl.BreweryPackageImpl#getSerialPortEventListener()
+		 * @generated
+		 */
+		EClass SERIAL_PORT_EVENT_LISTENER = eINSTANCE.getSerialPortEventListener();
+
+		/**
+		 * The meta object literal for the '{@link brewery.ui.monitor.ConsoleParserEventListener <em>Console Parser Event Listener</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see brewery.ui.monitor.ConsoleParserEventListener
+		 * @see brewery.impl.BreweryPackageImpl#getConsoleParserEventListener()
+		 * @generated
+		 */
+		EClass CONSOLE_PARSER_EVENT_LISTENER = eINSTANCE.getConsoleParserEventListener();
+
+		/**
+		 * The meta object literal for the '{@link brewery.impl.PIDImpl <em>PID</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see brewery.impl.PIDImpl
+		 * @see brewery.impl.BreweryPackageImpl#getPID()
+		 * @generated
+		 */
+		EClass PID = eINSTANCE.getPID();
+
+		/**
+		 * The meta object literal for the '<em><b>P</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PID__P = eINSTANCE.getPID_P();
+
+		/**
+		 * The meta object literal for the '<em><b>I</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PID__I = eINSTANCE.getPID_I();
+
+		/**
+		 * The meta object literal for the '<em><b>D</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PID__D = eINSTANCE.getPID_D();
+
+		/**
 		 * The meta object literal for the '{@link brewery.TemperatureUnit <em>Temperature Unit</em>}' enum.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
@@ -388,6 +570,16 @@ public interface BreweryPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TEMPERATURE_UNIT = eINSTANCE.getTemperatureUnit();
+
+		/**
+		 * The meta object literal for the '{@link brewery.Command <em>Command</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see brewery.Command
+		 * @see brewery.impl.BreweryPackageImpl#getCommand()
+		 * @generated
+		 */
+		EEnum COMMAND = eINSTANCE.getCommand();
 
 		/**
 		 * The meta object literal for the '<em>Comm Port Identifier</em>' data type.
@@ -428,6 +620,56 @@ public interface BreweryPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType UNSUPPORTED_COMM_OPERATION_EXCEPTION = eINSTANCE.getUnsupportedCommOperationException();
+
+		/**
+		 * The meta object literal for the '<em>IO Exception</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.io.IOException
+		 * @see brewery.impl.BreweryPackageImpl#getIOException()
+		 * @generated
+		 */
+		EDataType IO_EXCEPTION = eINSTANCE.getIOException();
+
+		/**
+		 * The meta object literal for the '<em>Writer</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.io.BufferedWriter
+		 * @see brewery.impl.BreweryPackageImpl#getWriter()
+		 * @generated
+		 */
+		EDataType WRITER = eINSTANCE.getWriter();
+
+		/**
+		 * The meta object literal for the '<em>Reader</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.io.BufferedReader
+		 * @see brewery.impl.BreweryPackageImpl#getReader()
+		 * @generated
+		 */
+		EDataType READER = eINSTANCE.getReader();
+
+		/**
+		 * The meta object literal for the '<em>String Builder</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.StringBuilder
+		 * @see brewery.impl.BreweryPackageImpl#getStringBuilder()
+		 * @generated
+		 */
+		EDataType STRING_BUILDER = eINSTANCE.getStringBuilder();
+
+		/**
+		 * The meta object literal for the '<em>IEvent Broker</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.e4.core.services.events.IEventBroker
+		 * @see brewery.impl.BreweryPackageImpl#getIEventBroker()
+		 * @generated
+		 */
+		EDataType IEVENT_BROKER = eINSTANCE.getIEventBroker();
 
 	}
 
@@ -801,13 +1043,40 @@ public interface BreweryPackage extends EPackage {
 	int MASH_SCHEDULE_FEATURE_COUNT = 3;
 
 	/**
+	 * The operation id for the '<em>Complete</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MASH_SCHEDULE___COMPLETE__MASHSTEP = 0;
+
+	/**
+	 * The operation id for the '<em>Next</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MASH_SCHEDULE___NEXT = 1;
+
+	/**
+	 * The operation id for the '<em>Has Next</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MASH_SCHEDULE___HAS_NEXT = 2;
+
+	/**
 	 * The number of operations of the '<em>Mash Schedule</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int MASH_SCHEDULE_OPERATION_COUNT = 0;
+	int MASH_SCHEDULE_OPERATION_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link brewery.impl.SensorImpl <em>Sensor</em>}' class.
@@ -1002,12 +1271,21 @@ public interface BreweryPackage extends EPackage {
 	int SENSOR_REPLY__TEMPERATURE = CONSOLE_REPLY_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_REPLY__ID = CONSOLE_REPLY_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Sensor Reply</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SENSOR_REPLY_FEATURE_COUNT = CONSOLE_REPLY_FEATURE_COUNT + 1;
+	int SENSOR_REPLY_FEATURE_COUNT = CONSOLE_REPLY_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Sensor Reply</em>' class. <!--
@@ -1017,6 +1295,34 @@ public interface BreweryPackage extends EPackage {
 	 * @ordered
 	 */
 	int SENSOR_REPLY_OPERATION_COUNT = CONSOLE_REPLY_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link gnu.io.SerialPortEventListener <em>Serial Port Event Listener</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gnu.io.SerialPortEventListener
+	 * @see brewery.impl.BreweryPackageImpl#getSerialPortEventListener()
+	 * @generated
+	 */
+	int SERIAL_PORT_EVENT_LISTENER = 12;
+
+	/**
+	 * The number of structural features of the '<em>Serial Port Event Listener</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERIAL_PORT_EVENT_LISTENER_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Serial Port Event Listener</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link brewery.impl.ArduinoControllerImpl <em>Arduino Controller</em>}' class.
@@ -1029,13 +1335,40 @@ public interface BreweryPackage extends EPackage {
 	int ARDUINO_CONTROLLER = 11;
 
 	/**
+	 * The feature id for the '<em><b>Writer</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER__WRITER = SERIAL_PORT_EVENT_LISTENER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Reader</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER__READER = SERIAL_PORT_EVENT_LISTENER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Current Port</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER__CURRENT_PORT = SERIAL_PORT_EVENT_LISTENER_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Arduino Controller</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARDUINO_CONTROLLER_FEATURE_COUNT = 0;
+	int ARDUINO_CONTROLLER_FEATURE_COUNT = SERIAL_PORT_EVENT_LISTENER_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Scan</em>' operation.
@@ -1044,16 +1377,7 @@ public interface BreweryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARDUINO_CONTROLLER___SCAN = 0;
-
-	/**
-	 * The operation id for the '<em>Select</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARDUINO_CONTROLLER___SELECT__COMMPORTIDENTIFIER = 1;
+	int ARDUINO_CONTROLLER___SCAN = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Configure</em>' operation.
@@ -1062,7 +1386,97 @@ public interface BreweryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARDUINO_CONTROLLER___CONFIGURE__INT_SERIALPORT = 2;
+	int ARDUINO_CONTROLLER___CONFIGURE__INT_SERIALPORT = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Start</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___START__STRING = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Send Sensor Command</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___SEND_SENSOR_COMMAND = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Send Setpoint Command</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___SEND_SETPOINT_COMMAND__DOUBLE = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 4;
+
+	/**
+	 * The operation id for the '<em>Send Sensor PCommand</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___SEND_SENSOR_PCOMMAND__INT = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>Send Sensor ICommand</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___SEND_SENSOR_ICOMMAND__INT = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 6;
+
+	/**
+	 * The operation id for the '<em>Send Sensor DCommand</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___SEND_SENSOR_DCOMMAND__INT = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 7;
+
+	/**
+	 * The operation id for the '<em>Add Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___ADD_LISTENER__CONSOLEPARSEREVENTLISTENER = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 8;
+
+	/**
+	 * The operation id for the '<em>Set Event Broker</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___SET_EVENT_BROKER__IEVENTBROKER = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 9;
+
+	/**
+	 * The operation id for the '<em>Send PID Command</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___SEND_PID_COMMAND = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 10;
+
+	/**
+	 * The operation id for the '<em>Send Tune Command</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARDUINO_CONTROLLER___SEND_TUNE_COMMAND__INT_INT_INT = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 11;
 
 	/**
 	 * The number of operations of the '<em>Arduino Controller</em>' class.
@@ -1071,7 +1485,99 @@ public interface BreweryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARDUINO_CONTROLLER_OPERATION_COUNT = 3;
+	int ARDUINO_CONTROLLER_OPERATION_COUNT = SERIAL_PORT_EVENT_LISTENER_OPERATION_COUNT + 12;
+
+	/**
+	 * The meta object id for the '{@link brewery.ui.monitor.ConsoleParserEventListener <em>Console Parser Event Listener</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see brewery.ui.monitor.ConsoleParserEventListener
+	 * @see brewery.impl.BreweryPackageImpl#getConsoleParserEventListener()
+	 * @generated
+	 */
+	int CONSOLE_PARSER_EVENT_LISTENER = 13;
+
+	/**
+	 * The number of structural features of the '<em>Console Parser Event Listener</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSOLE_PARSER_EVENT_LISTENER_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Console Parser Event Listener</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSOLE_PARSER_EVENT_LISTENER_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link brewery.impl.PIDImpl <em>PID</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see brewery.impl.PIDImpl
+	 * @see brewery.impl.BreweryPackageImpl#getPID()
+	 * @generated
+	 */
+	int PID = 14;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PID__NAME = CONSOLE_REPLY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>P</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PID__P = CONSOLE_REPLY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>I</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PID__I = CONSOLE_REPLY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>D</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PID__D = CONSOLE_REPLY_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>PID</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PID_FEATURE_COUNT = CONSOLE_REPLY_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>PID</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PID_OPERATION_COUNT = CONSOLE_REPLY_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link brewery.TemperatureUnit <em>Temperature Unit</em>}' enum.
@@ -1081,7 +1587,17 @@ public interface BreweryPackage extends EPackage {
 	 * @see brewery.impl.BreweryPackageImpl#getTemperatureUnit()
 	 * @generated
 	 */
-	int TEMPERATURE_UNIT = 12;
+	int TEMPERATURE_UNIT = 15;
+
+	/**
+	 * The meta object id for the '{@link brewery.Command <em>Command</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see brewery.Command
+	 * @see brewery.impl.BreweryPackageImpl#getCommand()
+	 * @generated
+	 */
+	int COMMAND = 16;
 
 	/**
 	 * The meta object id for the '<em>Comm Port Identifier</em>' data type.
@@ -1091,7 +1607,7 @@ public interface BreweryPackage extends EPackage {
 	 * @see brewery.impl.BreweryPackageImpl#getCommPortIdentifier()
 	 * @generated
 	 */
-	int COMM_PORT_IDENTIFIER = 13;
+	int COMM_PORT_IDENTIFIER = 17;
 
 	/**
 	 * The meta object id for the '<em>Port In Use Exception</em>' data type.
@@ -1101,7 +1617,7 @@ public interface BreweryPackage extends EPackage {
 	 * @see brewery.impl.BreweryPackageImpl#getPortInUseException()
 	 * @generated
 	 */
-	int PORT_IN_USE_EXCEPTION = 14;
+	int PORT_IN_USE_EXCEPTION = 18;
 
 	/**
 	 * The meta object id for the '<em>Serial Port</em>' data type.
@@ -1111,7 +1627,7 @@ public interface BreweryPackage extends EPackage {
 	 * @see brewery.impl.BreweryPackageImpl#getSerialPort()
 	 * @generated
 	 */
-	int SERIAL_PORT = 15;
+	int SERIAL_PORT = 19;
 
 	/**
 	 * The meta object id for the '<em>Unsupported Comm Operation Exception</em>' data type.
@@ -1121,7 +1637,57 @@ public interface BreweryPackage extends EPackage {
 	 * @see brewery.impl.BreweryPackageImpl#getUnsupportedCommOperationException()
 	 * @generated
 	 */
-	int UNSUPPORTED_COMM_OPERATION_EXCEPTION = 16;
+	int UNSUPPORTED_COMM_OPERATION_EXCEPTION = 20;
+
+	/**
+	 * The meta object id for the '<em>IO Exception</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.io.IOException
+	 * @see brewery.impl.BreweryPackageImpl#getIOException()
+	 * @generated
+	 */
+	int IO_EXCEPTION = 21;
+
+	/**
+	 * The meta object id for the '<em>Writer</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.io.BufferedWriter
+	 * @see brewery.impl.BreweryPackageImpl#getWriter()
+	 * @generated
+	 */
+	int WRITER = 22;
+
+	/**
+	 * The meta object id for the '<em>Reader</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.io.BufferedReader
+	 * @see brewery.impl.BreweryPackageImpl#getReader()
+	 * @generated
+	 */
+	int READER = 23;
+
+	/**
+	 * The meta object id for the '<em>String Builder</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.StringBuilder
+	 * @see brewery.impl.BreweryPackageImpl#getStringBuilder()
+	 * @generated
+	 */
+	int STRING_BUILDER = 24;
+
+	/**
+	 * The meta object id for the '<em>IEvent Broker</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.e4.core.services.events.IEventBroker
+	 * @see brewery.impl.BreweryPackageImpl#getIEventBroker()
+	 * @generated
+	 */
+	int IEVENT_BROKER = 25;
 
 	/**
 	 * Returns the factory that creates the instances of the model. <!--
@@ -1292,6 +1858,36 @@ public interface BreweryPackage extends EPackage {
 	EAttribute getMashSchedule_TotalTime();
 
 	/**
+	 * Returns the meta object for the '{@link brewery.MashSchedule#complete(brewery.MashStep) <em>Complete</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Complete</em>' operation.
+	 * @see brewery.MashSchedule#complete(brewery.MashStep)
+	 * @generated
+	 */
+	EOperation getMashSchedule__Complete__MashStep();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.MashSchedule#next() <em>Next</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Next</em>' operation.
+	 * @see brewery.MashSchedule#next()
+	 * @generated
+	 */
+	EOperation getMashSchedule__Next();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.MashSchedule#hasNext() <em>Has Next</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Has Next</em>' operation.
+	 * @see brewery.MashSchedule#hasNext()
+	 * @generated
+	 */
+	EOperation getMashSchedule__HasNext();
+
+	/**
 	 * Returns the meta object for the containment reference list '
 	 * {@link brewery.MashSchedule#getSteps <em>Steps</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -1443,6 +2039,17 @@ public interface BreweryPackage extends EPackage {
 	EAttribute getSensorReply_Temperature();
 
 	/**
+	 * Returns the meta object for the attribute '{@link brewery.SensorReply#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see brewery.SensorReply#getId()
+	 * @see #getSensorReply()
+	 * @generated
+	 */
+	EAttribute getSensorReply_Id();
+
+	/**
 	 * Returns the meta object for class '{@link brewery.ArduinoController <em>Arduino Controller</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1451,6 +2058,39 @@ public interface BreweryPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getArduinoController();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.ArduinoController#getWriter <em>Writer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Writer</em>'.
+	 * @see brewery.ArduinoController#getWriter()
+	 * @see #getArduinoController()
+	 * @generated
+	 */
+	EAttribute getArduinoController_Writer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.ArduinoController#getReader <em>Reader</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reader</em>'.
+	 * @see brewery.ArduinoController#getReader()
+	 * @see #getArduinoController()
+	 * @generated
+	 */
+	EAttribute getArduinoController_Reader();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.ArduinoController#getCurrentPort <em>Current Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Current Port</em>'.
+	 * @see brewery.ArduinoController#getCurrentPort()
+	 * @see #getArduinoController()
+	 * @generated
+	 */
+	EAttribute getArduinoController_CurrentPort();
 
 	/**
 	 * Returns the meta object for the '{@link brewery.ArduinoController#scan() <em>Scan</em>}' operation.
@@ -1463,16 +2103,6 @@ public interface BreweryPackage extends EPackage {
 	EOperation getArduinoController__Scan();
 
 	/**
-	 * Returns the meta object for the '{@link brewery.ArduinoController#select(gnu.io.CommPortIdentifier) <em>Select</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Select</em>' operation.
-	 * @see brewery.ArduinoController#select(gnu.io.CommPortIdentifier)
-	 * @generated
-	 */
-	EOperation getArduinoController__Select__CommPortIdentifier();
-
-	/**
 	 * Returns the meta object for the '{@link brewery.ArduinoController#configure(int, gnu.io.SerialPort) <em>Configure</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1481,6 +2111,171 @@ public interface BreweryPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getArduinoController__Configure__int_SerialPort();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#start(java.lang.String) <em>Start</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Start</em>' operation.
+	 * @see brewery.ArduinoController#start(java.lang.String)
+	 * @generated
+	 */
+	EOperation getArduinoController__Start__String();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#sendSensorCommand() <em>Send Sensor Command</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Send Sensor Command</em>' operation.
+	 * @see brewery.ArduinoController#sendSensorCommand()
+	 * @generated
+	 */
+	EOperation getArduinoController__SendSensorCommand();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#sendSetpointCommand(double) <em>Send Setpoint Command</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Send Setpoint Command</em>' operation.
+	 * @see brewery.ArduinoController#sendSetpointCommand(double)
+	 * @generated
+	 */
+	EOperation getArduinoController__SendSetpointCommand__double();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#sendSensorPCommand(int) <em>Send Sensor PCommand</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Send Sensor PCommand</em>' operation.
+	 * @see brewery.ArduinoController#sendSensorPCommand(int)
+	 * @generated
+	 */
+	EOperation getArduinoController__SendSensorPCommand__int();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#sendSensorICommand(int) <em>Send Sensor ICommand</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Send Sensor ICommand</em>' operation.
+	 * @see brewery.ArduinoController#sendSensorICommand(int)
+	 * @generated
+	 */
+	EOperation getArduinoController__SendSensorICommand__int();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#sendSensorDCommand(int) <em>Send Sensor DCommand</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Send Sensor DCommand</em>' operation.
+	 * @see brewery.ArduinoController#sendSensorDCommand(int)
+	 * @generated
+	 */
+	EOperation getArduinoController__SendSensorDCommand__int();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#addListener(brewery.ui.monitor.ConsoleParserEventListener) <em>Add Listener</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Add Listener</em>' operation.
+	 * @see brewery.ArduinoController#addListener(brewery.ui.monitor.ConsoleParserEventListener)
+	 * @generated
+	 */
+	EOperation getArduinoController__AddListener__ConsoleParserEventListener();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#setEventBroker(org.eclipse.e4.core.services.events.IEventBroker) <em>Set Event Broker</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Set Event Broker</em>' operation.
+	 * @see brewery.ArduinoController#setEventBroker(org.eclipse.e4.core.services.events.IEventBroker)
+	 * @generated
+	 */
+	EOperation getArduinoController__SetEventBroker__IEventBroker();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#sendPIDCommand() <em>Send PID Command</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Send PID Command</em>' operation.
+	 * @see brewery.ArduinoController#sendPIDCommand()
+	 * @generated
+	 */
+	EOperation getArduinoController__SendPIDCommand();
+
+	/**
+	 * Returns the meta object for the '{@link brewery.ArduinoController#sendTuneCommand(int, int, int) <em>Send Tune Command</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Send Tune Command</em>' operation.
+	 * @see brewery.ArduinoController#sendTuneCommand(int, int, int)
+	 * @generated
+	 */
+	EOperation getArduinoController__SendTuneCommand__int_int_int();
+
+	/**
+	 * Returns the meta object for class '{@link gnu.io.SerialPortEventListener <em>Serial Port Event Listener</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Serial Port Event Listener</em>'.
+	 * @see gnu.io.SerialPortEventListener
+	 * @model instanceClass="gnu.io.SerialPortEventListener"
+	 * @generated
+	 */
+	EClass getSerialPortEventListener();
+
+	/**
+	 * Returns the meta object for class '{@link brewery.ui.monitor.ConsoleParserEventListener <em>Console Parser Event Listener</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Console Parser Event Listener</em>'.
+	 * @see brewery.ui.monitor.ConsoleParserEventListener
+	 * @model instanceClass="brewery.ui.monitor.ConsoleParserEventListener"
+	 * @generated
+	 */
+	EClass getConsoleParserEventListener();
+
+	/**
+	 * Returns the meta object for class '{@link brewery.PID <em>PID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>PID</em>'.
+	 * @see brewery.PID
+	 * @generated
+	 */
+	EClass getPID();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.PID#getP <em>P</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>P</em>'.
+	 * @see brewery.PID#getP()
+	 * @see #getPID()
+	 * @generated
+	 */
+	EAttribute getPID_P();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.PID#getI <em>I</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>I</em>'.
+	 * @see brewery.PID#getI()
+	 * @see #getPID()
+	 * @generated
+	 */
+	EAttribute getPID_I();
+
+	/**
+	 * Returns the meta object for the attribute '{@link brewery.PID#getD <em>D</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>D</em>'.
+	 * @see brewery.PID#getD()
+	 * @see #getPID()
+	 * @generated
+	 */
+	EAttribute getPID_D();
 
 	/**
 	 * Returns the meta object for class '{@link brewery.TemperatureRange
@@ -1541,6 +2336,16 @@ public interface BreweryPackage extends EPackage {
 	EEnum getTemperatureUnit();
 
 	/**
+	 * Returns the meta object for enum '{@link brewery.Command <em>Command</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Command</em>'.
+	 * @see brewery.Command
+	 * @generated
+	 */
+	EEnum getCommand();
+
+	/**
 	 * Returns the meta object for data type '{@link gnu.io.CommPortIdentifier <em>Comm Port Identifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1583,6 +2388,61 @@ public interface BreweryPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getUnsupportedCommOperationException();
+
+	/**
+	 * Returns the meta object for data type '{@link java.io.IOException <em>IO Exception</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IO Exception</em>'.
+	 * @see java.io.IOException
+	 * @model instanceClass="java.io.IOException"
+	 * @generated
+	 */
+	EDataType getIOException();
+
+	/**
+	 * Returns the meta object for data type '{@link java.io.BufferedWriter <em>Writer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Writer</em>'.
+	 * @see java.io.BufferedWriter
+	 * @model instanceClass="java.io.BufferedWriter" serializeable="false"
+	 * @generated
+	 */
+	EDataType getWriter();
+
+	/**
+	 * Returns the meta object for data type '{@link java.io.BufferedReader <em>Reader</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Reader</em>'.
+	 * @see java.io.BufferedReader
+	 * @model instanceClass="java.io.BufferedReader" serializeable="false"
+	 * @generated
+	 */
+	EDataType getReader();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.StringBuilder <em>String Builder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>String Builder</em>'.
+	 * @see java.lang.StringBuilder
+	 * @model instanceClass="java.lang.StringBuilder"
+	 * @generated
+	 */
+	EDataType getStringBuilder();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipse.e4.core.services.events.IEventBroker <em>IEvent Broker</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IEvent Broker</em>'.
+	 * @see org.eclipse.e4.core.services.events.IEventBroker
+	 * @model instanceClass="org.eclipse.e4.core.services.events.IEventBroker"
+	 * @generated
+	 */
+	EDataType getIEventBroker();
 
 	/**
 	 * Returns the meta object for class '{@link brewery.Yeast <em>Yeast</em>}'.

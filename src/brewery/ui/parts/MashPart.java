@@ -6,7 +6,9 @@ import gnu.io.UnsupportedCommOperationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -30,6 +32,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
@@ -77,6 +80,10 @@ import brewery.ui.dialog.EditMashStepDialog;
 import brewery.ui.job.MashTimerJob;
 import brewery.ui.job.SensorEventHandler;
 import brewery.ui.job.TimerEventListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.ModifyEvent;
 
 /**
  * 
@@ -223,8 +230,8 @@ public class MashPart implements TimerEventListener {
 		gl_composite.marginBottom = 5;
 		composite.setLayout(gl_composite);
 		mashGraph = new XYGraph();
-		
-		ToolbarArmedXYGraph toolbarArmedXYGraph = new ToolbarArmedXYGraph(mashGraph);
+		ToolbarArmedXYGraph toolbarArmedXYGraph = new ToolbarArmedXYGraph(
+				mashGraph);
 		// xyGraph.setTitle("History");
 		mashGraph.primaryYAxis.setRange(new Range(0, 100));
 		mashGraph.primaryYAxis.setShowMajorGrid(true);
@@ -232,32 +239,31 @@ public class MashPart implements TimerEventListener {
 		mashGraph.primaryYAxis.setAutoFormat(true);
 		mashGraph.primaryYAxis.setAutoScale(false);
 		mashGraph.primaryYAxis.setTitle("Temperature");
-		
-		mashGraph.primaryXAxis.setRange(new Range(System.currentTimeMillis(),  System.currentTimeMillis()  + (60000 * 60 * 5)));
+
+		mashGraph.primaryXAxis.setRange(new Range(System.currentTimeMillis(),
+				System.currentTimeMillis() + (60000 * 60 * 5)));
 		mashGraph.primaryXAxis.setShowMajorGrid(true);
 		mashGraph.primaryXAxis.setTitle("Time");
 		mashGraph.primaryXAxis.setDateEnabled(true);
 		mashGraph.primaryXAxis.setAutoScale(true);
 		mashGraph.primaryXAxis.setAutoScaleThreshold(1);
-		//mashGraph.primaryXAxis.setFormatPattern("k:m:s");
+		// mashGraph.primaryXAxis.setFormatPattern("k:m:s");
 		mashGraph.primaryXAxis.setTimeUnit(Calendar.MINUTE);
 		mashGraph.primaryXAxis.setAutoFormat(true);
 		mashGraph.setShowLegend(false);
-		
+
 		provider = new CircularBufferDataProvider(false);
 		provider.setPlotMode(PlotMode.LAST_N);
 		provider.setChronological(true);
 		provider.setUpdateMode(UpdateMode.X_AND_Y);
 		provider.setBufferSize(320 * 60);
-		
+
 		final Trace trace = new Trace("Temp Graph", mashGraph.primaryXAxis,
 				mashGraph.primaryYAxis, provider);
 		trace.setBaseLine(BaseLine.POSITIVE_INFINITY);
 		trace.setAntiAliasing(true);
-		//provider.setChronological(true);
+		// provider.setChronological(true);
 		mashGraph.addTrace(trace);
-
-
 
 		gaugeFigure = new GaugeFigure();
 		gaugeFigure.setBackgroundColor(XYGraphMediaFactory.getInstance()
@@ -308,7 +314,15 @@ public class MashPart implements TimerEventListener {
 		grpSchedule.setText("Schedule");
 		grpSchedule.setLayout(new GridLayout(1, false));
 
-		selectedSchedule = new Combo(grpSchedule, SWT.READ_ONLY);
+		selectedSchedule = new Combo(grpSchedule, SWT.NONE);
+		selectedSchedule.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				Combo c = (Combo)e.getSource();
+				schedule.setName(c.getText());
+				dirty.setDirty(true);
+			}
+		});
+		
 		selectedSchedule.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
 
@@ -493,6 +507,8 @@ public class MashPart implements TimerEventListener {
 				broker.send(BreweryEventTopic.MASH_SCHEDULE, schedule);
 			}
 		}
+		// don't flag the content as dirty when it's auto-loaded
+		dirty.setDirty(false);
 	}
 
 	/**
@@ -579,7 +595,9 @@ public class MashPart implements TimerEventListener {
 					}
 				} else {
 					timerLabel.setText("00:00:00");
-					mashGraph.primaryXAxis.setRange(new Range(System.currentTimeMillis(),  System.currentTimeMillis()  + (60000 * 60 * 5)));
+					mashGraph.primaryXAxis.setRange(new Range(System
+							.currentTimeMillis(), System.currentTimeMillis()
+							+ (60000 * 60 * 5)));
 					timerJob = new MashTimerJob(this, controller);
 					ContextInjectionFactory.inject(timerJob, context);
 					provider.clearTrace();
@@ -631,6 +649,22 @@ public class MashPart implements TimerEventListener {
 	@Persist
 	public void save() {
 		System.out.println("SAVING");
+		final String fileName = mainPrefs.get("schedule", null);
+		if (fileName != null) {
+			final ResourceSet resSet = new ResourceSetImpl();
+			final URI uri = URI.createFileURI(fileName);
+			Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+			Map<String, Object> m = reg.getExtensionToFactoryMap();
+			m.put("mash", new XMIResourceFactoryImpl());
+			Resource resource = resSet.createResource(uri);
+			resource.getContents().add(schedule);
+			try {
+				resource.save(Collections.EMPTY_MAP);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		dirty.setDirty(false);
 	}
 
@@ -652,16 +686,17 @@ public class MashPart implements TimerEventListener {
 			@UIEventTopic(BreweryEventTopic.MASH_STATUS) final String message) {
 		statusLabel.setText(message);
 	}
-	
+
 	/**
 	 * 
 	 * @param command
 	 */
 	@Inject
 	@Optional
-	void processSensorReply(@UIEventTopic(BreweryEventTopic.SENSOR) final SensorReply reply) {
+	void processSensorReply(
+			@UIEventTopic(BreweryEventTopic.SENSOR) final SensorReply reply) {
 		provider.setCurrentYData(reply.getTemperature());
 		provider.setCurrentYDataTimestamp(System.currentTimeMillis());
-		//provider.setCurrentXData(System.currentTimeMillis());
+		// provider.setCurrentXData(System.currentTimeMillis());
 	}
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
-<brewery:MashSchedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:brewery="http://brewery/1.0" name="default schedule">
-  <steps temperature="18" pause="60000" description="First"/>
-  <steps temperature="25" pause="60000" description="Second"/>
-  <steps temperature="30" pause="60000" description="Third"/>
+<brewery:MashSchedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:brewery="http://brewery/1.0" name="Hanghofer Weizen">
+  <steps temperature="18.0" pause="60000" description="First" riseTime="2348"/>
+  <steps temperature="25.0" pause="180000" description="Maltose Rest"/>
+  <steps temperature="30.0" pause="60000" description="Third"/>
 </brewery:MashSchedule>

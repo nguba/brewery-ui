@@ -7,10 +7,10 @@ Bundle-ClassPath: .,
  lib/RXTXcomm.jar
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: brewery,
- brewery.impl,
- brewery.ui.monitor,
- brewery.util,
+Export-Package: brewery;uses:="org.eclipse.e4.core.services.events,  org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  gnu.io,  brewery.ui.monitor",
+ brewery.impl;uses:="org.eclipse.e4.core.services.events,  brewery,  org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  gnu.io,  org.eclipse.emf.common.notify,  org.eclipse.emf.ecore.impl,  brewery.ui.monitor",
+ brewery.ui.monitor;uses:=brewery,
+ brewery.util;uses:="brewery,  org.eclipse.emf.ecore.util,  org.eclipse.emf.ecore,  org.eclipse.emf.common.notify.impl,  gnu.io,  org.eclipse.emf.common.notify,  brewery.ui.monitor",
  gnu.io
 Require-Bundle: javax.inject;bundle-version="1.0.0",
  org.eclipse.core.runtime;bundle-version="3.9.0",
@@ -31,7 +31,7 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  org.eclipse.nebula.visualization.xygraph;visibility:=reexport,
  javax.annotation,
  librxtxSerial.macosx.x86_64;bundle-version="2.2.0",
- org.junit;bundle-version="4.11.0";resolution:=optional,
+ org.junit;resolution:=optional;bundle-version="4.11.0",
  org.eclipse.emf.common,
  org.eclipse.e4.core.di.extensions;bundle-version="0.11.100",
  org.eclipse.e4.core.commands;bundle-version="0.10.2"
